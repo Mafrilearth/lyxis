@@ -1,0 +1,30 @@
+// LYXIS Database Schema
+// Connected to Supabase PostgreSQL 15+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Baseline Models for Lyxis CBT Infrastructure
+enum Role {
+  ADMIN
+  CANDIDATE
+}
+
+enum SectionType {
+  LISTENING
+  STRUCTURE
+  READING
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  SUBMITTED
+  EXPIRED
+}

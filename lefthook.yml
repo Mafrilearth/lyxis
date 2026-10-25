@@ -1,0 +1,11 @@
+# Lefthook Git Hooks Automation (Parallel & Blazingly Fast)
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome-lint-and-format
+      glob: "*.{js,ts,jsx,tsx,json,jsonc}"
+      run: pnpm exec biome check --write {staged_files}
+      stage_fixed: true
+
+    - name: typescript-typecheck
+      run: pnpm exec tsc --noEmit
