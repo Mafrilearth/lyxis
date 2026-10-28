@@ -189,3 +189,14 @@ pnpm exec tsc --noEmit
 # Execute Biome linter and formatter (0 errors required)
 pnpm biome check src/
 ```
+
+---
+
+## 9. Platform & Deployment Infrastructure Status
+
+| Platform | Project / Repository | Owner / Scope | Status | Details / URL |
+| :--- | :--- | :--- | :---: | :--- |
+| **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Production branch `main`, 118 files pushed. [Repository Link](https://github.com/Mafrilearth/lyxis) |
+| **Cloudflare Pages** | `lyxis` | `Mafrilearth` (`b6ce011a...`) | **PROVISIONED (READY)** | Subdomain: `https://lyxis-2wx.pages.dev`, Production branch: `main`. |
+| **Vercel** | `lyxis` (Pending Import) | `Mafrilearth` (`team_gS7dz...`) | **READY FOR 1-CLICK IMPORT** | Ready to import `Mafrilearth/lyxis` via [Vercel Dashboard](https://vercel.com/new). API token requires elevated project creation scope. |
+
