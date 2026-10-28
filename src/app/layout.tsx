@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Lyxis",
   },
   description:
-    "Calibrated computer-based TOEFL diagnostic testing with instant CEFR scoring, single-play audio, and verified credentials.",
+    "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
   applicationName: "Lyxis",
   category: "Educational Assessment",
   classification: "Standardized English Diagnostic Platform",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lyxis — TOEFL Diagnostic",
     description:
-      "Standardized computer-based TOEFL diagnostic testing with instant CEFR scoring and verified credentials.",
+      "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
     siteName: "Lyxis",
     url: baseUrl,
     type: "website",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Lyxis — TOEFL Diagnostic",
     description:
-      "Standardized computer-based TOEFL diagnostic testing with instant CEFR scoring and verified credentials.",
+      "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
     images: ["/og-image.jpg"],
   },
   robots: {
