@@ -194,13 +194,15 @@ pnpm biome check src/
 
 ## 9. Platform & Deployment Infrastructure Status
 
-* **Canonical Production Domain:** `https://lyxis.mafrilearth.com` (Subdomain of `mafrilearth.com`)
+* **Canonical Live Production URL:** [https://lyxis.mafrilearth.com](https://lyxis.mafrilearth.com) (Subdomain of `mafrilearth.com`)
+* **Vercel Production Domain:** `https://lyxis.vercel.app`
 
 | Platform | Project / Resource | Owner / Scope | Status | Details / URL |
 | :--- | :--- | :--- | :---: | :--- |
-| **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Production branch `main`, 118 files pushed. [Repository Link](https://github.com/Mafrilearth/lyxis) |
-| **Cloudflare Pages** | `lyxis` | `Mafrilearth` (`b6ce011a...`) | **PROVISIONED & ROUTED** | Custom Domain: `https://lyxis.mafrilearth.com`<br>Pages target: `lyxis-2wx.pages.dev`<br>DNS Zone: `mafrilearth.com` (`3c509f77...`) |
-| **Cloudflare DNS** | `lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `lyxis.mafrilearth.com` $\to$ `lyxis-2wx.pages.dev` (Proxied: true). |
-| **Vercel** | `lyxis` | `Mafrilearth` (`team_gS7dz...`) | **READY FOR 1-CLICK IMPORT** | Ready to import `Mafrilearth/lyxis` via [Vercel Dashboard](https://vercel.com/new). Custom domain `lyxis.mafrilearth.com` can be bound via CNAME `cname.vercel-dns.com`. |
+| **Vercel Production** | `lyxis` (`prj_maVbTgA6...`) | `Mafrilearth` (`team_gS7dz...`) | **LIVE & SERVING (HTTP 200)** | Deployment ID: `dpl_7Ctv62cGMm...`<br>Canonical: [https://lyxis.mafrilearth.com](https://lyxis.mafrilearth.com)<br>Fallback: [https://lyxis.vercel.app](https://lyxis.vercel.app) |
+| **Cloudflare DNS** | `lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `lyxis.mafrilearth.com` $\to$ `cname.vercel-dns.com` (Direct Edge Routing). |
+| **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Production branch `main`, CI/CD Auto-Deploy to Vercel enabled. [Repository Link](https://github.com/Mafrilearth/lyxis) |
+| **Cloudflare Pages** | `lyxis` | `Mafrilearth` (`b6ce011a...`) | **PROVISIONED (STANDBY)** | Pages target: `https://lyxis-2wx.pages.dev` (Edge standby replica). |
+
 
 
