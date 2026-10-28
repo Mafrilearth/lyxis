@@ -34,18 +34,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Lyxis — TOEFL ITP® Assessment",
+    default: "Lyxis — TOEFL Diagnostic",
     template: "%s | Lyxis",
   },
   description:
-    "The Calibration of Academic Mastery. Standardized computer-based TOEFL ITP® diagnostic assessment platform with authentic pacing, single-play audio, and instant score reports.",
+    "Calibrated computer-based TOEFL diagnostic testing with instant CEFR scoring, single-play audio, and verified credentials.",
   applicationName: "Lyxis",
   category: "Educational Assessment",
-  classification: "Standardized English Assessment Platform",
+  classification: "Standardized English Diagnostic Platform",
   keywords: [
     "Lyxis",
+    "TOEFL Diagnostic",
     "Standardized English Assessment",
-    "TOEFL ITP Diagnostic",
     "TOEFL Prediction Test Online",
     "Computer-Based Testing CBT",
     "Simulasi TOEFL ITP Bersertifikat",
@@ -74,9 +74,9 @@ export const metadata: Metadata = {
     date: false,
   },
   openGraph: {
-    title: "Lyxis — TOEFL ITP® Assessment",
+    title: "Lyxis — TOEFL Diagnostic",
     description:
-      "The Calibration of Academic Mastery. Standardized computer-based assessment engine featuring single-play audio, isolated section timers, and automated 310–677 scaled scoring.",
+      "Standardized computer-based TOEFL diagnostic testing with instant CEFR scoring and verified credentials.",
     siteName: "Lyxis",
     url: baseUrl,
     type: "website",
@@ -86,15 +86,15 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Lyxis — TOEFL ITP® Assessment",
+        alt: "Lyxis — TOEFL Diagnostic",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lyxis — TOEFL ITP® Assessment",
+    title: "Lyxis — TOEFL Diagnostic",
     description:
-      "The Calibration of Academic Mastery. Standardized computer-based assessment engine featuring single-play audio and instant score reports.",
+      "Standardized computer-based TOEFL diagnostic testing with instant CEFR scoring and verified credentials.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -120,7 +120,7 @@ const jsonLd = {
     {
       "@type": "WebApplication",
       "@id": `${baseUrl}/#webapp`,
-      name: "Lyxis — TOEFL ITP® Assessment",
+      name: "Lyxis — TOEFL Diagnostic",
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web Browser",
       browserRequirements: "Requires modern web browser with HTML5 Audio and JavaScript enabled",
