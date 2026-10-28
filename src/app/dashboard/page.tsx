@@ -38,6 +38,7 @@ import { Suspense } from "react";
 
 export const metadata = {
   title: "Candidate Command Center — Lyxis",
+
   description:
     "Review your TOEFL ITP® diagnostic performance history, inspect scaled score predictions, and access verified digital credentials.",
 };
