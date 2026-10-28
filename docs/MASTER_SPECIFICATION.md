@@ -199,9 +199,12 @@ pnpm biome check src/
 
 | Platform | Project / Resource | Owner / Scope | Status | Details / URL |
 | :--- | :--- | :--- | :---: | :--- |
-| **Vercel Production** | `lyxis` (`prj_maVbTgA6...`) | `Mafrilearth` (`team_gS7dz...`) | **LIVE & SERVING (HTTP 200)** | Deployment ID: `dpl_7Ctv62cGMm...`<br>Canonical: [https://lyxis.mafrilearth.com](https://lyxis.mafrilearth.com)<br>Fallback: [https://lyxis.vercel.app](https://lyxis.vercel.app) |
-| **Cloudflare DNS** | `lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `lyxis.mafrilearth.com` $\to$ `cname.vercel-dns.com` (Direct DNS-Only to Vercel). |
-| **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Production branch `main`, CI/CD Auto-Deploy to Vercel enabled. [Repository Link](https://github.com/Mafrilearth/lyxis) |
+| **Vercel Production** | `lyxis` (`prj_maVbTgA6...`) | `Mafrilearth` (`team_gS7dz...`) | **LIVE & SERVING (HTTP 200)** | Branch: `main`<br>Canonical: [https://lyxis.mafrilearth.com](https://lyxis.mafrilearth.com)<br>Fallback: [https://lyxis.vercel.app](https://lyxis.vercel.app) |
+| **Vercel Dev / Preview** | `lyxis` (`prj_maVbTgA6...`) | `Mafrilearth` (`team_gS7dz...`) | **LIVE & SERVING (READY)** | Branch: `dev`<br>Preview URL: [https://dev.lyxis.mafrilearth.com](https://dev.lyxis.mafrilearth.com) |
+| **Cloudflare DNS** | `lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `lyxis.mafrilearth.com` $\to$ `cname.vercel-dns.com` (Direct DNS-Only). |
+| **Cloudflare DNS** | `dev.lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `dev.lyxis.mafrilearth.com` $\to$ `cname.vercel-dns.com` (Direct DNS-Only). |
+| **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Dual branches: `main` (Production) & `dev` (Staging). [Repository Link](https://github.com/Mafrilearth/lyxis) |
+
 
 
 
