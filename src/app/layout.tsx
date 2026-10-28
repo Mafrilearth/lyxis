@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   description:
     "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
   applicationName: "Lyxis",
-  category: "Educational Assessment",
-  classification: "Standardized English Diagnostic Platform",
+  category: "Education",
+  classification: "Academic Assessment",
   keywords: ["Lyxis", "TOEFL Diagnostic", "CBT", "Assessment", "CEFR"],
   authors: [{ name: "Lyxis" }],
   creator: "Lyxis",
@@ -113,7 +113,7 @@ const jsonLd = {
       browserRequirements: "Requires modern web browser with HTML5 Audio and JavaScript enabled",
       isAccessibleForFree: true,
       description:
-        "Standardized computer-based assessment platform for evaluating English language proficiency across Listening, Structure, and Reading sections with calibrated scaled scores (310–677).",
+        "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
       offers: {
         "@type": "Offer",
         price: "0",
@@ -126,7 +126,8 @@ const jsonLd = {
       name: "Lyxis",
       url: baseUrl,
       logo: `${baseUrl}/icon.svg`,
-      description: "Provider of standardized English diagnostic assessment systems.",
+      description:
+        "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
     },
     {
       "@type": "FAQPage",
