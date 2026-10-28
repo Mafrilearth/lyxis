@@ -26,7 +26,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.com";
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

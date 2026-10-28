@@ -27,7 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   // 2. Strict Role-Based Access Control (RBAC): Only designated ADMINs allowed
-  const adminEmailConfig = process.env.ADMIN_EMAIL || "admin@lyxis.com";
+  const adminEmailConfig = process.env.ADMIN_EMAIL || "admin@lyxis.mafrilearth.com";
   let isAdmin = user.email === adminEmailConfig;
 
   if (!isAdmin) {

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.com";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.com";
   const now = new Date();
 
   return [

@@ -194,9 +194,13 @@ pnpm biome check src/
 
 ## 9. Platform & Deployment Infrastructure Status
 
-| Platform | Project / Repository | Owner / Scope | Status | Details / URL |
+* **Canonical Production Domain:** `https://lyxis.mafrilearth.com` (Subdomain of `mafrilearth.com`)
+
+| Platform | Project / Resource | Owner / Scope | Status | Details / URL |
 | :--- | :--- | :--- | :---: | :--- |
 | **GitHub** | `Mafrilearth/lyxis` | `Mafrilearth` | **ACTIVE (100% SYNCED)** | Production branch `main`, 118 files pushed. [Repository Link](https://github.com/Mafrilearth/lyxis) |
-| **Cloudflare Pages** | `lyxis` | `Mafrilearth` (`b6ce011a...`) | **PROVISIONED (READY)** | Subdomain: `https://lyxis-2wx.pages.dev`, Production branch: `main`. |
-| **Vercel** | `lyxis` (Pending Import) | `Mafrilearth` (`team_gS7dz...`) | **READY FOR 1-CLICK IMPORT** | Ready to import `Mafrilearth/lyxis` via [Vercel Dashboard](https://vercel.com/new). API token requires elevated project creation scope. |
+| **Cloudflare Pages** | `lyxis` | `Mafrilearth` (`b6ce011a...`) | **PROVISIONED & ROUTED** | Custom Domain: `https://lyxis.mafrilearth.com`<br>Pages target: `lyxis-2wx.pages.dev`<br>DNS Zone: `mafrilearth.com` (`3c509f77...`) |
+| **Cloudflare DNS** | `lyxis.mafrilearth.com` | `Mafrilearth` | **ACTIVE CNAME** | CNAME `lyxis.mafrilearth.com` $\to$ `lyxis-2wx.pages.dev` (Proxied: true). |
+| **Vercel** | `lyxis` | `Mafrilearth` (`team_gS7dz...`) | **READY FOR 1-CLICK IMPORT** | Ready to import `Mafrilearth/lyxis` via [Vercel Dashboard](https://vercel.com/new). Custom domain `lyxis.mafrilearth.com` can be bound via CNAME `cname.vercel-dns.com`. |
+
 

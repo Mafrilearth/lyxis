@@ -21,7 +21,7 @@ export function StartTestButton({ candidateName, candidateEmail }: StartTestButt
       setIsLoading(true);
       const result = await startExamAction({
         fullName: candidateName || "Candidate",
-        email: candidateEmail || "candidate@lyxis.com",
+        email: candidateEmail || "candidate@lyxis.mafrilearth.com",
       });
 
       if (!result.success || !result.redirectUrl) {

@@ -28,7 +28,7 @@ import {
 const navigationData = {
   user: {
     name: "Lyxis Administrator",
-    email: "admin@lyxis.com",
+    email: "admin@lyxis.mafrilearth.com",
     avatar: "/branding/avatar.png",
   },
   navMain: [
