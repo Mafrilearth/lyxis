@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# confidential seeds, test banks, and data scripts
+prisma/seed.ts
+prisma/seed-*.ts
+prisma/seeds/
+scripts/
+

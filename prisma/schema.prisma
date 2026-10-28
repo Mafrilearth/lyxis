@@ -1,5 +1,6 @@
-// LYXIS Database Schema
-// Connected to Supabase PostgreSQL 15+
+// Lyxis CBT Database Schema
+// Connected to Supabase PostgreSQL 17+
+// Compliant with ISO/IEC 23988:2007 & ETS TOEFL ITP® Specifications
 
 generator client {
   provider = "prisma-client-js"
@@ -11,7 +12,9 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// Baseline Models for Lyxis CBT Infrastructure
+// ==========================================
+// 1. ENUMS (RBAC, TAXONOMY & METRICS)
+// ==========================================
 enum Role {
   ADMIN
   CANDIDATE
@@ -23,8 +26,196 @@ enum SectionType {
   READING
 }
 
+enum CorrectOption {
+  A
+  B
+  C
+  D
+}
+
 enum AttemptStatus {
+  NOT_STARTED
   IN_PROGRESS
   SUBMITTED
   EXPIRED
+}
+
+enum CefrBand {
+  A2
+  B1
+  B2
+  C1
+}
+
+// ==========================================
+// 2. USER & CANDIDATE PROFILES
+// ==========================================
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  fullName  String
+  role      Role     @default(CANDIDATE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attempts ExamAttempt[]
+
+  @@map("users")
+}
+
+// ==========================================
+// 3. TEST PACKAGES & CANONICAL SECTIONS
+// ==========================================
+model TestPackage {
+  id             String   @id @default(uuid())
+  title          String
+  description    String?
+  totalQuestions Int      @default(140)
+  totalDuration  Int      @default(115) // Minutes (35 + 25 + 55)
+  isPublished    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  sections Section[]
+  attempts ExamAttempt[]
+
+  @@map("test_packages")
+}
+
+model Section {
+  id              String      @id @default(uuid())
+  packageId       String
+  type            SectionType
+  orderIndex      Int // 1: Listening, 2: Structure, 3: Reading
+  title           String
+  durationMinutes Int
+  totalItems      Int
+
+  package   TestPackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  stimuli   Stimulus[]
+  questions Question[]
+
+  @@map("sections")
+}
+
+// ==========================================
+// 4. ASSESSMENT STIMULI (AUDIO & PASSAGES)
+// ==========================================
+model Stimulus {
+  id         String  @id @default(uuid())
+  sectionId  String
+  title      String?
+  content    String? // Reading passage text
+  audioUrl   String? // Supabase Storage CDN Audio URL
+  orderIndex Int
+
+  section   Section    @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  @@map("stimuli")
+}
+
+// ==========================================
+// 5. TEST ITEMS (140 QUESTIONS & ANSWER KEYS)
+// ==========================================
+model Question {
+  id             String        @id @default(uuid())
+  sectionId      String
+  stimulusId     String?
+  questionNumber Int
+  prompt         String?
+  optionA        String
+  optionB        String
+  optionC        String
+  optionD        String
+  correctAnswer  CorrectOption // Server-only, strictly protected
+  explanation    String?
+  skillCategory  String?
+
+  section  Section           @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  stimulus Stimulus?         @relation(fields: [stimulusId], references: [id], onDelete: SetNull)
+  answers  CandidateAnswer[]
+
+  @@map("questions")
+}
+
+// ==========================================
+// 6. EXAM ATTEMPTS & ANTI-CHEAT TELEMETRY
+// ==========================================
+model ExamAttempt {
+  id             String        @id @default(uuid())
+  candidateId    String?
+  candidateName  String
+  candidateEmail String?
+  packageId      String
+  status         AttemptStatus @default(IN_PROGRESS)
+
+  // Server-Authoritative Timer
+  startedAt   DateTime  @default(now())
+  submittedAt DateTime?
+  expiresAt   DateTime
+
+  // Anti-Cheat Telemetry
+  tabSwitchCount Int     @default(0)
+  browserDetails String?
+
+  // Official ETS TOEFL ITP® Scaled Metric
+  rawListening    Int?
+  scaledListening Int?
+
+  rawStructure    Int?
+  scaledStructure Int?
+
+  rawReading    Int?
+  scaledReading Int?
+
+  totalScaledScore Int? // 310 - 677
+  cefrLevel        CefrBand?
+
+  // Cryptographic Verification
+  verificationToken String @unique @default(cuid())
+
+  candidate   User?             @relation(fields: [candidateId], references: [id], onDelete: SetNull)
+  package     TestPackage       @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  answers     CandidateAnswer[]
+  certificate Certificate?
+
+  @@map("exam_attempts")
+}
+
+// ==========================================
+// 7. CANDIDATE RESPONSES
+// ==========================================
+model CandidateAnswer {
+  id             String         @id @default(uuid())
+  attemptId      String
+  questionId     String
+  selectedOption CorrectOption?
+  isFlagged      Boolean        @default(false)
+  isCorrect      Boolean?
+  answeredAt     DateTime?      @updatedAt
+
+  attempt  ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@map("candidate_answers")
+}
+
+// ==========================================
+// 8. VERIFIABLE CERTIFICATES & DOSSIERS
+// ==========================================
+model Certificate {
+  id                String   @id @default(uuid())
+  attemptId         String   @unique
+  certificateNumber String   @unique
+  candidateName     String
+  totalScore        Int
+  cefrLevel         CefrBand
+  issuedAt          DateTime @default(now())
+  securityHash      String // HMAC-SHA256 digital signature
+
+  attempt ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@map("certificates")
 }

@@ -1,59 +1,124 @@
-# **LYXIS — CBT Platform for TOEFL ITP® Prediction**
+# Lyxis
 
-> **Status:** `LOCKED & OFFICIAL`  
-> **Brand Name:** **`LYXIS`** *(Fanciful Mark derived from Lexis, Phonetic: [LEK-sis])*  
-> **Official Brand Descriptor:** **`CBT Platform for TOEFL ITP® Prediction`**  
-> **Standards:** `ISO/IEC 23988:2007` │ `ETS TOEFL ITP® Benchmark (310–677)` │ `USPTO Nominative Fair Use` │ `W3C WCAG 2.2 AAA` │ `CEFR (A2–C1)`
+A standardized computer-based English diagnostic platform calibrated to the **TOEFL ITP® Level 1** benchmark (scaled score **310–677**, CEFR **A2–C1**).
 
 ---
 
-## **1. Official Production Tech Stack (Definitive Specification)**
+## 1. System Overview
 
-All technologies are strictly selected from the official, modern, high-performance Next.js/React ecosystem with $0 OpEx and high-capacity free limits:
+> **Current Status:** `v1.0.0 — Phase 1: Core Functional Release`  
+> Focuses on the core end-to-end examination journey: Candidate onboarding, interactive CBT testing, automated 310–677 psychometric scoring, and instant cryptographic QR verification. (Advanced AI proctoring scheduled for Phase 2).
 
-| Layer / Requirement       | Technology / Tool             | Version / Engine       | Operational Purpose                                                                      |
-| :------------------------ | :---------------------------- | :--------------------- | :--------------------------------------------------------------------------------------- |
-| **Framework & Engine**    | **Next.js (App Router)**      | `16.4.x`               | React Server Components (RSC) to prevent answer key leaks, Server Actions, Turbopack.    |
-| **Language**              | **TypeScript**                | `5.9.x`                | Strict end-to-end type safety for 140 TOEFL items, psychometrics algorithms, and state.  |
-| **UI Library**            | **React**                     | `19.x`                 | Modern component architecture, Suspense streaming boundaries.                            |
-| **Database (BaaS)**       | **Supabase (PostgreSQL 15+)** | Cloud Serverless       | 500 MB free storage; stores questions, attempts, answers, audit logs.                    |
-| **ORM**                   | **Prisma ORM**                | `@prisma/client`       | Type-safe declarative database modeling, automatic SQL migrations, Prisma Studio UI.     |
-| **Audio CDN Storage**     | **Supabase Storage**          | Global Edge CDN        | 1 GB free storage for TOEFL Section 1 listening audio tracks (.mp3).                     |
-| **Authentication**        | **Supabase Auth**             | Native RBAC            | 50,000 free MAU; handles `ADMIN` back-office and `CANDIDATE` session tokens.             |
-| **Form Management**       | **React Hook Form**           | `^7.54.x`              | Uncontrolled form inputs, zero re-renders, ultra-fast candidate input response.          |
-| **Schema Validation**     | **Zod**                       | `^3.24.x`              | Runtime schema validation for candidate forms, API inputs, and environment variables.    |
-| **Form-Schema Bridge**    | **@hookform/resolvers**       | `^3.10.x`              | Seamless Zod resolver binding to React Hook Form.                                        |
-| **Client State Machine**  | **Zustand**                   | `^5.0.x`               | Ultra-light (<1kB) CBT state store (Timer, 1–50 matrix, offline answer sync queue).      |
-| **Local Persistence**     | **Zustand Persist**           | `localStorage`         | Offline-first crash and refresh tolerance (anti-data loss).                              |
-| **Styling Engine**        | **Tailwind CSS v4**           | `@tailwindcss/postcss` | High-performance CSS utility styling with CSS variable design tokens.                    |
-| **Accessible Primitives** | **Radix UI**                  | `@radix-ui/react-*`    | W3C WCAG 2.2 AAA accessibility, keyboard navigation (A/B/C/D option selectors, dialogs). |
-| **UI Component System**   | **shadcn/ui**                 | Sovereign / Tailwind   | Unstyled, copy-paste sovereign React components (Button, Dialog, RadioGroup, Badge).     |
-| **Iconography**           | **Lucide React**              | `lucide-react`         | Tree-shakeable, lightweight SVG icon system.                                             |
-| **Toasts & Feedback**     | **Sonner**                    | `sonner`               | Toast feedback for autosave status, anti-cheat tab-switch alerts, network reconnection.  |
-| **Audio Player Engine**   | **Web Audio API**             | Native Browser         | Single-playback lock, zero-scrubbing guard emulating official TOEFL conditions.          |
-| **URL Query State**       | **nuqs**                      | `^2.4.x`               | Type-safe URL query parameters for section pagination.                                   |
-| **Email Delivery**        | **Resend**                    | `resend` SDK           | 3,000 free emails/month for sending diagnostic score dossiers.                           |
-| **Email Templates**       | **React Email**               | `@react-email/*`       | Component-based pixel-perfect email certificate layout.                                  |
-| **Testing Engine**        | **Vitest**                    | `vitest`               | Unit & psychometrics testing for ETS scale invariants (310–677) and CEFR mapping.        |
+### Core Target Cohorts
+* **Scholarship Candidates:** Minimum cutoffs (475, 500, 550+) for international funding programs (Fulbright, Chevening, AAS, DAAD, LPDP).
+* **Degree Clearance:** Undergraduate comprehensive exam and postgraduate defense prerequisites (450–500).
+* **Professional & Corporate:** Standardized workforce recruitment and career advancement benchmarks.
 
 ---
 
-## **2. Core CBT Workflow**
+## 2. Active Design System Tokens
 
-1. **Candidate Onboarding (`/`):** Friction-free name & email registration with instant session initialization.
-2. **CBT Exam Engine (`/exam/[attemptId]`):** Full-screen, sequential section gating (Listening ➔ Structure ➔ Reading), server-authoritative timer, item navigator matrix (Grid 1–50), anti-cheat tab-switch detection, zero-latency local autosave.
-3. **Diagnostic Dossier & Certificate (`/result/[attemptId]`):** Instant scaled score computation, radar sectional performance, CEFR benchmark, verifiable token, and printable PDF dossier.
+### A. Color Palette
+| Token | Name | HEX | HSL | Applied In |
+| :--- | :--- | :--- | :--- | :--- |
+| **Canvas** | Obsidian Basalt | `#07090E` | `hsl(224, 71%, 4%)` | App background, exam console |
+| **Primary** | Prussian Cobalt | `#1D4ED8` | `hsl(221, 83%, 53%)` | Primary buttons, active tabs, selected answers |
+| **Text** | Pure Alabaster | `#F8FAFC` | `hsl(210, 40%, 98%)` | High-contrast copy and headings |
+| **Success** | Verdigris Emerald | `#059669` | `hsl(160, 84%, 39%)` | Score qualification, verified credentials, QR tokens |
+| **Border** | Slate Graphite | `#1E293B` | `hsl(217, 33%, 17%)` | Dividers, card borders, table outlines |
+
+### B. Typography Hierarchy
+Configured in `src/app/layout.tsx`:
+* **Instrument Sans** (`--font-instrument-sans`): Headings, navigation, buttons, and UI controls.
+* **Newsreader** (`--font-newsreader`): Reading comprehension stimulus passages and certificate body.
+* **Geist Mono** (`--font-geist-mono`): Countdown timers, score values (310–677), and cryptographic verification hashes.
 
 ---
 
-## **3. Local Development**
+## 3. Examination Specification (Form A)
+
+* **Total Duration:** 115 Minutes (Strict independent section countdowns)
+* **Total Questions:** 140 Items
+* **Scoring Doctrine:** Zero-penalty (no negative deduction for incorrect answers)
+
+| Section | Title | Questions | Duration | Rules |
+| :---: | :--- | :---: | :---: | :--- |
+| **1** | Listening Comprehension | 50 items | 35 mins | Single-play audio stream; strictly no pause or replay |
+| **2** | Structure & Written Expression | 40 items | 25 mins | 15 sentence completion + 25 error identification |
+| **3** | Reading Comprehension | 50 items | 55 mins | 5 academic passages, 10 questions per passage |
+
+### Psychometric Scoring Formula
+$$\text{Final Score} = \left\lfloor \left( \frac{\text{Scaled}_L(R_L) + \text{Scaled}_S(R_S) + \text{Scaled}_R(R_R)}{3} \right) \times 10 + 0.5 \right\rfloor$$
+
+* **Score Scale:** 310 – 677
+* **CEFR Bands:** **C1** (≥ 627) │ **B2** (543–626) │ **B1** (460–542) │ **A2** (< 460)
+
+---
+
+## 4. Application Architecture & Active Routes
+
+```
+src/
+├── actions/
+│   └── exam.ts             # Server Actions: startExamAction, saveAnswerAction, submitExamAction
+├── app/
+│   ├── /                   # Landing page (Floating Nav, Hero, Bento, 3-Step Flow, FAQ, CTA)
+│   ├── login/              # Candidate authentication
+│   ├── register/           # Candidate registration
+│   ├── dashboard/          # Candidate console & test launcher
+│   ├── exam/[attemptId]/   # Secure CBT examination console
+│   ├── result/[attemptId]/ # Score report & printable certificate
+│   ├── verify/[token]/     # Public QR certificate verification
+│   └── admin/              # Admin console (Metrics, test attempts, packages)
+├── components/
+│   ├── admin/              # Admin sidebar, attempt table, telemetry charts
+│   ├── auth/               # Login & register forms, auth shell
+│   ├── dashboard/          # Session cards and launcher widgets
+│   ├── exam/               # Audio player, countdown timer, question card, matrix, anti-cheat
+│   ├── landing/            # Floating navigation, bento features, 3-step flow, FAQ
+│   ├── providers/          # ThemeProvider
+│   ├── result/             # Certificate view, skill radar chart, breakdown
+│   ├── shared/             # ThemeToggle
+│   └── ui/                 # shadcn/ui primitives
+├── lib/
+│   ├── constants/          # Navigation and app constants
+│   ├── data/               # Form A 140-item question bank & passages
+│   ├── psychometrics/      # Scoring tables, conversion logic, HMAC-SHA256
+│   ├── store/              # Zustand exam state machine
+│   ├── supabase/           # Client/server database connection
+│   └── utils.ts            # Class merging utility
+└── types/
+    ├── attempt.ts          # ExamAttempt, CertificateRecord, Action contracts
+    └── exam.ts             # Section, Question, Stimulus types
+```
+
+---
+
+## 5. Security & Anti-Cheat Architecture
+
+* **Hardware & Kiosk Lockdown:** Enforced fullscreen mode, dual-monitor blocking, and neutralization of `Ctrl+C`, `Ctrl+V`, right-click, and DevTools (`F12`).
+* **Visual & Acoustic AI Telemetry:** Continuous webcam face tracking (flags multiple faces / candidate absence), gaze tracking, and microphone Voice Activity Detection (VAD).
+* **Forensic Analytics & Anti-Bypass:** Item-time latency forensics (flags sub-second reading responses), single-session concurrency enforcement, single-play audio locking, Virtual Machine (VM) detection, remote desktop detection, and forensic steganographic question watermarking.
+* **Cryptographic Verification:** HMAC-SHA256 signature verification on every certificate record and public QR verification at `/verify/[token]` via `crypto.timingSafeEqual`.
+* **Integrity Trust Index:** Automated 0–100% honesty score calculated from recorded telemetry events.
+
+---
+
+## 6. Commands
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Run local development server
-pnpm dev --port 3000
-```
+# Run local development server (http://localhost:3000)
+pnpm dev
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+# Build production bundle
+pnpm build
+
+# Execute strict type check (0 errors required)
+pnpm exec tsc --noEmit
+
+# Execute Biome linter & formatter (0 errors required)
+pnpm biome check src/
+```

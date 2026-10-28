@@ -1,49 +1,69 @@
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Instrument_Sans, Newsreader } from "next/font/google";
+import type React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: "/",
+  },
   title: {
-    default: "Lyxis — CBT Platform for TOEFL ITP® Prediction",
+    default: "Lyxis — TOEFL ITP® Assessment",
     template: "%s | Lyxis",
   },
   description:
-    "Independent Computer-Based Testing (CBT) platform for TOEFL ITP® score prediction. Diagnostic simulation of Listening (50 items), Structure (40 items), and Reading (50 items) using ETS scaled scoring (310–677) and CEFR proficiency mapping under Nominative Fair Use principles.",
+    "The Calibration of Academic Mastery. Standardized computer-based TOEFL ITP® diagnostic assessment platform with authentic pacing, single-play audio, and instant score reports.",
   applicationName: "Lyxis",
   category: "Educational Assessment",
-  classification: "Computer-Based Testing (CBT) & TOEFL ITP Prediction",
+  classification: "Standardized English Assessment Platform",
   keywords: [
     "Lyxis",
-    "CBT Platform",
-    "TOEFL ITP Prediction",
+    "Standardized English Assessment",
+    "TOEFL ITP Diagnostic",
     "Computer-Based Testing",
-    "Diagnostic Assessment",
-    "ETS Scaled Score 310-677",
     "Listening Comprehension",
     "Structure and Written Expression",
     "Reading Comprehension",
-    "CEFR A2 B1 B2 C1",
-    "ISO/IEC 23988:2007 Guidelines",
-    "Nominative Fair Use",
-    "USPTO Lanham Act",
+    "CEFR Proficiency Levels",
     "Diagnostic Score Report",
   ],
   authors: [{ name: "Lyxis" }],
   creator: "Lyxis",
   publisher: "Lyxis",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -51,18 +71,28 @@ export const metadata: Metadata = {
     date: false,
   },
   openGraph: {
-    title: "Lyxis — CBT Platform for TOEFL ITP® Prediction",
+    title: "Lyxis — TOEFL ITP® Assessment",
     description:
-      "Independent Computer-Based Testing (CBT) platform for TOEFL ITP® score prediction. Diagnostic simulation of Listening, Structure, and Reading sections using ETS scaled scoring (310–677) and CEFR proficiency mapping.",
+      "The Calibration of Academic Mastery. Standardized computer-based assessment engine featuring single-play audio, isolated section timers, and automated 310–677 scaled scoring.",
     siteName: "Lyxis",
+    url: baseUrl,
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Lyxis — TOEFL ITP® Assessment",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lyxis — CBT Platform for TOEFL ITP® Prediction",
+    title: "Lyxis — TOEFL ITP® Assessment",
     description:
-      "Independent Computer-Based Testing (CBT) platform for TOEFL ITP® score prediction. Diagnostic simulation of Listening, Structure, and Reading sections using ETS scaled scoring (310–677) and CEFR proficiency mapping.",
+      "The Calibration of Academic Mastery. Standardized computer-based assessment engine featuring single-play audio and instant score reports.",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -76,12 +106,8 @@ export const metadata: Metadata = {
     },
   },
   other: {
-    "cbt-delivery-guidelines": "ISO/IEC 23988:2007 (Computer-Based Assessment Delivery)",
-    "psychometrics-scoring": "ETS TOEFL ITP Metric (140 Items, 310-677 Scaled Score)",
-    "proficiency-framework": "Council of Europe CEFR (A2, B1, B2, C1)",
-    "legal-doctrine": "USPTO Lanham Act § 33(b)(4) / 15 U.S.C. § 1115(b)(4) Nominative Fair Use",
-    "trademark-disclaimer":
-      "TOEFL and TOEFL ITP are registered trademarks of Educational Testing Service (ETS). Lyxis is an independent diagnostic simulation platform and is not affiliated with, endorsed, or approved by ETS.",
+    "scoring-metric": "TOEFL ITP Standard (140 Items, 310–677 Scale)",
+    "proficiency-framework": "CEFR Scale (A2, B1, B2, C1)",
   },
 };
 
@@ -90,14 +116,14 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebApplication",
-      "@id": "https://lyxis.mafrilearth.com/#webapp",
-      name: "Lyxis — CBT Platform for TOEFL ITP® Prediction",
+      "@id": `${baseUrl}/#webapp`,
+      name: "Lyxis — TOEFL ITP® Assessment",
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web Browser",
       browserRequirements: "Requires modern web browser with HTML5 Audio and JavaScript enabled",
       isAccessibleForFree: true,
       description:
-        "Independent diagnostic Computer-Based Testing (CBT) platform for predicting TOEFL ITP® scores across Listening, Structure, and Reading sections using official ETS psychometric scales (310–677) and CEFR levels.",
+        "Standardized computer-based assessment platform for evaluating English language proficiency across Listening, Structure, and Reading sections with calibrated scaled scores (310–677).",
       offers: {
         "@type": "Offer",
         price: "0",
@@ -106,26 +132,80 @@ const jsonLd = {
     },
     {
       "@type": "Organization",
-      "@id": "https://lyxis.mafrilearth.com/#organization",
+      "@id": `${baseUrl}/#organization`,
       name: "Lyxis",
-      url: "https://lyxis.mafrilearth.com",
-      description:
-        "Independent provider of Computer-Based Testing (CBT) diagnostic assessment and score prediction platforms.",
+      url: baseUrl,
+      logo: `${baseUrl}/icon.svg`,
+      description: "Provider of standardized English diagnostic assessment systems.",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${baseUrl}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Who can take this diagnostic test? Is it restricted to university students?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The platform is open to all candidates worldwide preparing for scholarship applications, graduate school admissions, corporate hiring, academic faculty benchmarks, and graduation requirements.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do I need to schedule an appointment or reserve a testing slot?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No reservation is needed. You can launch your assessment immediately at any time (24/7 on demand) directly from your candidate portal.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I retake the diagnostic assessment to track my score progress?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. You can retake the assessment at any time to monitor your score improvement across Listening, Structure, and Reading before sitting for your official test date.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What happens if my network disconnects or my device powers down during the exam?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Every selected response is saved automatically in real time. If interrupted, simply log back into your candidate account to resume at the exact question and remaining time without data loss.",
+          },
+        },
+      ],
     },
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${instrumentSans.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+    >
       <head>
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
       </head>
-      <body className="min-h-full flex flex-col">
-        {children}
-        <Toaster position="top-right" richColors />
-        <Analytics />
-        <SpeedInsights />
+      <body className="min-h-full flex flex-col font-sans">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster position="top-right" richColors />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -22,10 +22,31 @@
     "indentWidth": 2,
     "lineWidth": 100
   },
+  "assist": {
+    "enabled": false
+  },
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "a11y": {
+        "useSemanticElements": "off",
+        "useFocusableInteractive": "off",
+        "noLabelWithoutControl": "off"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off",
+        "noDocumentCookie": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "style": {
+        "useImportType": "off"
+      }
     }
   },
   "javascript": {
