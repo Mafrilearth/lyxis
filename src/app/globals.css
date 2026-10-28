@@ -29,6 +29,13 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -65,15 +72,22 @@
   --muted-foreground: oklch(0.5 0.015 260); /* #64748B Muted Steel */
   --accent: oklch(0.96 0.005 260);
   --accent-foreground: oklch(0.14 0.01 260);
-  --destructive: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --destructive: oklch(0.55 0.28 18); /* #E60039 Laser Vermilion */
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.52 0.22 155); /* #009E60 Quantum Emerald */
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.68 0.18 78); /* #D97706 Cadmium Auric */
+  --warning-foreground: oklch(1 0 0);
+  --info: oklch(0.55 0.18 215); /* #0284C7 Cryogenic Ion-Cyan */
+  --info-foreground: oklch(1 0 0);
   --border: oklch(0.9 0.005 260); /* #E2E8F0 Crisp Structural Slate */
   --input: oklch(0.9 0.005 260);
   --ring: oklch(0.635 0.238 38.5); /* #FF3700 Focus Ring */
-  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Orange */
-  --chart-2: oklch(0.65 0.18 155); /* #10B981 Telemetry Emerald */
-  --chart-3: oklch(0.75 0.16 75); /* #F59E0B Telemetry Amber */
-  --chart-4: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
-  --chart-5: oklch(0.6 0.15 230); /* #0284C7 Cerulean Telemetry */
+  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Safety Orange */
+  --chart-2: oklch(0.52 0.22 155); /* #009E60 Quantum Emerald */
+  --chart-3: oklch(0.68 0.18 78); /* #D97706 Cadmium Auric */
+  --chart-4: oklch(0.55 0.28 18); /* #E60039 Laser Vermilion */
+  --chart-5: oklch(0.55 0.18 215); /* #0284C7 Cryogenic Ion-Cyan */
   --radius: 0.75rem;
   --sidebar: oklch(0.985 0.002 260);
   --sidebar-foreground: oklch(0.14 0.01 260);
@@ -108,15 +122,22 @@
   --muted-foreground: oklch(0.68 0.015 260); /* #94A3B8 Steel Slate */
   --accent: oklch(0.16 0.012 260);
   --accent-foreground: oklch(0.985 0.005 260);
-  --destructive: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --destructive: oklch(0.58 0.29 18); /* #FF003C Laser Vermilion (Luminescent) */
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.85 0.24 155); /* #00FFA3 Quantum Emerald (Bioluminescent) */
+  --success-foreground: oklch(0.08 0.008 260);
+  --warning: oklch(0.8 0.19 80); /* #FFB800 Cadmium Auric (Radiation Beacon) */
+  --warning-foreground: oklch(0.08 0.008 260);
+  --info: oklch(0.84 0.18 200); /* #00F0FF Cryogenic Ion-Cyan (Cherenkov Plasma) */
+  --info-foreground: oklch(0.08 0.008 260);
   --border: oklch(0.22 0.015 260); /* #212836 Subtle Carbon Hairline */
   --input: oklch(0.22 0.015 260);
   --ring: oklch(0.635 0.238 38.5); /* #FF3700 */
-  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Orange */
-  --chart-2: oklch(0.65 0.18 155); /* #10B981 Telemetry Emerald */
-  --chart-3: oklch(0.75 0.16 75); /* #F59E0B Telemetry Amber */
-  --chart-4: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
-  --chart-5: oklch(0.6 0.15 230); /* #0284C7 Cerulean Telemetry */
+  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Safety Orange */
+  --chart-2: oklch(0.85 0.24 155); /* #00FFA3 Quantum Emerald */
+  --chart-3: oklch(0.8 0.19 80); /* #FFB800 Cadmium Auric */
+  --chart-4: oklch(0.58 0.29 18); /* #FF003C Laser Vermilion */
+  --chart-5: oklch(0.84 0.18 200); /* #00F0FF Cryogenic Ion-Cyan */
   --sidebar: oklch(0.12 0.01 260);
   --sidebar-foreground: oklch(0.985 0.005 260);
   --sidebar-primary: oklch(0.635 0.238 38.5);
