@@ -1,11 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" aria-label="Lyxis Master Icon">
   <title>Lyxis Master Icon</title>
   <!-- Obsidian Instrument Chassis Base with Chamfer Hairline -->
-  <rect width="64" height="64" rx="18" fill="#0A0D14" />
-  <rect x="0.5" y="0.5" width="63" height="63" rx="17.5" stroke="rgba(255, 255, 255, 0.14)" stroke-width="1" />
+  <rect width="64" height="64" rx="18" fill="#07080B" />
+  <rect x="0.5" y="0.5" width="63" height="63" rx="17.5" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
 
-  <!-- The Calibration Keystone: 1 Continuous Solid Part (Pure Neutral Monochrome) -->
-  <g transform="translate(10, 11) scale(0.088)" fill="#FFFFFF">
+  <!-- The Calibration Keystone: Hyper-Safety Orange Instrument Beacon -->
+  <defs>
+    <linearGradient id="iconOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5500" />
+      <stop offset="100%" stop-color="#FF3700" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 11) scale(0.088)" fill="url(#iconOrangeGrad)">
     <path
       d="M 246 68
          C 248 65, 252 65, 254 68

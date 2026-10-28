@@ -51,38 +51,38 @@
 }
 
 :root {
-  --background: oklch(0.988 0.003 95);
-  --foreground: oklch(0.18 0.008 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.008 260);
+  --background: oklch(0.985 0.002 260); /* #F8FAFC Pure Alabaster Canvas */
+  --foreground: oklch(0.14 0.01 260); /* #090D16 Deep Jet Carbon */
+  --card: oklch(1 0 0); /* #FFFFFF Optical Pure White */
+  --card-foreground: oklch(0.14 0.01 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.008 260);
-  --primary: oklch(0.36 0.17 258);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.955 0.004 95);
-  --secondary-foreground: oklch(0.18 0.008 260);
-  --muted: oklch(0.955 0.004 95);
-  --muted-foreground: oklch(0.46 0.01 260);
-  --accent: oklch(0.955 0.004 95);
-  --accent-foreground: oklch(0.18 0.008 260);
-  --destructive: oklch(0.55 0.22 25);
-  --border: oklch(0.89 0.005 260);
-  --input: oklch(0.89 0.005 260);
-  --ring: oklch(0.36 0.17 258);
-  --chart-1: oklch(0.36 0.17 258);
-  --chart-2: oklch(0.52 0.14 165);
-  --chart-3: oklch(0.72 0.16 75);
-  --chart-4: oklch(0.55 0.22 25);
-  --chart-5: oklch(0.32 0.01 260);
+  --popover-foreground: oklch(0.14 0.01 260);
+  --primary: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Safety Orange */
+  --primary-foreground: oklch(1 0 0); /* #FFFFFF Stark White */
+  --secondary: oklch(0.96 0.005 260); /* #F1F5F9 Soft Ice Gray */
+  --secondary-foreground: oklch(0.14 0.01 260);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.5 0.015 260); /* #64748B Muted Steel */
+  --accent: oklch(0.96 0.005 260);
+  --accent-foreground: oklch(0.14 0.01 260);
+  --destructive: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --border: oklch(0.9 0.005 260); /* #E2E8F0 Crisp Structural Slate */
+  --input: oklch(0.9 0.005 260);
+  --ring: oklch(0.635 0.238 38.5); /* #FF3700 Focus Ring */
+  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Orange */
+  --chart-2: oklch(0.65 0.18 155); /* #10B981 Telemetry Emerald */
+  --chart-3: oklch(0.75 0.16 75); /* #F59E0B Telemetry Amber */
+  --chart-4: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --chart-5: oklch(0.6 0.15 230); /* #0284C7 Cerulean Telemetry */
   --radius: 0.75rem;
-  --sidebar: oklch(0.988 0.003 95);
-  --sidebar-foreground: oklch(0.18 0.008 260);
-  --sidebar-primary: oklch(0.36 0.17 258);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.955 0.004 95);
-  --sidebar-accent-foreground: oklch(0.18 0.008 260);
-  --sidebar-border: oklch(0.89 0.005 260);
-  --sidebar-ring: oklch(0.36 0.17 258);
+  --sidebar: oklch(0.985 0.002 260);
+  --sidebar-foreground: oklch(0.14 0.01 260);
+  --sidebar-primary: oklch(0.635 0.238 38.5);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.96 0.005 260);
+  --sidebar-accent-foreground: oklch(0.14 0.01 260);
+  --sidebar-border: oklch(0.9 0.005 260);
+  --sidebar-ring: oklch(0.635 0.238 38.5);
 
   /* Universal Ergonomic Sizing & Physics Tokens */
   --control-height-lg: 3.5rem; /* 56px - Primary Action / Input Target */
@@ -94,37 +94,37 @@
 }
 
 .dark {
-  --background: oklch(0.085 0.015 260); /* #07090E Obsidian Basalt */
-  --foreground: oklch(0.985 0.005 260); /* #F8FAFC Pure Alabaster */
-  --card: oklch(0.11 0.018 260); /* #0A0D14 Elevated Basalt */
+  --background: oklch(0.08 0.008 260); /* #07080B Deep Obsidian Basalt */
+  --foreground: oklch(0.985 0.005 260); /* #F8FAFC Stark Optical White */
+  --card: oklch(0.12 0.01 260); /* #0E1117 Machined Titanium Surface */
   --card-foreground: oklch(0.985 0.005 260);
-  --popover: oklch(0.11 0.018 260);
+  --popover: oklch(0.16 0.012 260); /* #151922 Elevated Graphite */
   --popover-foreground: oklch(0.985 0.005 260);
-  --primary: oklch(0.48 0.22 260); /* #1D4ED8 Deep Prussian Cobalt */
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.18 0.02 260);
+  --primary: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Safety Orange */
+  --primary-foreground: oklch(1 0 0); /* #FFFFFF Stark White */
+  --secondary: oklch(0.16 0.012 260);
   --secondary-foreground: oklch(0.985 0.005 260);
-  --muted: oklch(0.16 0.02 260);
-  --muted-foreground: oklch(0.65 0.015 260);
-  --accent: oklch(0.18 0.02 260);
+  --muted: oklch(0.14 0.01 260);
+  --muted-foreground: oklch(0.68 0.015 260); /* #94A3B8 Steel Slate */
+  --accent: oklch(0.16 0.012 260);
   --accent-foreground: oklch(0.985 0.005 260);
-  --destructive: oklch(0.55 0.22 25); /* #DC2626 Cinnabar Evaluation */
-  --border: oklch(0.22 0.03 260); /* #1E2638 Carbon Slate */
-  --input: oklch(0.22 0.03 260);
-  --ring: oklch(0.48 0.22 260);
-  --chart-1: oklch(0.48 0.22 260);
-  --chart-2: oklch(0.62 0.16 165); /* #059669 Verdigris Benchmark */
-  --chart-3: oklch(0.78 0.16 75);
-  --chart-4: oklch(0.55 0.22 25);
-  --chart-5: oklch(0.45 0.01 260);
-  --sidebar: oklch(0.11 0.018 260);
+  --destructive: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --border: oklch(0.22 0.015 260); /* #212836 Subtle Carbon Hairline */
+  --input: oklch(0.22 0.015 260);
+  --ring: oklch(0.635 0.238 38.5); /* #FF3700 */
+  --chart-1: oklch(0.635 0.238 38.5); /* #FF3700 Hyper-Orange */
+  --chart-2: oklch(0.65 0.18 155); /* #10B981 Telemetry Emerald */
+  --chart-3: oklch(0.75 0.16 75); /* #F59E0B Telemetry Amber */
+  --chart-4: oklch(0.58 0.22 25); /* #F43F5E Telemetry Rose */
+  --chart-5: oklch(0.6 0.15 230); /* #0284C7 Cerulean Telemetry */
+  --sidebar: oklch(0.12 0.01 260);
   --sidebar-foreground: oklch(0.985 0.005 260);
-  --sidebar-primary: oklch(0.48 0.22 260);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.18 0.02 260);
+  --sidebar-primary: oklch(0.635 0.238 38.5);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.16 0.012 260);
   --sidebar-accent-foreground: oklch(0.985 0.005 260);
-  --sidebar-border: oklch(0.22 0.03 260);
-  --sidebar-ring: oklch(0.48 0.22 260);
+  --sidebar-border: oklch(0.22 0.015 260);
+  --sidebar-ring: oklch(0.635 0.238 38.5);
 
   /* Dark Mode Surface Chamfer Highlight */
   --chamfer-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
