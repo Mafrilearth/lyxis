@@ -1,27 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" aria-label="Lyxis Master Icon">
-  <title>Lyxis Master Icon</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" aria-label="Lyxis Master Favicon">
+  <title>Lyxis Master Favicon</title>
   <!-- Obsidian Instrument Chassis Base with Chamfer Hairline -->
   <rect width="64" height="64" rx="18" fill="#07080B" />
   <rect x="0.5" y="0.5" width="63" height="63" rx="17.5" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
 
-  <!-- The Calibration Keystone: Hyper-Safety Orange Instrument Beacon -->
-  <defs>
-    <linearGradient id="iconOrangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF5500" />
-      <stop offset="100%" stop-color="#FF3700" />
-    </linearGradient>
-  </defs>
-  <g transform="translate(10, 11) scale(0.088)" fill="url(#iconOrangeGrad)">
-    <path
-      d="M 246 68
-         C 248 65, 252 65, 254 68
-         C 295 125, 385 245, 395 360
-         C 398 375, 385 388, 370 385
-         C 335 375, 290 340, 250 290
-         C 210 340, 165 375, 130 385
-         C 115 388, 102 375, 105 360
-         C 115 245, 205 125, 246 68
-         Z"
+  <!-- Pure 1-Field Monochromatic Delta Keystone (Single Solid Polygon) -->
+  <g transform="translate(11, 11) scale(0.42)">
+    <polygon
+      points="16,20 84,20 54,82 54,52 64,52 50,34 36,52 46,52 46,82"
+      fill="#FF3700"
     />
   </g>
 </svg>

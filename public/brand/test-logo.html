@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyxis Concept 2 Single Path Verification</title>
+  <style>
+    body {
+      background: #07080B;
+      color: #F8FAFC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 30px;
+    }
+    .preview-card {
+      background: #0E1117;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .scales {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lyxis Concept 2 — Single Path Delta Keystone</h1>
+  <div class="preview-card">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="180" height="180" fill="none">
+      <defs>
+        <linearGradient id="keystoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF5500" />
+          <stop offset="100%" stop-color="#FF3700" />
+        </linearGradient>
+      </defs>
+      <!-- Top Keystone Block in Hyper-Safety Orange -->
+      <polygon points="24,14 76,14 68,26 32,26" fill="url(#keystoneGrad)" />
+      
+      <!-- Monolithic Delta Chevron with Embedded Calibration Arrow Negative Space -->
+      <path
+        d="M 20 32
+           L 80 32
+           L 58 84
+           L 54 84
+           L 54 52
+           L 62 52
+           L 50 38
+           L 38 52
+           L 46 52
+           L 46 84
+           L 42 84
+           Z"
+        fill="#F8FAFC"
+      />
+    </svg>
+    <div style="font-weight: 900; font-size: 32px; letter-spacing: -0.04em;">LYXIS</div>
+    <div style="color: #94A3B8; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">TOEFL Diagnostic</div>
+  </div>
+
+  <div class="preview-card">
+    <h3>Micro-Scale Invariance Test (64px, 32px, 16px)</h3>
+    <div class="scales">
+      <!-- 64px -->
+      <svg viewBox="0 0 100 100" width="64" height="64" fill="none">
+        <polygon points="24,14 76,14 68,26 32,26" fill="#FF3700" />
+        <path d="M 20 32 L 80 32 L 58 84 L 54 84 L 54 52 L 62 52 L 50 38 L 38 52 L 46 52 L 46 84 L 42 84 Z" fill="#F8FAFC" />
+      </svg>
+      <!-- 32px -->
+      <svg viewBox="0 0 100 100" width="32" height="32" fill="none">
+        <polygon points="24,14 76,14 68,26 32,26" fill="#FF3700" />
+        <path d="M 20 32 L 80 32 L 58 84 L 54 84 L 54 52 L 62 52 L 50 38 L 38 52 L 46 52 L 46 84 L 42 84 Z" fill="#F8FAFC" />
+      </svg>
+      <!-- 16px Favicon -->
+      <svg viewBox="0 0 100 100" width="16" height="16" fill="none">
+        <polygon points="24,14 76,14 68,26 32,26" fill="#FF3700" />
+        <path d="M 20 32 L 80 32 L 58 84 L 54 84 L 54 52 L 62 52 L 50 38 L 38 52 L 46 52 L 46 84 L 42 84 Z" fill="#F8FAFC" />
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

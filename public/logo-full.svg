@@ -1,37 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" fill="none">
-  <defs>
-    <linearGradient id="fullLyxisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF5500" />
-      <stop offset="100%" stop-color="#FF3700" />
-    </linearGradient>
-    <linearGradient id="fullChamferHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FF8A50" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#FF3700" stop-opacity="0" />
-    </linearGradient>
-  </defs>
-
-  <!-- Left: Monogram Icon (48x48) -->
+  <!-- Left: Delta Keystone Monolith Icon (48x48 Chassis) -->
   <g transform="translate(8, 8)">
     <rect width="48" height="48" rx="14" fill="#0B0C10" />
     <rect x="0.5" y="0.5" width="47" height="47" rx="13.5" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
 
-    <path
-      d="M15 12
-         L24 12
-         L24 27
-         L35 27
-         L35 36
-         L15 36
-         Z"
-      fill="url(#fullLyxisGrad)"
-    />
-    <path
-      d="M15 12
-         L21 12
-         L15 18
-         Z"
-      fill="url(#fullChamferHighlight)"
-    />
+    <!-- Pure 1-Field Monochromatic Polygon -->
+    <g transform="translate(7, 7) scale(0.34)">
+      <polygon
+        points="16,20 84,20 54,82 54,52 64,52 50,34 36,52 46,52 46,82"
+        fill="#FF3700"
+      />
+    </g>
   </g>
 
   <!-- Right: Wordmark & Descriptor Typography -->
