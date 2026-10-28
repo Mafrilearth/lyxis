@@ -2,6 +2,10 @@
 pre-commit:
   parallel: true
   jobs:
+    - name: block-sensitive-env-files
+      glob: "*.{env,env.local,env.*,pem,key}"
+      run: 'echo "ERROR: Staging secret files is strictly forbidden!" && exit 1'
+
     - name: biome-lint-and-format
       glob: "*.{js,ts,jsx,tsx,json,jsonc}"
       run: pnpm exec biome check --write {staged_files}
