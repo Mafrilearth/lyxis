@@ -16,7 +16,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^6.0.0",
-    "@prisma/client": "^6.19.3",
+    "@prisma/client": "^7.10.1",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.118.0",
     "@t3-oss/env-nextjs": "^0.13.11",
