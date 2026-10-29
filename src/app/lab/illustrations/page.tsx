@@ -1,19 +1,20 @@
 import { IllustrationShowcase } from "@/components/illustrations/illustration-showcase";
 import { MinimalInteractiveMark } from "@/components/illustrations/minimal-interactive-mark";
+import { PsychometricBeamPipeline } from "@/components/illustrations/psychometric-beam-pipeline";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
   title: "Motion & Animation Lab — Lyxis",
   description:
-    "Interactive comparison of Linear-style technical wireframe illustrations using Pure CSS, Motion, GSAP, Three.js, and Quantum Canvas.",
+    "Interactive comparison of Linear-style technical wireframe illustrations and Magic UI Animated Beam special effects.",
 };
 
 export default function IllustrationsLabPage() {
   return (
     <div className="min-h-screen bg-[#05070A] text-foreground p-6 sm:p-10 lg:p-12 space-y-16 selection:bg-primary/20">
-      <div className="max-w-7xl mx-auto space-y-12">
+      <div className="max-w-7xl mx-auto space-y-16">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs font-mono font-bold text-muted-foreground hover:text-foreground transition-colors"
@@ -21,19 +22,43 @@ export default function IllustrationsLabPage() {
           <ArrowLeft className="w-3.5 h-3.5" /> Back to Overview
         </Link>
 
+        {/* ================= SPECIAL EFFECT: MAGIC UI ANIMATED BEAM PIPELINE ================= */}
+        <section className="space-y-6 pt-2 border-b border-border/20 pb-16">
+          <div className="space-y-3">
+            <Badge
+              variant="outline"
+              className="border-cyan-500/40 text-cyan-400 bg-cyan-950/20 font-mono text-xs uppercase"
+            >
+              <Zap className="w-3.5 h-3.5 mr-1" /> Custom Special Effect — Animated Beam
+            </Badge>
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+              Psychometric Animated Beam Pipeline
+            </h1>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
+              Efek khusus seperti pada Magic UI dibuat kustom menggunakan{" "}
+              <span className="text-cyan-400 font-mono">motion/react</span> dan SVG Quadratic Bézier
+              curves. Menghubungkan titik DOM koordinat seksi TOEFL ITP (Listening, Structure,
+              Reading) ke pusat kalkulasi IRT Lyxis dengan aliran partikel cahaya.
+            </p>
+          </div>
+
+          <div className="p-4 sm:p-8 rounded-3xl bg-[#030508] border border-white/5 flex items-center justify-center">
+            <PsychometricBeamPipeline />
+          </div>
+        </section>
+
         {/* ================= PRIMARY FEATURED: MINIMALIST INTERACTIVE ================= */}
-        <section className="space-y-6 pt-4 border-b border-border/20 pb-16">
+        <section className="space-y-6 border-b border-border/20 pb-16">
           <div className="space-y-3">
             <Badge
               variant="outline"
               className="border-primary/40 text-primary bg-primary/10 font-mono text-xs uppercase"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Requested Revision — Minimalist &
-              Interactive
+              <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Minimalist & Quiet Aesthetic
             </Badge>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
               The Minimalist Calibration Core
-            </h1>
+            </h2>
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
               Disederhanakan total tanpa elemen visual yang ramai: monolit isometrik murni dengan
               celah optik akustik (*venetian slits*). Interaktif secara langsung melalui kursor
