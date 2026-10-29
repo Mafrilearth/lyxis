@@ -6,6 +6,7 @@ import { NavDocuments } from "@/components/admin/nav-documents";
 import { NavMain } from "@/components/admin/nav-main";
 import { NavSecondary } from "@/components/admin/nav-secondary";
 import { NavUser } from "@/components/admin/nav-user";
+import { NextLogo } from "@/components/shared/next-logo";
 import {
   Sidebar,
   SidebarContent,
@@ -100,18 +101,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               render={<a href="/admin" />}
             >
               <div className="flex size-7 items-center justify-center rounded-md bg-[#07090E] border border-border p-1 text-foreground shadow-xs">
-                <svg
-                  viewBox="0 0 500 500"
-                  className="size-full text-foreground"
-                  fill="none"
-                  aria-label="Lyxis Logo"
-                >
-                  <title>Lyxis Logo</title>
-                  <path
-                    d="M 246 68 C 248 65, 252 65, 254 68 C 295 125, 385 245, 395 360 C 398 375, 385 388, 370 385 C 335 375, 290 340, 250 290 C 210 340, 165 375, 130 385 C 115 388, 102 375, 105 360 C 115 245, 205 125, 246 68 Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                <NextLogo className="size-full text-foreground" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="text-sm font-semibold tracking-tight">Lyxis</span>

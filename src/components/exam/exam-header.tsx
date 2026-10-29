@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { NextLogo } from "@/components/shared/next-logo";
 import { Timer } from "@/components/exam/timer";
 import { Command, HelpCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
@@ -33,18 +34,7 @@ export function ExamHeader({
       <div className="flex items-center gap-4">
         <Link href="/dashboard" className="flex items-center gap-3 group">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#07090E] border border-border/80 p-2 shadow-md group-hover:scale-105 transition-transform">
-            <svg
-              viewBox="0 0 500 500"
-              className="w-full h-full text-foreground"
-              fill="none"
-              aria-label="Lyxis Logo"
-            >
-              <title>Lyxis Logo</title>
-              <path
-                d="M 246 68 C 248 65, 252 65, 254 68 C 295 125, 385 245, 395 360 C 398 375, 385 388, 370 385 C 335 375, 290 340, 250 290 C 210 340, 165 375, 130 385 C 115 388, 102 375, 105 360 C 115 245, 205 125, 246 68 Z"
-                fill="currentColor"
-              />
-            </svg>
+            <NextLogo className="w-full h-full text-foreground" />
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-lg tracking-tight leading-none text-foreground">
