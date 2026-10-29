@@ -7,12 +7,13 @@ import Link from "next/link";
 
 /**
  * Standard Global Header Navigation (8pt Baseline Grid Architecture)
+ * - Language: Global English.
  * - Exact height: h-16 (64px = 16 Tailwind units = 8 x 8px grid cells).
  * - Docks firmly to top when scrolling (sticky top-0).
  * - Solid, high-contrast, unfaded grid borders (border-zinc-300 dark:border-zinc-800).
  * - Content mathematically centered along direction axis.
  * - Uniform corner radii (rounded-lg = 8px = 1 grid cell).
- * - Strictly: Brand name only, Masuk, Daftar, Theme Toggle.
+ * - Strictly: Brand name only, Sign In, Sign Up, Theme Toggle.
  */
 export function FloatingNav() {
   return (
@@ -25,7 +26,7 @@ export function FloatingNav() {
           </span>
         </Link>
 
-        {/* Action Cluster: Exact Centered Alignment, 8px Radius, Zero Shadows */}
+        {/* Action Cluster: Centered Alignment, 8px Radius, Zero Shadows */}
         <div className="flex items-center gap-3">
           <Link
             href="/login"
@@ -34,7 +35,7 @@ export function FloatingNav() {
               "h-9 px-3.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Masuk
+            Sign In
           </Link>
 
           <Link
@@ -44,7 +45,7 @@ export function FloatingNav() {
               "h-9 px-4 sm:px-5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Daftar
+            Sign Up
           </Link>
 
           <ThemeToggle />
