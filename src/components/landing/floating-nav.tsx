@@ -34,7 +34,7 @@ export function FloatingNav() {
               "h-9 px-3.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Masuk
+            Sign In
           </Link>
 
           <Link
@@ -44,7 +44,7 @@ export function FloatingNav() {
               "h-9 px-4 sm:px-5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Daftar
+            Sign Up
           </Link>
 
           <ThemeToggle />
