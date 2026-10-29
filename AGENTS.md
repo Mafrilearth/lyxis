@@ -218,6 +218,39 @@ Before declaring any coding task complete, AI agents must run and pass the 3-ste
 3. **Turbopack Build Verification**: Execute `pnpm build` to verify that all App Router segments (static and dynamic) compile and optimize cleanly with exit code 0.
 4. **Runtime MCP Visibility**: Utilize the running Next.js MCP server at `/_next/mcp` configured in `.mcp.json` (`next-devtools-mcp`) for zero-build-time compilation issue checks (`get_compilation_issues`, `compile_route`).
 
+### 20. Exhaustive Next.js 16 Bundled Documentation Catalog (`node_modules/next/dist/docs/`)
+
+AI agents must consult these version-matched Markdown documents directly on disk before designing, modifying, or debugging any App Router feature:
+- **Getting Started (`01-app/01-getting-started/`)**:
+  `01-installation.md`, `02-project-structure.md`, `03-layouts-and-pages.md`, `04-linking-and-navigating.md`, `05-server-and-client-components.md`, `06-fetching-data.md`, `07-mutating-data.md`, `08-caching.md`, `09-revalidating.md`, `10-error-handling.md`, `11-css.md`, `12-images.md`, `13-fonts.md`, `14-metadata-and-og-images.md`, `15-route-handlers.md`, `16-proxy.md`, `17-deploying.md`, `18-upgrading.md`.
+
+- **Comprehensive Guides (`01-app/02-guides/`)**:
+  `adopting-partial-prefetching.md`, `ai-agents.md`, `analytics.md`, `authentication.md`, `authentication-with-cache-components.md`, `backend-for-frontend.md`, `building.md`, `caching-without-cache-components.md`, `cdn-caching.md`, `ci-build-caching.md`, `content-security-policy.md`, `css-in-js.md`, `custom-server.md`, `data-security.md`, `debugging.md`, `deploying-to-platforms.md`, `draft-mode.md`, `environment-variables.md`, `forms.md`, `how-revalidation-works.md`, `incremental-static-regeneration.md`, `incremental-static-regeneration-cache-components.md`, `instant-navigation.md`, `instrumentation.md`, `interactive-apps.md`, `internationalization.md`, `json-ld.md`, `keeping-pages-static.md`, `lazy-loading.md`, `local-development.md`, `mcp.md`, `mdx.md`, `memory-usage.md`, `migrating-to-cache-components.md`, `multi-tenant.md`, `multi-zones.md`, `offline-support.md`, `open-telemetry.md`, `optimizing-prefetching.md`, `optimizing-the-static-shell.md`, `package-bundling.md`, `ppr-platform-guide.md`, `prefetching.md`, `preserving-ui-state.md`, `preventing-flash-before-hydration.md`, `production-checklist.md`, `progressive-web-apps.md`, `public-static-pages.md`, `redirecting.md`, `rendering-philosophy.md`, `sass.md`, `scripts.md`, `self-hosting.md`, `server-actions.md`, `server-and-client-boundary.md`, `single-page-applications.md`, `static-exports.md`, `streaming.md`, `tailwind-v3-css.md`, `third-party-libraries.md`, `videos.md`, `view-transitions.md`.
+  - Subguides: `client-side-data-fetching/` (`swr.md`, `tanstack-query.md`, `use.md`), `migrating/` (`from-create-react-app.md`, `from-pages-router.md`, `from-vite.md`), `testing/` (`cypress.md`, `jest.md`, `playwright.md`, `vitest.md`), `upgrading/` (`codemods.md`, `version-14.md`, `version-15.md`, `version-16.md`).
+
+- **Directives API Reference (`01-app/03-api-reference/01-directives/`)**:
+  `use-client.md`, `use-server.md`, `use-cache.md`, `use-cache-private.md`, `use-cache-remote.md`.
+
+- **Components API Reference (`01-app/03-api-reference/02-components/`)**:
+  `font.md`, `form.md`, `image.md`, `link.md`, `script.md`.
+
+- **File Conventions Reference (`01-app/03-api-reference/03-file-conventions/`)**:
+  `page.md`, `layout.md`, `loading.md`, `error.md`, `not-found.md`, `route.md`, `template.md`, `default.md`, `forbidden.md`, `unauthorized.md`, `proxy.md`, `instrumentation.md`, `instrumentation-client.md`, `mdx-components.md`, `dynamic-routes.md`, `intercepting-routes.md`, `parallel-routes.md`, `route-groups.md`, `src-folder.md`, `public-folder.md`.
+  - Metadata Files (`01-metadata/`): `app-icons.md`, `icon.md`, `apple-icon.md`, `opengraph-image.md`, `robots.md`, `sitemap.md`, `manifest.md`.
+  - Route Segment Config (`02-route-segment-config/`): `dynamic.md`, `dynamicParams.md`, `revalidate.md`, `runtime.md`, `maxDuration.md`, `preferredRegion.md`, `prefetch.md`, `ensureStatic.md`, `instant.md`.
+
+- **Functions API Reference (`01-app/03-api-reference/04-functions/`)**:
+  `after.md`, `cacheLife.md`, `cacheTag.md`, `catchError.md`, `connection.md`, `cookies.md`, `draft-mode.md`, `fetch.md`, `forbidden.md`, `generate-image-metadata.md`, `generate-metadata.md`, `generate-sitemaps.md`, `generate-static-params.md`, `generate-viewport.md`, `headers.md`, `image-response.md`, `io.md`, `navigation.md`, `next-request.md`, `next-response.md`, `next-root-params.md`, `not-found.md`, `permanentRedirect.md`, `prefetch.md`, `redirect.md`, `refresh.md`, `revalidatePath.md`, `revalidateTag.md`, `unauthorized.md`, `unstable_cache.md`, `unstable_noStore.md`, `unstable_rethrow.md`, `updateTag.md`, `use-link-status.md`, `use-offline.md`, `use-params.md`, `use-pathname.md`, `use-report-web-vitals.md`, `use-router.md`, `use-search-params.md`, `use-selected-layout-segment.md`, `use-selected-layout-segments.md`, `userAgent.md`.
+
+- **Configuration API Reference (`01-app/03-api-reference/05-config/`)**:
+  `01-next-config-js/` (82 configuration options including `typedRoutes.md`, `serverExternalPackages.md`, `serverActions.md`, `logging.md`, `headers.md`, `redirects.md`, `rewrites.md`, `images.md`, `cacheComponents.md`, `turbopack.md`, `authInterrupts.md`, `taint.md`, etc.), `02-typescript.md`, `03-environment-variables.md`.
+
+- **CLI & Adapters (`01-app/03-api-reference/`)**:
+  `06-cli/` (`next.md`, `create-next-app.md`), `07-adapters/` (13 adapter architecture specifications).
+
+- **Architecture Deep Dives (`03-architecture/`)**:
+  `nextjs-compiler.md`, `fast-refresh.md`, `accessibility.md`, `supported-browsers.md`.
+
 <!-- END:nextjs-official-specifications -->
 
 <!-- BEGIN:heroui-agent-rules -->
