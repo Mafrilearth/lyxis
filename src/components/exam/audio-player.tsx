@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { Chip } from "@heroui/react";
 import { useExamStore } from "@/lib/store/exam-store";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Lock, Play, Volume2 } from "lucide-react";
@@ -147,12 +147,13 @@ export function AudioPlayer({
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-base font-bold text-foreground">{label}</span>
-              <Badge
-                variant="outline"
-                className="text-xs py-0.5 px-2.5 border-primary/30 text-primary font-bold"
+              <Chip
+                variant="soft"
+                size="sm"
+                className="text-xs py-0.5 px-2.5 border border-accent/30 text-accent font-bold"
               >
                 Single-Play
-              </Badge>
+              </Chip>
             </div>
             <p className="text-xs text-muted-foreground">
               Official ETS Academic Listening Track • Calibrated 128 kbps Fidelity

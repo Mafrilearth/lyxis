@@ -4,7 +4,7 @@ import { CompetencyRadarChart } from "@/components/result/radar-chart";
 import { ScoreCard } from "@/components/result/score-card";
 import { SectionBreakdown } from "@/components/result/section-breakdown";
 import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@heroui/styles";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";
 import { createClient } from "@/lib/supabase/server";

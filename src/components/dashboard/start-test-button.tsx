@@ -1,7 +1,7 @@
 "use client";
 
 import { startExamAction } from "@/actions/exam";
-import { Button } from "@/components/ui/button";
+import { Button } from "@heroui/react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,9 +39,10 @@ export function StartTestButton({ candidateName, candidateEmail }: StartTestButt
 
   return (
     <Button
-      onClick={handleStart}
-      disabled={isLoading}
-      className="h-10 px-6 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none cursor-pointer"
+      onPress={handleStart}
+      isDisabled={isLoading}
+      variant="primary"
+      className="h-10 px-6 text-sm font-semibold rounded-lg bg-accent text-accent-foreground cursor-pointer"
     >
       {isLoading ? (
         <>

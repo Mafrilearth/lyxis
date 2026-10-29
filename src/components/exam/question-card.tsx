@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@heroui/react";
 import { useExamStore } from "@/lib/store/exam-store";
 import type { CorrectOption, ExamQuestion } from "@/types/exam";
 import { Check, Flag } from "lucide-react";
@@ -66,10 +66,8 @@ export function QuestionCard({ question, onAnswerSaved }: QuestionCardProps) {
         </div>
 
         <Button
-          type="button"
           variant="ghost"
-          size="default"
-          onClick={() => toggleFlagQuestion(question.id)}
+          onPress={() => toggleFlagQuestion(question.id)}
           className={`h-11 px-4 gap-2 text-xs font-semibold rounded-xl transition-colors ${
             isFlagged
               ? "bg-amber-500/15 text-amber-600 hover:bg-amber-500/25 dark:text-amber-400"

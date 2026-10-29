@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Chip } from "@heroui/react";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { Award, CheckCircle2, TrendingUp } from "lucide-react";
 
@@ -33,12 +33,12 @@ export function ScoreCard({ totalScore, cefrLevel, candidateName }: ScoreCardPro
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Scaled Diagnostic Score Dossier
               </span>
-              <Badge
-                variant="outline"
-                className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 border-emerald-500/20 px-2.5 py-0.5"
+              <Chip
+                variant="soft"
+                className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-2.5 py-0.5"
               >
                 <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Psychometrically Calibrated
-              </Badge>
+              </Chip>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
               {candidateName}
@@ -46,9 +46,9 @@ export function ScoreCard({ totalScore, cefrLevel, candidateName }: ScoreCardPro
           </div>
 
           <div className="flex items-center gap-3">
-            <Badge className="py-2 px-4 text-sm font-bold bg-primary text-primary-foreground uppercase tracking-wider rounded-xl">
+            <Chip className="py-2 px-4 text-sm font-bold bg-accent text-accent-foreground uppercase tracking-wider rounded-xl">
               CEFR Benchmark: {cefrLevel}
-            </Badge>
+            </Chip>
           </div>
         </div>
 

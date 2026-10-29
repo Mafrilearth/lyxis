@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button, Input, Label } from "@heroui/react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
@@ -154,8 +152,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
         <Button
           type="submit"
-          className="w-full h-10 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none"
-          disabled={isLoading}
+          className="w-full h-10 text-sm font-semibold rounded-lg bg-accent text-accent-foreground border border-transparent shadow-none"
+          isDisabled={isLoading}
         >
           {isLoading ? (
             <>
@@ -171,19 +169,18 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       <div className="space-y-4">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border" />
+            <span className="w-full border-t border-separator" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase text-muted-foreground">
+          <div className="relative flex justify-center text-xs uppercase text-muted">
             <span className="bg-background px-2">Or</span>
           </div>
         </div>
 
         <Button
           variant="outline"
-          type="button"
-          className="w-full h-10 text-sm font-medium rounded-lg border border-border shadow-none gap-2"
-          onClick={handleGoogleAuth}
-          disabled={isLoading}
+          className="w-full h-10 text-sm font-medium rounded-lg border border-separator shadow-none gap-2"
+          onPress={handleGoogleAuth}
+          isDisabled={isLoading}
         >
           <svg className="h-4 w-4" viewBox="0 0 24 24" role="img" aria-label="Google logo">
             <title>Google logo</title>

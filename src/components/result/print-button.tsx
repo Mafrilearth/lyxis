@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@heroui/react";
 import { Printer } from "lucide-react";
 
 export function PrintButton() {
@@ -12,10 +12,9 @@ export function PrintButton() {
 
   return (
     <Button
-      type="button"
       variant="outline"
       size="sm"
-      onClick={handlePrint}
+      onPress={handlePrint}
       className="h-9 gap-1.5 text-xs font-semibold print:hidden"
     >
       <Printer className="h-3.5 w-3.5" /> Print Dossier / Save PDF

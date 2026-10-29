@@ -1,5 +1,5 @@
 import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
-import { Badge } from "@/components/ui/badge";
+import { Chip } from "@heroui/react";
 import { createClient } from "@/lib/supabase/server";
 import { Calendar, CheckCircle2, ShieldAlert, ShieldCheck, User } from "lucide-react";
 import Link from "next/link";
@@ -155,9 +155,9 @@ async function VerifyContent({ params }: VerifyPageProps) {
                     </div>
                   </div>
 
-                  <Badge className="py-1.5 px-4 text-sm font-bold bg-primary text-primary-foreground self-start sm:self-auto rounded-xl">
+                  <Chip className="py-1.5 px-4 text-sm font-bold bg-accent text-accent-foreground self-start sm:self-auto rounded-xl">
                     CEFR: {cefrLevel}
-                  </Badge>
+                  </Chip>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 text-center text-xs sm:text-sm">

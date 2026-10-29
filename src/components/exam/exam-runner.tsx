@@ -1,14 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Button, Modal } from "@heroui/react";
 import { AntiCheatSensor } from "@/components/exam/anti-cheat";
 import { AudioPlayer } from "@/components/exam/audio-player";
 import { ExamHeader } from "@/components/exam/exam-header";
@@ -333,10 +325,9 @@ export function ExamRunner({
           {/* Bottom Action / Navigation Bar: Spacious & Comfortable */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6 mt-10">
             <Button
-              type="button"
               variant="outline"
-              disabled={isFirstQuestion}
-              onClick={handlePrevQuestion}
+              isDisabled={isFirstQuestion}
+              onPress={handlePrevQuestion}
               className="h-12 sm:h-13 px-6 gap-2.5 text-sm sm:text-base font-semibold rounded-2xl border-border/80"
             >
               <ArrowLeft className="h-4 w-4" /> Previous Item{" "}
@@ -348,9 +339,8 @@ export function ExamRunner({
             <div className="flex items-center gap-3">
               {!isLastSection ? (
                 <Button
-                  type="button"
                   variant="outline"
-                  onClick={() => setIsNextSectionDialogOpen(true)}
+                  onPress={() => setIsNextSectionDialogOpen(true)}
                   className="h-12 sm:h-13 px-6 gap-2 text-sm sm:text-base font-bold rounded-2xl border-primary/40 hover:bg-primary/5 text-primary"
                 >
                   Complete Section <ChevronRight className="h-4 w-4" />
@@ -360,9 +350,8 @@ export function ExamRunner({
                 </Button>
               ) : (
                 <Button
-                  type="button"
-                  onClick={() => setIsSubmitDialogOpen(true)}
-                  disabled={isSubmitting}
+                  onPress={() => setIsSubmitDialogOpen(true)}
+                  isDisabled={isSubmitting}
                   className="h-12 sm:h-13 px-7 gap-2.5 text-sm sm:text-base font-bold rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md"
                 >
                   {isSubmitting ? (
@@ -381,9 +370,8 @@ export function ExamRunner({
               )}
 
               <Button
-                type="button"
-                disabled={isLastQuestion}
-                onClick={handleNextQuestion}
+                isDisabled={isLastQuestion}
+                onPress={handleNextQuestion}
                 className="h-12 sm:h-13 px-6 gap-2.5 text-sm sm:text-base font-bold rounded-2xl shadow-sm"
               >
                 Next Item <ArrowRight className="h-4 w-4" />{" "}
@@ -405,82 +393,85 @@ export function ExamRunner({
         </div>
       </main>
 
-      {/* Confirmation Dialog: Proceed to Next Section */}
-      <Dialog open={isNextSectionDialogOpen} onOpenChange={setIsNextSectionDialogOpen}>
-        <DialogContent className="max-w-md p-6 sm:p-7 rounded-3xl">
-          <DialogHeader>
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 mb-2">
-              <AlertTriangle className="h-5 w-5" />
-            </div>
-            <DialogTitle className="text-lg font-bold">Advance to Next Section?</DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground leading-relaxed mt-1">
-              Once you confirm and exit{" "}
-              <strong className="text-foreground">{currentSection.title}</strong>, all responses in
-              this section will be permanently locked. You cannot navigate back to modify answers.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-3 mt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setIsNextSectionDialogOpen(false)}
-              className="h-12 px-5 rounded-2xl font-semibold text-sm"
-            >
-              Continue Section
-            </Button>
-            <Button
-              type="button"
-              onClick={handleConfirmNextSection}
-              className="h-12 px-6 rounded-2xl bg-primary text-primary-foreground font-bold text-sm shadow-md"
-            >
-              Confirm Section Finalization
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Confirmation Modal: Proceed to Next Section */}
+      <Modal.Backdrop isOpen={isNextSectionDialogOpen} onOpenChange={setIsNextSectionDialogOpen}>
+        <Modal.Container>
+          <Modal.Dialog className="max-w-md p-6 sm:p-7 rounded-3xl">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 mb-2">
+                <AlertTriangle className="h-5 w-5" />
+              </div>
+              <Modal.Heading className="text-lg font-bold">Advance to Next Section?</Modal.Heading>
+              <p className="text-sm text-muted leading-relaxed mt-1">
+                Once you confirm and exit{" "}
+                <strong className="text-foreground">{currentSection.title}</strong>, all responses
+                in this section will be permanently locked. You cannot navigate back to modify
+                answers.
+              </p>
+            </Modal.Header>
+            <Modal.Footer className="gap-2 sm:gap-3 mt-4">
+              <Button
+                variant="outline"
+                onPress={() => setIsNextSectionDialogOpen(false)}
+                className="h-12 px-5 rounded-2xl font-semibold text-sm"
+              >
+                Continue Section
+              </Button>
+              <Button
+                onPress={handleConfirmNextSection}
+                className="h-12 px-6 rounded-2xl bg-accent text-accent-foreground font-bold text-sm shadow-md"
+              >
+                Confirm Section Finalization
+              </Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
 
-      {/* Confirmation Dialog: Submit Examination */}
-      <Dialog open={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
-        <DialogContent className="max-w-md p-6 sm:p-7 rounded-3xl">
-          <DialogHeader>
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 mb-2">
-              <CheckCircle2 className="h-5 w-5" />
-            </div>
-            <DialogTitle className="text-lg font-bold">
-              Finalize Examination Submission?
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground leading-relaxed mt-1">
-              You are about to submit all 140 questions for psychometric evaluation. Your scaled
-              score (310–677), CEFR band, and verified digital credential will be generated
-              immediately.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-3 mt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setIsSubmitDialogOpen(false)}
-              className="h-12 px-5 rounded-2xl font-semibold text-sm"
-            >
-              Review Questions
-            </Button>
-            <Button
-              type="button"
-              onClick={handleSubmitExam}
-              disabled={isSubmitting}
-              className="h-12 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" /> Scoring...
-                </>
-              ) : (
-                "Yes, Submit Examination"
-              )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Confirmation Modal: Submit Examination */}
+      <Modal.Backdrop isOpen={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
+        <Modal.Container>
+          <Modal.Dialog className="max-w-md p-6 sm:p-7 rounded-3xl">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 mb-2">
+                <CheckCircle2 className="h-5 w-5" />
+              </div>
+              <Modal.Heading className="text-lg font-bold">
+                Finalize Examination Submission?
+              </Modal.Heading>
+              <p className="text-sm text-muted leading-relaxed mt-1">
+                You are about to submit all 140 questions for psychometric evaluation. Your scaled
+                score (310–677), CEFR band, and verified digital credential will be generated
+                immediately.
+              </p>
+            </Modal.Header>
+            <Modal.Footer className="gap-2 sm:gap-3 mt-4">
+              <Button
+                variant="outline"
+                onPress={() => setIsSubmitDialogOpen(false)}
+                className="h-12 px-5 rounded-2xl font-semibold text-sm"
+              >
+                Review Questions
+              </Button>
+              <Button
+                onPress={handleSubmitExam}
+                isDisabled={isSubmitting}
+                className="h-12 px-6 rounded-2xl bg-emerald-600 text-white font-bold text-sm shadow-md"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" /> Scoring...
+                  </>
+                ) : (
+                  "Yes, Submit Examination"
+                )}
+              </Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </div>
   );
 }

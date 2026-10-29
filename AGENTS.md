@@ -36,6 +36,23 @@ HeroUI v3 is the primary UI component system for this application, built on **Ta
    - Use `isPending` for loading state indicators.
    - Maintain full WAI-ARIA keyboard navigation and focus rings.
 
+4. **Zero Copy-Paste UI Folder (`components/ui` Is Banned):**
+   - HeroUI v3 is a direct npm package (`@heroui/react` and `@heroui/styles`), NOT a copy-paste CLI system like Shadcn.
+   - Never create `src/components/ui/` or copy individual component wrapper files.
+   - All components are imported directly in their respective page or feature views (`import { Button, Card, Chip, Modal } from "@heroui/react";` and `import { buttonVariants } from "@heroui/styles";`).
+
+5. **Clean Global Styling Standards:**
+   - `src/app/globals.css` must strictly contain only the official Tailwind CSS v4 and HeroUI imports:
+     - `@import "tailwindcss";`
+     - `@import "@heroui/styles";`
+     - `@import "tw-animate-css";`
+     - Semantic brand accent: `--accent: #ff3700;`
+   - Never re-introduce legacy Shadcn CSS variables, HSL blocks, or redundant `@layer base` style declarations.
+
+6. **Component API Specifics:**
+   - **Chip Variants:** HeroUI `Chip` supports `variant="primary" | "secondary" | "tertiary" | "soft"`. Do not pass `variant="outline"` to `Chip`; use `variant="soft"` with border utility classes.
+   - **Button Attributes:** HeroUI `Button` wraps React Aria Button; use `aria-label` instead of `title`.
+
 <!-- END:heroui-agent-rules -->
 
 

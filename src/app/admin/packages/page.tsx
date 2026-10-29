@@ -1,13 +1,4 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Button, Card, Chip } from "@heroui/react";
 import {
   BookOpenIcon,
   CheckCircle2Icon,
@@ -64,92 +55,92 @@ export default function PackagesPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge
-            variant="outline"
-            className="gap-1 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+          <Chip
+            variant="soft"
+            className="gap-1 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
           >
             <CheckCircle2Icon className="size-3.5" />
             140 Items Calibrated
-          </Badge>
+          </Chip>
           <Button variant="outline" size="sm">
             Export Package JSON
           </Button>
         </div>
       </div>
 
-      <Card className="border-primary/20 bg-primary/[0.02]">
-        <CardHeader>
+      <Card className="border-accent/20 bg-accent/[0.02] p-4">
+        <Card.Header>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-lg">TOEFL ITP® Diagnostic Test Form A</CardTitle>
-              <CardDescription>
+              <Card.Title className="text-lg">TOEFL ITP® Diagnostic Test Form A</Card.Title>
+              <Card.Description>
                 Canonical Form ID:{" "}
-                <code className="font-mono text-xs text-primary">pkg-toefl-itp-form-a</code>
-              </CardDescription>
+                <code className="font-mono text-xs text-accent">pkg-toefl-itp-form-a</code>
+              </Card.Description>
             </div>
-            <Badge>Active Benchmark</Badge>
+            <Chip variant="primary">Active Benchmark</Chip>
           </div>
-        </CardHeader>
-        <CardContent className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
+        </Card.Header>
+        <Card.Content className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4 pt-3">
           <div>
-            <span className="text-xs text-muted-foreground">Total Questions</span>
+            <span className="text-xs text-muted">Total Questions</span>
             <p className="font-semibold">140 Items</p>
           </div>
           <div>
-            <span className="text-xs text-muted-foreground">Total Duration</span>
+            <span className="text-xs text-muted">Total Duration</span>
             <p className="font-semibold">115 Minutes (1 hr 55 min)</p>
           </div>
           <div>
-            <span className="text-xs text-muted-foreground">Target Score Band</span>
+            <span className="text-xs text-muted">Target Score Band</span>
             <p className="font-semibold">310 – 677 Scaled Score</p>
           </div>
           <div>
-            <span className="text-xs text-muted-foreground">CEFR Classification</span>
+            <span className="text-xs text-muted">CEFR Classification</span>
             <p className="font-semibold">Bands A2, B1, B2, C1</p>
           </div>
-        </CardContent>
+        </Card.Content>
       </Card>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {canonicalSections.map((sec) => {
           const Icon = sec.icon;
           return (
-            <Card key={sec.orderIndex} className="flex flex-col justify-between">
-              <CardHeader>
+            <Card key={sec.orderIndex} className="flex flex-col justify-between p-4">
+              <Card.Header>
                 <div className="flex items-center justify-between">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
                     <Icon className="size-5" />
                   </div>
-                  <Badge variant="secondary" className="font-mono text-xs">
+                  <Chip variant="soft" className="font-mono text-xs">
                     Order #{sec.orderIndex}
-                  </Badge>
+                  </Chip>
                 </div>
-                <CardTitle className="mt-3 text-base">{sec.title}</CardTitle>
-                <CardDescription className="text-xs">{sec.subParts}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-xs">
-                <div className="flex items-center justify-between border-t pt-2">
-                  <span className="text-muted-foreground">Question Pool</span>
+                <Card.Title className="mt-3 text-base">{sec.title}</Card.Title>
+                <Card.Description className="text-xs">{sec.subParts}</Card.Description>
+              </Card.Header>
+              <Card.Content className="space-y-3 text-xs pt-3">
+                <div className="flex items-center justify-between border-t border-separator pt-2">
+                  <span className="text-muted">Question Pool</span>
                   <span className="font-semibold">{sec.items} items</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Standard Timing</span>
+                  <span className="text-muted">Standard Timing</span>
                   <span className="flex items-center gap-1 font-semibold">
-                    <ClockIcon className="size-3.5 text-muted-foreground" />
+                    <ClockIcon className="size-3.5 text-muted" />
                     {sec.duration} minutes
                   </span>
                 </div>
-                <div className="border-t pt-2">
-                  <span className="text-muted-foreground">Stimulus Format:</span>
+                <div className="border-t border-separator pt-2">
+                  <span className="text-muted">Stimulus Format:</span>
                   <p className="mt-0.5 text-foreground/80 leading-relaxed">{sec.stimuli}</p>
                 </div>
-              </CardContent>
-              <CardFooter className="border-t pt-3">
+              </Card.Content>
+              <Card.Footer className="border-t border-separator pt-3">
                 <Button variant="ghost" size="sm" className="w-full text-xs">
                   <FileTextIcon className="mr-1.5 size-3.5" />
                   View Calibrated Items
                 </Button>
-              </CardFooter>
+              </Card.Footer>
             </Card>
           );
         })}

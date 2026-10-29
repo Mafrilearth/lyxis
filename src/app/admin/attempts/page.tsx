@@ -1,6 +1,5 @@
 import { DataTable } from "@/components/admin/data-table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, Chip } from "@heroui/react";
 import { DownloadIcon, ShieldCheckIcon, UsersIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
@@ -66,10 +65,10 @@ export default async function AttemptsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="gap-1 border-primary/30">
+          <Chip variant="soft" size="sm" className="gap-1 border border-primary/30">
             <ShieldCheckIcon className="size-3.5 text-primary" />
             ISO/IEC 23988:2007 Audit Trail
-          </Badge>
+          </Chip>
           <Button variant="outline" size="sm">
             <DownloadIcon className="mr-1.5 size-3.5" />
             Export Audit CSV
@@ -98,9 +97,9 @@ export default async function AttemptsPage() {
         </div>
         <div className="rounded-lg border bg-card p-4">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="secondary" className="text-[10px]">
+            <Chip variant="soft" className="text-[10px]">
               CEFR Standard
-            </Badge>
+            </Chip>
             Score Range in Cohort
           </div>
           <div className="mt-2 text-2xl font-bold">{scoreRange}</div>

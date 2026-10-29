@@ -1,4 +1,4 @@
-import { Progress } from "@/components/ui/progress";
+import { ProgressBar } from "@heroui/react";
 import { BookOpen, Headphones, PenTool } from "lucide-react";
 
 interface SectionBreakdownProps {
@@ -35,7 +35,15 @@ export function SectionBreakdown({ listening, structure, reading }: SectionBreak
             </span>
           </div>
 
-          <Progress value={Math.max(5, lPercent)} className="h-2" />
+          <ProgressBar
+            aria-label="Listening progress"
+            value={Math.max(5, lPercent)}
+            className="w-full"
+          >
+            <ProgressBar.Track className="h-2 w-full rounded-full bg-default/40 overflow-hidden">
+              <ProgressBar.Fill className="h-full bg-accent transition-all duration-300" />
+            </ProgressBar.Track>
+          </ProgressBar>
 
           <div className="flex items-center justify-between text-[11px] text-muted-foreground">
             <span>Raw Correct:</span>
@@ -55,7 +63,15 @@ export function SectionBreakdown({ listening, structure, reading }: SectionBreak
             </span>
           </div>
 
-          <Progress value={Math.max(5, sPercent)} className="h-2" />
+          <ProgressBar
+            aria-label="Structure progress"
+            value={Math.max(5, sPercent)}
+            className="w-full"
+          >
+            <ProgressBar.Track className="h-2 w-full rounded-full bg-default/40 overflow-hidden">
+              <ProgressBar.Fill className="h-full bg-accent transition-all duration-300" />
+            </ProgressBar.Track>
+          </ProgressBar>
 
           <div className="flex items-center justify-between text-[11px] text-muted-foreground">
             <span>Raw Correct:</span>
@@ -75,7 +91,15 @@ export function SectionBreakdown({ listening, structure, reading }: SectionBreak
             </span>
           </div>
 
-          <Progress value={Math.max(5, rPercent)} className="h-2" />
+          <ProgressBar
+            aria-label="Reading progress"
+            value={Math.max(5, rPercent)}
+            className="w-full"
+          >
+            <ProgressBar.Track className="h-2 w-full rounded-full bg-default/40 overflow-hidden">
+              <ProgressBar.Fill className="h-full bg-accent transition-all duration-300" />
+            </ProgressBar.Track>
+          </ProgressBar>
 
           <div className="flex items-center justify-between text-[11px] text-muted-foreground">
             <span>Raw Correct:</span>

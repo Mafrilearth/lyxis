@@ -1,7 +1,7 @@
 import { IllustrationShowcase } from "@/components/illustrations/illustration-showcase";
 import { MinimalInteractiveMark } from "@/components/illustrations/minimal-interactive-mark";
 import { PsychometricBeamPipeline } from "@/components/illustrations/psychometric-beam-pipeline";
-import { Badge } from "@/components/ui/badge";
+import { Chip } from "@heroui/react";
 import { ArrowLeft, CheckCircle2, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 
@@ -25,12 +25,12 @@ export default function IllustrationsLabPage() {
         {/* ================= SPECIAL EFFECT: MAGIC UI ANIMATED BEAM PIPELINE ================= */}
         <section className="space-y-6 pt-2 border-b border-border/20 pb-16">
           <div className="space-y-3">
-            <Badge
-              variant="outline"
-              className="border-cyan-500/40 text-cyan-400 bg-cyan-950/20 font-mono text-xs uppercase"
+            <Chip
+              variant="soft"
+              className="border border-cyan-500/40 text-cyan-400 bg-cyan-950/20 font-mono text-xs uppercase"
             >
               <Zap className="w-3.5 h-3.5 mr-1" /> Custom Special Effect — Animated Beam
-            </Badge>
+            </Chip>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
               Psychometric Animated Beam Pipeline
             </h1>
@@ -50,12 +50,12 @@ export default function IllustrationsLabPage() {
         {/* ================= PRIMARY FEATURED: MINIMALIST INTERACTIVE ================= */}
         <section className="space-y-6 border-b border-border/20 pb-16">
           <div className="space-y-3">
-            <Badge
-              variant="outline"
-              className="border-primary/40 text-primary bg-primary/10 font-mono text-xs uppercase"
+            <Chip
+              variant="soft"
+              className="border border-primary/40 text-primary bg-primary/10 font-mono text-xs uppercase"
             >
               <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Minimalist & Quiet Aesthetic
-            </Badge>
+            </Chip>
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
               The Minimalist Calibration Core
             </h2>
@@ -74,12 +74,12 @@ export default function IllustrationsLabPage() {
         {/* ================= EXPERIMENTAL SUITE: 5 ADVANCED ENGINES ================= */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <Badge
-              variant="outline"
-              className="border-border text-muted-foreground font-mono text-xs uppercase"
+            <Chip
+              variant="soft"
+              className="border border-border text-muted-foreground font-mono text-xs uppercase"
             >
               <Sparkles className="w-3.5 h-3.5 mr-1" /> Experimental Laboratory Suite (5 Engines)
-            </Badge>
+            </Chip>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
               MK-IV Advanced Engine Explorations
             </h2>

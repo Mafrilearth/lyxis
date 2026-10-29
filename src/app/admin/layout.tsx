@@ -1,7 +1,5 @@
 import type React from "react";
-import { AppSidebar } from "@/components/admin/app-sidebar";
-import { SiteHeader } from "@/components/admin/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AdminNav } from "@/components/admin/admin-nav";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -48,19 +46,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 64)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
-        <div className="flex flex-1 flex-col">{children}</div>
-      </SidebarInset>
-    </SidebarProvider>
+    <div className="flex min-h-screen flex-col lg:flex-row bg-background text-foreground">
+      <AdminNav userEmail={user.email || "admin@lyxis.mafrilearth.com"} />
+      <main className="flex-1 overflow-x-hidden">{children}</main>
+    </div>
   );
 }

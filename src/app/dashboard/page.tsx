@@ -1,17 +1,8 @@
 import { StartTestButton } from "@/components/dashboard/start-test-button";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, Chip } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import {
@@ -128,12 +119,13 @@ async function DashboardContent() {
             <div className="hidden sm:flex items-center gap-2.5 border border-border/60 rounded-full px-4 py-1.5 bg-muted/30 text-xs">
               <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-semibold text-foreground">{displayName}</span>
-              <Badge
-                variant="outline"
-                className="text-[10px] px-2 py-0 font-bold bg-primary/10 text-primary border-primary/20"
+              <Chip
+                variant="soft"
+                size="sm"
+                className="text-[10px] px-2 py-0 font-bold bg-primary/10 text-primary border border-primary/20"
               >
                 CANDIDATE
-              </Badge>
+              </Chip>
             </div>
 
             <form action="/auth/signout" method="post">
@@ -184,9 +176,13 @@ async function DashboardContent() {
           <div className="rounded-3xl border-2 border-primary/40 bg-primary/5 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md animate-pulse">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2.5">
-                <Badge className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider px-3 py-1">
+                <Chip
+                  variant="primary"
+                  size="sm"
+                  className="text-xs font-bold uppercase tracking-wider px-3 py-1"
+                >
                   Active Assessment Session
-                </Badge>
+                </Chip>
                 <span className="text-xs text-muted-foreground font-mono">
                   Session #{inProgressAttempt.id.slice(0, 8)}
                 </span>
@@ -215,91 +211,85 @@ async function DashboardContent() {
         {/* Metric Overview Cards: Expansive & Proportional */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <CardHeader className="p-0 pb-1">
-              <CardDescription className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted-foreground">
+            <Card.Header className="p-0 pb-1">
+              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
                 <span>Completed Assessments</span>
-                <FileCheck2 className="h-5 w-5 text-primary" />
-              </CardDescription>
-              <CardTitle className="text-4xl font-black font-mono pt-2">
+                <FileCheck2 className="h-5 w-5 text-accent" />
+              </Card.Description>
+              <Card.Title className="text-4xl font-black font-mono pt-2">
                 {completedAttempts.length}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <p className="text-xs text-muted-foreground">
-                Standardized Form A sessions (140 Items)
-              </p>
-            </CardContent>
+              </Card.Title>
+            </Card.Header>
+            <Card.Content className="p-0">
+              <p className="text-xs text-muted">Standardized Form A sessions (140 Items)</p>
+            </Card.Content>
           </Card>
 
           <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <CardHeader className="p-0 pb-1">
-              <CardDescription className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted-foreground">
+            <Card.Header className="p-0 pb-1">
+              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
                 <span>Peak Scaled Score</span>
                 <Award className="h-5 w-5 text-emerald-500" />
-              </CardDescription>
-              <CardTitle className="text-4xl font-black font-mono text-emerald-600 dark:text-emerald-400 pt-2">
+              </Card.Description>
+              <Card.Title className="text-4xl font-black font-mono text-emerald-600 dark:text-emerald-400 pt-2">
                 {completedAttempts.length > 0 ? (
                   <>
                     {bestScore}{" "}
-                    <span className="text-sm font-normal text-muted-foreground font-mono">
-                      / 677
-                    </span>
+                    <span className="text-sm font-normal text-muted font-mono">/ 677</span>
                   </>
                 ) : (
-                  <span className="text-muted-foreground font-sans text-3xl font-semibold">—</span>
+                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
                 )}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <p className="text-xs text-muted-foreground">Official scaled score range (310–677)</p>
-            </CardContent>
+              </Card.Title>
+            </Card.Header>
+            <Card.Content className="p-0">
+              <p className="text-xs text-muted">Official scaled score range (310–677)</p>
+            </Card.Content>
           </Card>
 
           <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <CardHeader className="p-0 pb-1">
-              <CardDescription className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted-foreground">
+            <Card.Header className="p-0 pb-1">
+              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
                 <span>Peak CEFR Band</span>
-                <TrendingUp className="h-5 w-5 text-primary" />
-              </CardDescription>
-              <CardTitle className="text-4xl font-black font-mono pt-2">
+                <TrendingUp className="h-5 w-5 text-accent" />
+              </Card.Description>
+              <Card.Title className="text-4xl font-black font-mono pt-2">
                 {completedAttempts.length > 0 ? (
                   completedAttempts[0]?.cefrLevel || "B1"
                 ) : (
-                  <span className="text-muted-foreground font-sans text-3xl font-semibold">—</span>
+                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
                 )}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <p className="text-xs text-muted-foreground">
+              </Card.Title>
+            </Card.Header>
+            <Card.Content className="p-0">
+              <p className="text-xs text-muted">
                 {completedAttempts.length > 0
                   ? "Global CEFR competency band"
                   : "No assessments yet"}
               </p>
-            </CardContent>
+            </Card.Content>
           </Card>
 
           <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <CardHeader className="p-0 pb-1">
-              <CardDescription className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted-foreground">
+            <Card.Header className="p-0 pb-1">
+              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
                 <span>Mean Scaled Score</span>
-                <Clock className="h-5 w-5 text-primary" />
-              </CardDescription>
-              <CardTitle className="text-4xl font-black font-mono pt-2">
+                <Clock className="h-5 w-5 text-accent" />
+              </Card.Description>
+              <Card.Title className="text-4xl font-black font-mono pt-2">
                 {completedAttempts.length > 0 ? (
                   <>
                     {avgScore}{" "}
-                    <span className="text-sm font-normal text-muted-foreground font-mono">
-                      / 677
-                    </span>
+                    <span className="text-sm font-normal text-muted font-mono">/ 677</span>
                   </>
                 ) : (
-                  <span className="text-muted-foreground font-sans text-3xl font-semibold">—</span>
+                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
                 )}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <p className="text-xs text-muted-foreground">Average across all finished sessions</p>
-            </CardContent>
+              </Card.Title>
+            </Card.Header>
+            <Card.Content className="p-0">
+              <p className="text-xs text-muted">Average across all finished sessions</p>
+            </Card.Content>
           </Card>
         </div>
 
@@ -309,12 +299,13 @@ async function DashboardContent() {
             <h2 className="text-xl font-bold tracking-tight text-foreground">
               Active Assessment Instrument
             </h2>
-            <Badge
-              variant="outline"
-              className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 border-emerald-500/20 px-3 py-1"
+            <Chip
+              variant="soft"
+              size="sm"
+              className="text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-3 py-1"
             >
               <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" /> Self-Service Session Ready
-            </Badge>
+            </Chip>
           </div>
 
           <div className="rounded-3xl border border-border/80 bg-card p-8 sm:p-10 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
@@ -323,9 +314,9 @@ async function DashboardContent() {
                 <h3 className="text-xl font-bold text-foreground">
                   Comprehensive TOEFL ITP® Diagnostic Form A
                 </h3>
-                <Badge variant="secondary" className="text-xs font-mono px-3 py-1">
+                <Chip variant="soft" className="text-xs font-mono px-3 py-1">
                   140 Items • 115 Full Minutes
-                </Badge>
+                </Chip>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Rigorous testing framework matching official ETS specifications. Encompasses 50
@@ -362,112 +353,118 @@ async function DashboardContent() {
           </div>
 
           {completedAttempts.length > 0 ? (
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
-              <Table>
-                <TableHeader className="bg-muted/30">
-                  <TableRow>
-                    <TableHead className="text-xs font-bold uppercase py-4">
-                      Date Conferred
-                    </TableHead>
-                    <TableHead className="text-xs font-bold uppercase py-4">
-                      Certificate ID
-                    </TableHead>
-                    <TableHead className="text-xs font-bold uppercase text-center py-4">
-                      Scaled Score
-                    </TableHead>
-                    <TableHead className="text-xs font-bold uppercase text-center py-4">
-                      CEFR Band
-                    </TableHead>
-                    <TableHead className="text-xs font-bold uppercase text-center py-4">
-                      Sections (L / S / R)
-                    </TableHead>
-                    <TableHead className="text-xs font-bold uppercase text-right py-4">
-                      Action
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {completedAttempts.map((attempt) => {
-                    const dateStr = new Date(
-                      attempt.submittedAt || attempt.startedAt,
-                    ).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    });
-                    const certId =
-                      attempt.certificates?.certificateNumber ||
-                      `LYXIS-2026-${attempt.id.slice(0, 8).toUpperCase()}`;
+            <div className="rounded-3xl border border-separator bg-surface overflow-hidden shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm caption-bottom">
+                  <thead className="bg-surface-secondary border-b border-separator">
+                    <tr>
+                      <th className="text-xs font-bold uppercase py-4 px-4 text-left text-muted">
+                        Date Conferred
+                      </th>
+                      <th className="text-xs font-bold uppercase py-4 px-4 text-left text-muted">
+                        Certificate ID
+                      </th>
+                      <th className="text-xs font-bold uppercase text-center py-4 px-4 text-muted">
+                        Scaled Score
+                      </th>
+                      <th className="text-xs font-bold uppercase text-center py-4 px-4 text-muted">
+                        CEFR Band
+                      </th>
+                      <th className="text-xs font-bold uppercase text-center py-4 px-4 text-muted">
+                        Sections (L / S / R)
+                      </th>
+                      <th className="text-xs font-bold uppercase text-right py-4 px-4 text-muted">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {completedAttempts.map((attempt) => {
+                      const dateStr = new Date(
+                        attempt.submittedAt || attempt.startedAt,
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      });
+                      const certId =
+                        attempt.certificates?.certificateNumber ||
+                        `LYXIS-2026-${attempt.id.slice(0, 8).toUpperCase()}`;
 
-                    return (
-                      <TableRow key={attempt.id} className="hover:bg-muted/20 transition-colors">
-                        <TableCell className="text-sm font-medium text-foreground py-4">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-muted-foreground" />
-                            {dateStr}
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-xs font-mono font-semibold text-muted-foreground py-4">
-                          {certId}
-                        </TableCell>
-                        <TableCell className="text-center py-4">
-                          <span className="font-mono font-black text-base text-foreground">
-                            {attempt.totalScaledScore || 310}
-                          </span>
-                          <span className="text-xs text-muted-foreground font-mono"> / 677</span>
-                        </TableCell>
-                        <TableCell className="text-center py-4">
-                          <Badge
-                            variant="outline"
-                            className="font-bold text-xs bg-primary/5 text-primary border-primary/20 px-2.5 py-0.5"
-                          >
-                            {attempt.cefrLevel || "B1"}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-center font-mono text-sm text-muted-foreground py-4">
-                          <span className="font-semibold text-foreground">
-                            {attempt.scaledListening || 24}
-                          </span>
-                          {" / "}
-                          <span className="font-semibold text-foreground">
-                            {attempt.scaledStructure || 20}
-                          </span>
-                          {" / "}
-                          <span className="font-semibold text-foreground">
-                            {attempt.scaledReading || 21}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-right py-4">
-                          <div className="flex items-center justify-end gap-2">
-                            <Link
-                              href={`/result/${attempt.id}`}
-                              className={cn(
-                                buttonVariants({ variant: "outline", size: "sm" }),
-                                "h-9 px-3 gap-1.5 text-xs font-semibold rounded-xl",
-                              )}
+                      return (
+                        <tr
+                          key={attempt.id}
+                          className="border-b border-separator hover:bg-surface-secondary/50 transition-colors"
+                        >
+                          <td className="text-sm font-medium text-foreground py-4 px-4">
+                            <div className="flex items-center gap-2">
+                              <Calendar className="h-4 w-4 text-muted" />
+                              {dateStr}
+                            </div>
+                          </td>
+                          <td className="text-xs font-mono font-semibold text-muted py-4 px-4">
+                            {certId}
+                          </td>
+                          <td className="text-center py-4 px-4">
+                            <span className="font-mono font-black text-base text-foreground">
+                              {attempt.totalScaledScore || 310}
+                            </span>
+                            <span className="text-xs text-muted font-mono"> / 677</span>
+                          </td>
+                          <td className="text-center py-4 px-4">
+                            <Chip
+                              variant="soft"
+                              size="sm"
+                              className="font-bold text-xs bg-accent/5 text-accent border border-accent/20 px-2.5 py-0.5"
                             >
-                              Dossier Report <ArrowRight className="h-3.5 w-3.5" />
-                            </Link>
-                            {attempt.verificationToken && (
+                              {attempt.cefrLevel || "B1"}
+                            </Chip>
+                          </td>
+                          <td className="text-center font-mono text-sm text-muted py-4 px-4">
+                            <span className="font-semibold text-foreground">
+                              {attempt.scaledListening || 24}
+                            </span>
+                            {" / "}
+                            <span className="font-semibold text-foreground">
+                              {attempt.scaledStructure || 20}
+                            </span>
+                            {" / "}
+                            <span className="font-semibold text-foreground">
+                              {attempt.scaledReading || 21}
+                            </span>
+                          </td>
+                          <td className="text-right py-4 px-4">
+                            <div className="flex items-center justify-end gap-2">
                               <Link
-                                href={`/verify/${attempt.verificationToken}`}
-                                target="_blank"
+                                href={`/result/${attempt.id}`}
                                 className={cn(
-                                  buttonVariants({ variant: "ghost", size: "sm" }),
-                                  "h-9 w-9 p-0 text-muted-foreground hover:text-foreground rounded-xl",
+                                  buttonVariants({ variant: "outline", size: "sm" }),
+                                  "h-9 px-3 gap-1.5 text-xs font-semibold rounded-xl",
                                 )}
-                                title="Open Public QR Verification Portal"
                               >
-                                <ExternalLink className="h-4 w-4" />
+                                Dossier Report <ArrowRight className="h-3.5 w-3.5" />
                               </Link>
-                            )}
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+                              {attempt.verificationToken && (
+                                <Link
+                                  href={`/verify/${attempt.verificationToken}`}
+                                  target="_blank"
+                                  className={cn(
+                                    buttonVariants({ variant: "ghost", size: "sm" }),
+                                    "h-9 w-9 p-0 text-muted hover:text-foreground rounded-xl",
+                                  )}
+                                  title="Open Public QR Verification Portal"
+                                >
+                                  <ExternalLink className="h-4 w-4" />
+                                </Link>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ) : (
             <div className="rounded-3xl border border-dashed border-border/80 bg-card/40 p-12 text-center flex flex-col items-center justify-center space-y-4">

@@ -1,6 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, Chip } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import {
   AlertCircleIcon,
   ArrowLeftIcon,
@@ -116,16 +115,17 @@ async function AttemptDetailContent({ params }: PageProps) {
             <h1 className="text-2xl font-bold tracking-tight">
               {attempt.candidateName || "Candidate"}
             </h1>
-            <Badge
-              variant="outline"
+            <Chip
+              variant="soft"
+              size="sm"
               className={
                 attempt.status === "SUBMITTED"
-                  ? "border-emerald-500/40 text-emerald-600 dark:text-emerald-400"
-                  : "border-primary/40 text-primary"
+                  ? "border border-emerald-500/40 text-emerald-600 dark:text-emerald-400"
+                  : "border border-primary/40 text-primary"
               }
             >
               {attempt.status}
-            </Badge>
+            </Chip>
           </div>
           <p className="text-xs text-muted-foreground">
             Attempt ID: <code className="font-mono">{attempt.id}</code> │ Email:{" "}
@@ -145,70 +145,70 @@ async function AttemptDetailContent({ params }: PageProps) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
         <Card className="bg-primary/5 border-primary/20">
-          <CardHeader className="pb-2">
-            <CardDescription className="text-xs">ETS Total Scaled Score</CardDescription>
-            <CardTitle className="text-3xl font-bold text-primary">
+          <Card.Header className="pb-2">
+            <Card.Description className="text-xs">ETS Total Scaled Score</Card.Description>
+            <Card.Title className="text-3xl font-bold text-primary">
               {attempt.totalScaledScore ?? "—"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs text-muted-foreground">
+            </Card.Title>
+          </Card.Header>
+          <Card.Content className="text-xs text-muted-foreground">
             ETS Scale Benchmark: 310 – 677
-          </CardContent>
+          </Card.Content>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription className="text-xs">CEFR Proficiency Level</CardDescription>
-            <CardTitle className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+          <Card.Header className="pb-2">
+            <Card.Description className="text-xs">CEFR Proficiency Level</Card.Description>
+            <Card.Title className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
               {attempt.cefrLevel ? `Level ${attempt.cefrLevel}` : "Pending"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs text-muted-foreground">
+            </Card.Title>
+          </Card.Header>
+          <Card.Content className="text-xs text-muted-foreground">
             {attempt.cefrLevel ? "Calibrated CEFR band" : "Examination ongoing"}
-          </CardContent>
+          </Card.Content>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription className="text-xs">Anti-Cheat Telemetry</CardDescription>
-            <CardTitle className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+          <Card.Header className="pb-2">
+            <Card.Description className="text-xs">Anti-Cheat Telemetry</Card.Description>
+            <Card.Title className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
               {attempt.tabSwitchCount ?? 0} Violations
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs text-muted-foreground">
+            </Card.Title>
+          </Card.Header>
+          <Card.Content className="text-xs text-muted-foreground">
             {(attempt.tabSwitchCount ?? 0) === 0
               ? "Full-screen lock strictly preserved"
               : `${attempt.tabSwitchCount} window blur events recorded`}
-          </CardContent>
+          </Card.Content>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription className="text-xs">Duration & Timing</CardDescription>
-            <CardTitle className="text-2xl font-bold">
+          <Card.Header className="pb-2">
+            <Card.Description className="text-xs">Duration & Timing</Card.Description>
+            <Card.Title className="text-2xl font-bold">
               {durationMin ? `${durationMin} / 115 min` : "In Progress"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs text-muted-foreground">
+            </Card.Title>
+          </Card.Header>
+          <Card.Content className="text-xs text-muted-foreground">
             {durationMin ? "Submitted within authoritative limit" : "115-minute standardized limit"}
-          </CardContent>
+          </Card.Content>
         </Card>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <Card>
-          <CardHeader className="pb-2">
+          <Card.Header className="pb-2">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                 <HeadphonesIcon className="size-4" /> Section 1
               </span>
-              <Badge variant="secondary" className="text-xs">
+              <Chip variant="secondary" size="sm" className="text-xs">
                 50 Items
-              </Badge>
+              </Chip>
             </div>
-            <CardTitle className="text-lg">Listening Comprehension</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-xs">
+            <Card.Title className="text-lg">Listening Comprehension</Card.Title>
+          </Card.Header>
+          <Card.Content className="space-y-2 text-xs">
             <div className="flex justify-between border-b pb-1.5">
               <span className="text-muted-foreground">Raw Score</span>
               <span className="font-semibold">{attempt.rawListening ?? 0} / 50</span>
@@ -225,22 +225,22 @@ async function AttemptDetailContent({ params }: PageProps) {
                 {listeningAccuracy}
               </span>
             </div>
-          </CardContent>
+          </Card.Content>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
+          <Card.Header className="pb-2">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                 <LayersIcon className="size-4" /> Section 2
               </span>
-              <Badge variant="secondary" className="text-xs">
+              <Chip variant="secondary" size="sm" className="text-xs">
                 40 Items
-              </Badge>
+              </Chip>
             </div>
-            <CardTitle className="text-lg">Structure & Written Expression</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-xs">
+            <Card.Title className="text-lg">Structure & Written Expression</Card.Title>
+          </Card.Header>
+          <Card.Content className="space-y-2 text-xs">
             <div className="flex justify-between border-b pb-1.5">
               <span className="text-muted-foreground">Raw Score</span>
               <span className="font-semibold">{attempt.rawStructure ?? 0} / 40</span>
@@ -257,22 +257,22 @@ async function AttemptDetailContent({ params }: PageProps) {
                 {structureAccuracy}
               </span>
             </div>
-          </CardContent>
+          </Card.Content>
         </Card>
 
         <Card>
-          <CardHeader className="pb-2">
+          <Card.Header className="pb-2">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                 <BookOpenIcon className="size-4" /> Section 3
               </span>
-              <Badge variant="secondary" className="text-xs">
+              <Chip variant="secondary" size="sm" className="text-xs">
                 50 Items
-              </Badge>
+              </Chip>
             </div>
-            <CardTitle className="text-lg">Reading Comprehension</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-xs">
+            <Card.Title className="text-lg">Reading Comprehension</Card.Title>
+          </Card.Header>
+          <Card.Content className="space-y-2 text-xs">
             <div className="flex justify-between border-b pb-1.5">
               <span className="text-muted-foreground">Raw Score</span>
               <span className="font-semibold">{attempt.rawReading ?? 0} / 50</span>
@@ -289,25 +289,25 @@ async function AttemptDetailContent({ params }: PageProps) {
                 {readingAccuracy}
               </span>
             </div>
-          </CardContent>
+          </Card.Content>
         </Card>
       </div>
 
       <Card>
-        <CardHeader>
+        <Card.Header>
           <div className="flex items-center gap-2">
             <ShieldCheckIcon className="size-5 text-emerald-500" />
             <div>
-              <CardTitle className="text-base">
+              <Card.Title className="text-base">
                 ISO/IEC 23988:2007 Audit Trail & Cryptographic Verification
-              </CardTitle>
-              <CardDescription className="text-xs">
+              </Card.Title>
+              <Card.Description className="text-xs">
                 Tamper-evident verification token and timestamp ledger
-              </CardDescription>
+              </Card.Description>
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="space-y-3 text-xs font-mono">
+        </Card.Header>
+        <Card.Content className="space-y-3 text-xs font-mono">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 rounded bg-muted p-2">
             <span className="text-muted-foreground">Verification Token:</span>
             <span className="text-primary font-bold">
@@ -328,7 +328,7 @@ async function AttemptDetailContent({ params }: PageProps) {
                 : "Active proctoring stream monitoring."}
             </span>
           </div>
-        </CardContent>
+        </Card.Content>
       </Card>
     </div>
   );
