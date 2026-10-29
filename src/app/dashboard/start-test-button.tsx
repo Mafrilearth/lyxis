@@ -3,6 +3,7 @@
 import { startExamAction } from "@/actions/exam";
 import { Button } from "@heroui/react";
 import { Loader2 } from "lucide-react";
+import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -29,7 +30,7 @@ export function StartTestButton({ candidateName, candidateEmail }: StartTestButt
       }
 
       toast.success("Starting assessment session...");
-      router.push(result.redirectUrl);
+      router.push(result.redirectUrl as Route);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to start assessment";
       toast.error(msg);

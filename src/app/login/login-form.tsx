@@ -4,6 +4,7 @@ import { Button, Input, Label } from "@heroui/react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import type { Route } from "next";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -51,7 +52,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
       if (data?.user) {
         toast.success("Authentication successful. Redirecting to candidate portal...");
-        router.push(next);
+        router.push(next as Route);
         router.refresh();
       }
     } catch (err: unknown) {

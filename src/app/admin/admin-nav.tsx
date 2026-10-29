@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button, Chip } from "@heroui/react";
@@ -16,7 +17,14 @@ import {
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
-const navItems = [
+interface NavItem {
+  title: string;
+  href: Route;
+  icon: React.ComponentType<{ className?: string }>;
+  exact: boolean;
+}
+
+const navItems: NavItem[] = [
   {
     title: "Overview",
     href: "/admin",

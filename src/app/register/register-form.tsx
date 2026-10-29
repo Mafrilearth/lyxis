@@ -4,6 +4,7 @@ import { Button, Input, Label } from "@heroui/react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import type { Route } from "next";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -63,7 +64,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
 
       if (data?.session) {
         toast.success("Account created successfully. Navigating to candidate portal...");
-        router.push(next);
+        router.push(next as Route);
         router.refresh();
       } else if (data?.user) {
         setSuccessMessage("Account created. Please check your email to verify your account.");

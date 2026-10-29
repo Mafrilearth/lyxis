@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import { Button, Modal } from "@heroui/react";
 import { AntiCheatSensor } from "./anti-cheat";
 import { AudioPlayer } from "./audio-player";
@@ -165,7 +166,7 @@ export function ExamRunner({
       }
 
       toast.success("Examination submitted. Loading diagnostic dossier...");
-      router.push(result.redirectUrl);
+      router.push(result.redirectUrl as Route);
     } catch (err: unknown) {
       setIsSubmitting(false);
       const msg = err instanceof Error ? err.message : "Submission failed";

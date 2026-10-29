@@ -29,8 +29,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  typedRoutes: true,
   poweredByHeader: false,
   compress: true,
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   experimental: {
     authInterrupts: true,
   },
