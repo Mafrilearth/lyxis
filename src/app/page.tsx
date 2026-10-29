@@ -1,4 +1,4 @@
-import { FloatingNav } from "@/components/landing/floating-nav";
+import { FloatingNav } from "./floating-nav";
 import { buttonVariants } from "@heroui/styles";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";

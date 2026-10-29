@@ -1,10 +1,10 @@
 "use client";
 
-import { GsapLinearMark } from "@/components/illustrations/gsap-linear-mark";
-import { MotionLinearMark } from "@/components/illustrations/motion-linear-mark";
-import { PureCssLinearMark } from "@/components/illustrations/pure-css-linear-mark";
-import { QuantumCanvasMark } from "@/components/illustrations/quantum-canvas-mark";
-import { SplineLinearMark } from "@/components/illustrations/spline-linear-mark";
+import { GsapLinearMark } from "./gsap-linear-mark";
+import { MotionLinearMark } from "./motion-linear-mark";
+import { PureCssLinearMark } from "./pure-css-linear-mark";
+import { QuantumCanvasMark } from "./quantum-canvas-mark";
+import { SplineLinearMark } from "./spline-linear-mark";
 import { Activity } from "lucide-react";
 import { useState } from "react";
 

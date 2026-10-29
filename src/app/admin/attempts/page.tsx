@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/admin/data-table";
+import { DataTable } from "../data-table";
 import { Button, Chip } from "@heroui/react";
 import { DownloadIcon, ShieldCheckIcon, UsersIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";

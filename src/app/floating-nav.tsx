@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { ThemeToggle } from "./theme-toggle";
 import { Separator } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
 import { cn } from "@/lib/utils";

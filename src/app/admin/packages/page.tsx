@@ -57,6 +57,7 @@ export default function PackagesPage() {
         <div className="flex items-center gap-2">
           <Chip
             variant="soft"
+            size="sm"
             className="gap-1 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
           >
             <CheckCircle2Icon className="size-3.5" />

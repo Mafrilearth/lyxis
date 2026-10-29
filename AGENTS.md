@@ -6,6 +6,28 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
+### Official Next.js Project Architecture & Rules (From Bundled Docs)
+
+1. **Colocation & Component Architecture (`01-getting-started/02-project-structure.md`):**
+   - In Next.js App Router, folders inside `app/` do **not** become public routes unless they contain `page.tsx` or `route.ts`.
+   - Files and UI components can be **safely colocated inside route segments** without being exposed to the client URL.
+   - The name `components/` has **no special framework significance**. Keep page-specific components directly inside their respective route directory or inline in the page file.
+   - Private folders: prefix with an underscore (`_components/` or `_folder/`) to explicitly opt a folder and all its subfolders out of routing.
+
+2. **Asynchronous Request APIs (Breaking Changes):**
+   - Dynamic route parameters: `params` is a Promise. Always await it: `const { id } = await params;`.
+   - URL search parameters: `searchParams` is a Promise. Always await it: `const { query } = await searchParams;`.
+   - Cookies & Headers: `cookies()` and `headers()` are asynchronous. Always await them: `const cookieStore = await cookies();`.
+
+3. **React Server Components (RSC) Boundaries:**
+   - All files in `app/` are Server Components by default.
+   - Only add `'use client'` when state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), or browser APIs are required.
+   - Keep `'use client'` boundaries pushed to the leaves of the component tree.
+
+4. **Component Hierarchy in Route Segments:**
+   - The components render in strict nested hierarchy:
+     `Layout -> Template -> ErrorBoundary (error.tsx) -> Suspense (loading.tsx) -> NotFoundBoundary (not-found.tsx) -> Page`.
+
 <!-- END:nextjs-agent-rules -->
 
 <!-- BEGIN:heroui-agent-rules -->

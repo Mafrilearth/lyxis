@@ -1,8 +1,8 @@
 "use client";
 
 import { Button, Modal } from "@heroui/react";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Timer } from "@/components/exam/timer";
+import { ThemeToggle } from "../../theme-toggle";
+import { Timer } from "./timer";
 import { Command, HelpCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 

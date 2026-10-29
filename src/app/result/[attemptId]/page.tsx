@@ -1,9 +1,9 @@
-import { Certificate } from "@/components/result/certificate";
-import { PrintButton } from "@/components/result/print-button";
-import { CompetencyRadarChart } from "@/components/result/radar-chart";
-import { ScoreCard } from "@/components/result/score-card";
-import { SectionBreakdown } from "@/components/result/section-breakdown";
-import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
+import { Certificate } from "./certificate";
+import { PrintButton } from "./print-button";
+import { CompetencyRadarChart } from "./radar-chart";
+import { ScoreCard } from "./score-card";
+import { SectionBreakdown } from "./section-breakdown";
+import { AmbientMeshCanvas } from "../../ambient-mesh-canvas";
 import { buttonVariants } from "@heroui/styles";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";

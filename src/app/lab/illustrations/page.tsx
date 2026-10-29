@@ -1,6 +1,6 @@
-import { IllustrationShowcase } from "@/components/illustrations/illustration-showcase";
-import { MinimalInteractiveMark } from "@/components/illustrations/minimal-interactive-mark";
-import { PsychometricBeamPipeline } from "@/components/illustrations/psychometric-beam-pipeline";
+import { IllustrationShowcase } from "./illustration-showcase";
+import { MinimalInteractiveMark } from "./minimal-interactive-mark";
+import { PsychometricBeamPipeline } from "./psychometric-beam-pipeline";
 import { Chip } from "@heroui/react";
 import { ArrowLeft, CheckCircle2, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";

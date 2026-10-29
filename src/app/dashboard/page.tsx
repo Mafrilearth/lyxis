@@ -1,6 +1,6 @@
-import { StartTestButton } from "@/components/dashboard/start-test-button";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
+import { StartTestButton } from "./start-test-button";
+import { ThemeToggle } from "../theme-toggle";
+import { AmbientMeshCanvas } from "../ambient-mesh-canvas";
 import { Card, Chip } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
 import { createClient } from "@/lib/supabase/server";

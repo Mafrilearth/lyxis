@@ -1,4 +1,4 @@
-import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
+import { AmbientMeshCanvas } from "../../ambient-mesh-canvas";
 import { Chip } from "@heroui/react";
 import { createClient } from "@/lib/supabase/server";
 import { Calendar, CheckCircle2, ShieldAlert, ShieldCheck, User } from "lucide-react";

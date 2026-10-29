@@ -1,6 +1,6 @@
 "use client";
 
-import { QuestionCard } from "@/components/exam/question-card";
+import { QuestionCard } from "./question-card";
 import type { CorrectOption, ExamQuestion, ExamStimulus } from "@/types/exam";
 import { BookOpen } from "lucide-react";
 

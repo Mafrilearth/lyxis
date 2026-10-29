@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
 import type React from "react";
 

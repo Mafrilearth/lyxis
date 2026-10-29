@@ -1,12 +1,12 @@
 "use client";
 
 import { Button, Modal } from "@heroui/react";
-import { AntiCheatSensor } from "@/components/exam/anti-cheat";
-import { AudioPlayer } from "@/components/exam/audio-player";
-import { ExamHeader } from "@/components/exam/exam-header";
-import { ItemMatrix } from "@/components/exam/item-matrix";
-import { QuestionCard } from "@/components/exam/question-card";
-import { ReadingView } from "@/components/exam/reading-view";
+import { AntiCheatSensor } from "./anti-cheat";
+import { AudioPlayer } from "./audio-player";
+import { ExamHeader } from "./exam-header";
+import { ItemMatrix } from "./item-matrix";
+import { QuestionCard } from "./question-card";
+import { ReadingView } from "./reading-view";
 import { useExamStore } from "@/lib/store/exam-store";
 import { saveAnswerAction, submitExamAction } from "@/actions/exam";
 import type { CorrectOption, ExamSection } from "@/types/exam";
