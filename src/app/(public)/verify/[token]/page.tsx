@@ -1,4 +1,3 @@
-import { AmbientMeshCanvas } from "@/app/ambient-mesh-canvas";
 import { Chip } from "@heroui/react";
 import { createClient } from "@/lib/supabase/server";
 import { Calendar, CheckCircle2, ShieldAlert, ShieldCheck, User } from "lucide-react";
@@ -82,9 +81,6 @@ async function VerifyContent({ params }: VerifyPageProps) {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col justify-center py-16 px-6 sm:px-10 lg:px-12 selection:bg-primary/20 selection:text-primary">
-      {/* Living Atmospheric Mesh Background Canvas */}
-      <AmbientMeshCanvas />
-
       {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"

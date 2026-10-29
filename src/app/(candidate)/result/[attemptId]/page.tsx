@@ -1,9 +1,8 @@
-import { Certificate } from "./certificate";
-import { PrintButton } from "./print-button";
-import { CompetencyRadarChart } from "./radar-chart";
-import { ScoreCard } from "./score-card";
-import { SectionBreakdown } from "./section-breakdown";
-import { AmbientMeshCanvas } from "@/app/ambient-mesh-canvas";
+import { Certificate } from "./_components/certificate";
+import { PrintButton } from "./_components/print-button";
+import { CompetencyRadarChart } from "./_components/radar-chart";
+import { ScoreCard } from "./_components/score-card";
+import { SectionBreakdown } from "./_components/section-breakdown";
 import { buttonVariants } from "@heroui/styles";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";
@@ -142,9 +141,6 @@ async function ResultContent({ params }: ResultPageProps) {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col py-10 sm:py-16 px-6 sm:px-10 lg:px-12 selection:bg-primary/20 selection:text-primary">
-      {/* Living Atmospheric Mesh Background Canvas */}
-      <AmbientMeshCanvas />
-
       {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"

@@ -1,6 +1,5 @@
-import { StartTestButton } from "./start-test-button";
-import { ThemeToggle } from "@/app/theme-toggle";
-import { AmbientMeshCanvas } from "@/app/ambient-mesh-canvas";
+import { StartTestButton } from "./_components/start-test-button";
+import { ThemeToggle } from "@/app/_components/theme-toggle";
 import { Card, Chip } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
 import { createClient } from "@/lib/supabase/server";
@@ -87,9 +86,6 @@ async function DashboardContent() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col overflow-x-hidden selection:bg-primary/20 selection:text-primary">
-      {/* Living Atmospheric Mesh Background Canvas */}
-      <AmbientMeshCanvas />
-
       {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"

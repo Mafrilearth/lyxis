@@ -1,5 +1,5 @@
 import type React from "react";
-import { AdminNav } from "./admin-nav";
+import { AdminNav } from "./_components/admin-nav";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { ThemeProvider } from "./theme-provider";
+import { ThemeProvider } from "./_components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";

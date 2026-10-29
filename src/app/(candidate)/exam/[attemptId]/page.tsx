@@ -1,4 +1,4 @@
-import { ExamRunner } from "./exam-runner";
+import { ExamRunner } from "./_components/exam-runner";
 import { getBenchmarkExamSections } from "@/lib/data/exam-package";
 import { Loader2 } from "lucide-react";
 import type { Metadata } from "next";

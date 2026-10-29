@@ -1,6 +1,6 @@
-import { ChartAreaInteractive } from "./chart-area-interactive";
-import { DataTable } from "./data-table";
-import { SectionCards } from "./section-cards";
+import { ChartAreaInteractive } from "./_components/chart-area-interactive";
+import { DataTable } from "./_components/data-table";
+import { SectionCards } from "./_components/section-cards";
 import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
 import { redirect } from "next/navigation";
