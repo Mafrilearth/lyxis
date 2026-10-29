@@ -521,7 +521,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                 }))}
               >
                 <SelectTrigger size="sm" className="w-20" id="rows-per-page">
-                  <SelectValue placeholder={table.state.pagination.pageSize} />
+                  <SelectValue placeholder={`${table.state.pagination.pageSize}`} />
                 </SelectTrigger>
                 <SelectContent side="top">
                   <SelectGroup>
@@ -640,7 +640,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   return (
     <Drawer swipeDirection={isMobile ? "down" : "right"}>
       <DrawerTrigger
-        render={<Button variant="link" className="w-fit px-0 text-left text-foreground" />}
+        render={(props) => (
+          <Button variant="link" className="w-fit px-0 text-left text-foreground" {...props} />
+        )}
       >
         {item.header}
       </DrawerTrigger>
@@ -802,7 +804,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         </div>
         <DrawerFooter>
           <Button>Submit</Button>
-          <DrawerClose render={<Button variant="outline" />}>Done</DrawerClose>
+          <DrawerClose render={(props) => <Button variant="outline" {...props} />}>
+            Done
+          </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

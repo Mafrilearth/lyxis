@@ -47,3 +47,5 @@ prisma/seed-*.ts
 prisma/seeds/
 scripts/
 
+# heroui-agents-md
+.heroui-docs/
