@@ -21,11 +21,6 @@ export default function HomePage() {
       <main className="flex-1 max-w-6xl w-full mx-auto border-x border-zinc-300 dark:border-zinc-800 bg-background flex flex-col">
         <section className="flex-1 flex flex-col items-center justify-center text-center py-20 sm:py-28 lg:py-32 px-6 sm:px-8 space-y-6 border-b border-zinc-300 dark:border-zinc-800 relative">
           <div className="space-y-4 max-w-3xl mx-auto flex flex-col items-center">
-            {/* Minimal Core Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-semibold select-none">
-              <span>TOEFL ITP® Simulation</span>
-            </div>
-
             {/* Global Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.15] text-balance">
               Online TOEFL ITP® Diagnostic & Simulation
