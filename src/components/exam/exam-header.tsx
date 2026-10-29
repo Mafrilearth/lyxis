@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { NextLogo } from "@/components/shared/next-logo";
 import { Timer } from "@/components/exam/timer";
 import { Command, HelpCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
@@ -32,18 +31,13 @@ export function ExamHeader({
   return (
     <header className="sticky top-0 z-30 flex h-20 w-full items-center justify-between border-b border-border/80 bg-background/90 px-6 sm:px-10 backdrop-blur-xl">
       <div className="flex items-center gap-4">
-        <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#07090E] border border-border/80 p-2 shadow-md group-hover:scale-105 transition-transform">
-            <NextLogo className="w-full h-full text-foreground" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-lg tracking-tight leading-none text-foreground">
-              Lyxis
-            </span>
-            <span className="text-[11px] text-muted-foreground font-medium tracking-wide uppercase mt-0.5">
-              Psychometric English Diagnostic Engine
-            </span>
-          </div>
+        <Link href="/dashboard" className="flex flex-col group">
+          <span className="font-extrabold text-xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
+            Lyxis
+          </span>
+          <span className="text-[11px] text-muted-foreground font-medium tracking-wide uppercase mt-1">
+            Psychometric English Diagnostic Engine
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-2 border-l border-border/60 pl-4 py-1">

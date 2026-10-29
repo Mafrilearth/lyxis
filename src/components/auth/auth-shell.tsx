@@ -1,5 +1,4 @@
 import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
-import { NextLogo } from "@/components/shared/next-logo";
 import { Badge } from "@/components/ui/badge";
 import { Headphones, QrCode, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -24,18 +23,13 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Column: Expansive Editorial Showcase */}
         <div className="lg:col-span-6 space-y-8 text-left">
-          <Link href="/" className="inline-flex items-center gap-3 group">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#07090E] border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 p-2">
-              <NextLogo className="w-full h-full text-foreground" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-2xl tracking-tight leading-none text-foreground">
-                Lyxis
-              </span>
-              <span className="text-xs text-muted-foreground font-medium tracking-wide mt-1">
-                Psychometric English Diagnostic Engine
-              </span>
-            </div>
+          <Link href="/" className="inline-flex flex-col group">
+            <span className="font-extrabold text-3xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
+              Lyxis
+            </span>
+            <span className="text-xs text-muted-foreground font-medium tracking-wide mt-1.5">
+              Psychometric English Diagnostic Engine
+            </span>
           </Link>
 
           <div className="space-y-4">

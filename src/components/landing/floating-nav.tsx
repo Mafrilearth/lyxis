@@ -1,7 +1,6 @@
 "use client";
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { NextLogo } from "@/components/shared/next-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -95,11 +94,8 @@ export function FloatingNav() {
           )}
         >
           {/* Brand Logo & Name */}
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs transition-transform duration-300 group-hover:scale-105 p-1.5">
-              <NextLogo className="w-full h-full" />
-            </div>
-            <span className="font-extrabold text-base sm:text-lg tracking-tight leading-none text-foreground">
+          <Link href="/" className="flex items-center group shrink-0">
+            <span className="font-extrabold text-lg sm:text-xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
               Lyxis
             </span>
           </Link>

@@ -1,5 +1,4 @@
 import { EnterpriseFlow } from "@/components/landing/enterprise-flow";
-import { NextLogo } from "@/components/shared/next-logo";
 import { FeatureBento } from "@/components/landing/feature-bento";
 import { FloatingNav } from "@/components/landing/floating-nav";
 import { InteractiveFaq } from "@/components/landing/interactive-faq";
@@ -251,11 +250,8 @@ export default function HomePage() {
       {/* Clean Commercial Footer: Seamlessly Blended */}
       <footer className="border-t border-border/30 bg-background/50 backdrop-blur-sm py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs group-hover:scale-105 transition-transform p-1.5">
-              <NextLogo className="w-full h-full" />
-            </div>
-            <span className="font-extrabold text-base tracking-tight text-foreground leading-none">
+          <Link href="/" className="flex items-center group">
+            <span className="font-extrabold text-lg tracking-tight text-foreground leading-none transition-opacity group-hover:opacity-80">
               Lyxis
             </span>
           </Link>

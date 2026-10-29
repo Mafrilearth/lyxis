@@ -6,7 +6,6 @@ import { NavDocuments } from "@/components/admin/nav-documents";
 import { NavMain } from "@/components/admin/nav-main";
 import { NavSecondary } from "@/components/admin/nav-secondary";
 import { NavUser } from "@/components/admin/nav-user";
-import { NextLogo } from "@/components/shared/next-logo";
 import {
   Sidebar,
   SidebarContent,
@@ -100,11 +99,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:p-1.5!"
               render={<a href="/admin" />}
             >
-              <div className="flex size-7 items-center justify-center rounded-md bg-[#07090E] border border-border p-1 text-foreground shadow-xs">
-                <NextLogo className="size-full text-foreground" />
-              </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="text-sm font-semibold tracking-tight">Lyxis</span>
+                <span className="text-base font-bold tracking-tight">Lyxis</span>
                 <span className="text-[11px] text-muted-foreground">
                   Psychometric English Diagnostic Engine
                 </span>

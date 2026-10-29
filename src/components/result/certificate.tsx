@@ -1,6 +1,5 @@
 import { CheckCircle2, ExternalLink, ShieldAlert, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { NextLogo } from "@/components/shared/next-logo";
 
 interface CertificateProps {
   certificateNumber: string;
@@ -32,10 +31,10 @@ export function Certificate({
   return (
     <div className="rounded-2xl border-2 border-primary/20 bg-card p-8 sm:p-12 shadow-xl relative overflow-hidden print:border-black print:shadow-none selection:bg-primary/20">
       <div className="flex flex-col items-center text-center space-y-6 relative z-10">
-        {/* Official The Calibration Keystone Seal */}
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground border border-border p-3.5 shadow-xl shadow-primary/20 ring-1 ring-white/10">
-          <NextLogo className="w-full h-full" />
-        </div>
+        {/* Official Brand Header */}
+        <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-foreground select-none">
+          Lyxis
+        </span>
 
         <div className="space-y-1">
           <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-primary">
