@@ -5,9 +5,9 @@
 
 ---
 
-## 1. Brand & Target Audience
+## 1. Platform & Target Audience
 
-* **Brand Name:** `Lyxis` (`LYXIS`)
+* **Platform Name:** `Lyxis` (`LYXIS`)
 * **Core Function:** Standardized diagnostic assessment simulating the official paper-based TOEFL ITP® Level 1 format in an institutional computer-based environment.
 * **Target Audience:**
   1. **Scholarship Candidates:** Minimum cutoff scores (475, 500, 550+) for global funding programs (Fulbright, Chevening, AAS, DAAD, LPDP).

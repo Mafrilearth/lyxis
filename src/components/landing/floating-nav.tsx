@@ -93,7 +93,7 @@ export function FloatingNav() {
               : "border-border/80 shadow-sm shadow-primary/5",
           )}
         >
-          {/* Brand Logo & Name */}
+          {/* Logo & Name */}
           <Link href="/" className="flex items-center group shrink-0">
             <span className="font-extrabold text-lg sm:text-xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
               Lyxis

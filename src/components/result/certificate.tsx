@@ -31,7 +31,7 @@ export function Certificate({
   return (
     <div className="rounded-2xl border-2 border-primary/20 bg-card p-8 sm:p-12 shadow-xl relative overflow-hidden print:border-black print:shadow-none selection:bg-primary/20">
       <div className="flex flex-col items-center text-center space-y-6 relative z-10">
-        {/* Official Brand Header */}
+        {/* Official Header */}
         <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-foreground select-none">
           Lyxis
         </span>

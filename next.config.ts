@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
-        source: "/(og-image.jpg|brand-guidelines-board.jpg|logo-full.svg|icon.svg)",
+        source: "/(og-image.jpg)",
         headers: [
           {
             key: "Cache-Control",

@@ -29,7 +29,7 @@ const navigationData = {
   user: {
     name: "Lyxis Administrator",
     email: "admin@lyxis.mafrilearth.com",
-    avatar: "/branding/avatar.png",
+    avatar: "/avatar.png",
   },
   navMain: [
     {

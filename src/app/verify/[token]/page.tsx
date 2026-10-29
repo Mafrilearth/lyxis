@@ -92,7 +92,7 @@ async function VerifyContent({ params }: VerifyPageProps) {
       />
 
       <div className="max-w-4xl mx-auto w-full space-y-10">
-        {/* Brand Banner */}
+        {/* Header */}
         <div className="text-center space-y-3">
           <Link
             href="/"
