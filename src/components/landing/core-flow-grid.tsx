@@ -2,18 +2,18 @@
 
 /**
  * 3-Stage Core Flow Bento Grid Component
- * Wrapped in continuous CAD grid lines with corner crosshair datum marks
- * Represents the fundamental software flow: Daftar -> Ngerjain -> Hasil
+ * Wrapped in continuous CAD grid lines
+ * Represents the fundamental user journey: Daftar -> Ngerjain -> Hasil
  */
 export function CoreFlowGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/40">
-      {/* ================= CELL 1: FIG 0.1 DAFTAR / MASUK ================= */}
+    <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+      {/* ================= CELL 1: LANGKAH 1 DAFTAR / MASUK ================= */}
       <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6 relative group hover:bg-muted/10 transition-colors">
         {/* Cell Header */}
         <div className="flex items-center justify-between font-mono text-[10px] text-muted-foreground select-none">
-          <span className="text-foreground font-semibold">FIG 0.1</span>
-          <span>STAGE — 01</span>
+          <span className="text-foreground font-semibold">LANGKAH 01</span>
+          <span>PERSIAPAN</span>
         </div>
 
         {/* Isometric Wireframe SVG Illustration */}
@@ -23,9 +23,9 @@ export function CoreFlowGrid() {
             className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="Stage 1 Identity Token Isometric Schematic"
+            aria-label="Langkah 1 Pendaftaran Akun"
           >
-            <title>Stage 1 Identity Token Schematic</title>
+            <title>Langkah 1 Pendaftaran Akun</title>
             {/* Base Plinth */}
             <polygon
               points="120,40 185,77 120,115 55,77"
@@ -55,7 +55,7 @@ export function CoreFlowGrid() {
               strokeWidth="0.8"
             />
 
-            {/* Glowing Laser Keyline (Access Granted) */}
+            {/* Glowing Laser Keyline */}
             <line
               x1="90"
               y1="84"
@@ -71,31 +71,33 @@ export function CoreFlowGrid() {
             <ellipse cx="65" cy="77" rx="2" ry="1" fill="#71717A" />
             <ellipse cx="175" cy="77" rx="2" ry="1" fill="#71717A" />
 
-            <text x="82" y="145" fill="#71717A" fontSize="6.5" fontFamily="monospace">
-              {"TOKEN // ACCESS AUTH"}
+            <text x="84" y="145" fill="#71717A" fontSize="7" fontFamily="monospace">
+              {"SESI UJIAN AKTIF"}
             </text>
           </svg>
         </div>
 
         {/* Cell Text Description */}
         <div className="space-y-2">
-          <div className="font-mono text-xs text-primary font-bold tracking-wider uppercase">
-            01. Daftar / Masuk
+          <div className="text-xs text-primary font-bold uppercase tracking-wider">
+            01. Daftar & Masuk
           </div>
-          <h3 className="text-lg font-bold text-foreground tracking-tight">Akses Sesi Instan</h3>
+          <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight">
+            Buat Akun Mandiri
+          </h3>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Daftar atau masuk akun dalam hitungan detik tanpa birokrasi kampus. Token sesi ujian
-            aktif seketika untuk persiapan pengerjaan.
+            Cukup masukkan nama dan email Anda. Akun langsung aktif seketika untuk membuka lembar
+            ujian simulasi TOEFL ITP®.
           </p>
         </div>
       </div>
 
-      {/* ================= CELL 2: FIG 0.2 KERJAKAN TES ================= */}
+      {/* ================= CELL 2: LANGKAH 2 KERJAKAN TES ================= */}
       <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6 relative group hover:bg-muted/10 transition-colors">
         {/* Cell Header */}
         <div className="flex items-center justify-between font-mono text-[10px] text-muted-foreground select-none">
-          <span className="text-foreground font-semibold">FIG 0.2</span>
-          <span>STAGE — 02</span>
+          <span className="text-foreground font-semibold">LANGKAH 02</span>
+          <span>PENGERJAAN</span>
         </div>
 
         {/* Isometric Wireframe SVG Illustration */}
@@ -105,9 +107,9 @@ export function CoreFlowGrid() {
             className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="Stage 2 3-Tier Exam Monolith Schematic"
+            aria-label="Langkah 2 Pengerjaan 140 Soal"
           >
-            <title>Stage 2 3-Tier Exam Monolith Schematic</title>
+            <title>Langkah 2 Pengerjaan 140 Soal</title>
             {/* Tier 1 (Listening) */}
             <polygon
               points="120,70 175,102 120,134 65,102"
@@ -148,7 +150,7 @@ export function CoreFlowGrid() {
               strokeWidth="1"
             />
 
-            {/* Tier 3 (Reading & Live Timer) */}
+            {/* Tier 3 (Reading) */}
             <polygon
               points="120,26 175,58 120,90 65,58"
               fill="#0C101D"
@@ -173,33 +175,33 @@ export function CoreFlowGrid() {
             <line x1="95" y1="64" x2="145" y2="64" stroke="#475569" strokeWidth="0.8" />
             <circle cx="120" cy="58" r="2" fill="#38BDF8" />
 
-            <text x="82" y="156" fill="#71717A" fontSize="6.5" fontFamily="monospace">
-              {"140 ITEMS // 115 MINS"}
+            <text x="82" y="156" fill="#71717A" fontSize="7" fontFamily="monospace">
+              {"140 SOAL // 115 MENIT"}
             </text>
           </svg>
         </div>
 
         {/* Cell Text Description */}
         <div className="space-y-2">
-          <div className="font-mono text-xs text-primary font-bold tracking-wider uppercase">
-            02. Kerjakan Tes
+          <div className="text-xs text-primary font-bold uppercase tracking-wider">
+            02. Kerjakan Ujian
           </div>
-          <h3 className="text-lg font-bold text-foreground tracking-tight">
+          <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight">
             140 Soal Standar Resmi
           </h3>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Selesaikan 3 seksi ujian (Listening 50, Structure 40, Reading 50) dengan timer resmi 115
-            menit. Tampilan distraction-free dan penyimpanan jawaban otomatis.
+            Selesaikan 3 seksi ujian berurutan: Listening (35 mnt), Structure (25 mnt), dan Reading
+            (55 mnt). Dilengkapi pemutar audio terintegrasi dan timer otomatis.
           </p>
         </div>
       </div>
 
-      {/* ================= CELL 3: FIG 0.3 LIHAT HASIL ================= */}
+      {/* ================= CELL 3: LANGKAH 3 LIHAT HASIL ================= */}
       <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6 relative group hover:bg-muted/10 transition-colors">
         {/* Cell Header */}
         <div className="flex items-center justify-between font-mono text-[10px] text-muted-foreground select-none">
-          <span className="text-foreground font-semibold">FIG 0.3</span>
-          <span>STAGE — 03</span>
+          <span className="text-foreground font-semibold">LANGKAH 03</span>
+          <span>EVALUASI</span>
         </div>
 
         {/* Isometric Wireframe SVG Illustration */}
@@ -209,9 +211,9 @@ export function CoreFlowGrid() {
             className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="Stage 3 Diagnostic Calibration Gauge Schematic"
+            aria-label="Langkah 3 Skor dan Hasil Diagnostik"
           >
-            <title>Stage 3 Diagnostic Calibration Gauge Schematic</title>
+            <title>Langkah 3 Skor dan Hasil Diagnostik</title>
             {/* Dial Base */}
             <polygon
               points="120,40 185,77 120,115 55,77"
@@ -270,23 +272,23 @@ export function CoreFlowGrid() {
             >
               310 – 677
             </text>
-            <text x="84" y="150" fill="#71717A" fontSize="6.5" fontFamily="monospace">
-              CEFR A2-C1 VERIFIED
+            <text x="82" y="150" fill="#71717A" fontSize="7" fontFamily="monospace">
+              {"SKOR RESMI ETS ITP"}
             </text>
           </svg>
         </div>
 
         {/* Cell Text Description */}
         <div className="space-y-2">
-          <div className="font-mono text-xs text-primary font-bold tracking-wider uppercase">
-            03. Lihat Hasil
+          <div className="text-xs text-primary font-bold uppercase tracking-wider">
+            03. Dapatkan Hasil
           </div>
-          <h3 className="text-lg font-bold text-foreground tracking-tight">
-            Skor 310–677 & Diagnostik
+          <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight">
+            Prediksi Skor & Evaluasi
           </h3>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Skor konversi resmi ETS dan sertifikat level CEFR keluar instan setelah submit. Lengkap
-            dengan analisis kelemahan spesifik per seksi soal.
+            Hasil estimasi skor skala 310–677 dan level CEFR langsung tampil begitu tes
+            diselesaikan, lengkap dengan rincian kelemahan per seksi soal.
           </p>
         </div>
       </div>

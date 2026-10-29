@@ -2,68 +2,72 @@ import { CoreFlowGrid } from "@/components/landing/core-flow-grid";
 import { FloatingNav } from "@/components/landing/floating-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { GridDivider } from "@/components/ui/grid-divider";
-import { FOOTER_LINKS } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen, FileCode2, Headphones, Trophy } from "lucide-react";
 import Link from "next/link";
 
-const CORE_METRICS = [
+const EXAM_SECTIONS = [
   {
-    value: "115 Mins",
-    label: "Total Durasi Ujian",
-    subtext: "Terbagi dalam 3 seksi ketat",
+    icon: Headphones,
+    title: "Section 1: Listening",
+    items: "50 Soal",
+    duration: "35 Menit",
+    description: "Percakapan pendek, dialog panjang, dan monolog akademik berbahasa Inggris.",
   },
   {
-    value: "140 Soal",
-    label: "Butir Evaluasi",
-    subtext: "Listening, Structure, Reading",
+    icon: FileCode2,
+    title: "Section 2: Structure",
+    items: "40 Soal",
+    duration: "25 Menit",
+    description:
+      "Kelengkapan kalimat (Structure) dan identifikasi kesalahan tata bahasa (Written Expression).",
   },
   {
-    value: "310 – 677",
-    label: "Skala Skor ETS",
-    subtext: "Kalibrasi konversi standar resmi",
+    icon: BookOpen,
+    title: "Section 3: Reading",
+    items: "50 Soal",
+    duration: "55 Menit",
+    description: "Pemahaman teks bacaan topik universitas, sains, sejarah, dan kosakata akademik.",
   },
   {
-    value: "CEFR A2–C1",
-    label: "Validasi Global",
-    subtext: "Pemetaan kecakapan internasional",
+    icon: Trophy,
+    title: "Estimasi Skor Resmi",
+    items: "140 Soal Total",
+    duration: "Skala 310 – 677",
+    description: "Perhitungan skor konversi standar TOEFL ITP® beserta level kesetaraan CEFR.",
   },
 ] as const;
 
 export default function HomePage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/20 selection:text-primary">
-      {/* Docked Full-Width Top Header */}
+      {/* Header Navigasi Minimal: Brand Saja, Masuk, Daftar, Toggle Theme */}
       <FloatingNav />
 
-      {/* Main Container Wrapped in Continuous Vertical CAD Grid Rails */}
-      <main className="flex-1 max-w-6xl w-full mx-auto border-x border-border/40 bg-background flex flex-col">
-        {/* Top Header-to-Hero CAD Grid Line Intersection */}
-        <GridDivider columns={1} />
-
-        {/* ================= 1. HERO CELL ================= */}
-        <section className="p-8 sm:p-14 lg:p-20 text-center space-y-8 relative">
-          <div className="space-y-5 max-w-4xl mx-auto">
-            {/* System Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/10 text-primary text-xs font-mono font-semibold tracking-wider uppercase">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>TOEFL ITP® INDEPENDENT DIAGNOSTIC ENGINE</span>
+      {/* Kontainer Utama dengan Garis Grid Vertikal Kiri-Kanan */}
+      <main className="flex-1 max-w-6xl w-full mx-auto border-x border-border bg-background flex flex-col">
+        {/* ================= 1. HERO UTAMA ================= */}
+        <section className="p-8 sm:p-14 lg:p-18 text-center space-y-6 relative">
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {/* Lencana Identitas Asesmen */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold">
+              <span>Platform Simulasi Mandiri TOEFL ITP®</span>
             </div>
 
-            {/* Authoritative Solid Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1] text-balance">
-              Standar Diagnostik TOEFL ITP®.{" "}
-              <span className="text-primary block sm:inline">Langsung Inti, Bebas Birokrasi.</span>
+            {/* Judul Utama yang Jelas dan Nyata */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.15] text-balance">
+              Tes Diagnostik & Simulasi TOEFL ITP® Online
             </h1>
 
-            {/* Core Value Statement */}
-            <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto font-normal text-balance">
-              Software evaluasi mandiri terkalibrasi ke standar skor ETS 310–677. Cukup 3 tahap:
-              Daftar akun, selesaikan 140 soal (115 menit), dan terima hasil prediksi instan.
+            {/* Penjelasan Nyata & Manusiawi */}
+            <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto text-balance">
+              Uji kemampuan bahasa Inggris Anda dengan simulasi lengkap 140 butir soal standar
+              resmi. Dapatkan estimasi skor konversi skala 310–677 dan evaluasi kelemahan Anda
+              sebelum ujian sesungguhnya.
             </p>
 
-            {/* Primary Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 pt-4 w-full max-w-md sm:max-w-none mx-auto font-mono text-sm">
+            {/* Tombol Aksi Utama */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-3 w-full max-w-md sm:max-w-none mx-auto text-sm">
               <Link
                 href="/dashboard"
                 className={cn(
@@ -71,7 +75,7 @@ export default function HomePage() {
                   "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all",
                 )}
               >
-                <span>Mulai Tes Sekarang</span>
+                <span>Mulai Simulasi Tes</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
@@ -79,7 +83,7 @@ export default function HomePage() {
                 href="/login"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "default" }),
-                  "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 font-semibold border-border/80 bg-background hover:bg-muted transition-all",
+                  "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 font-semibold border-border bg-background hover:bg-muted transition-all",
                 )}
               >
                 <span>Masuk Akun</span>
@@ -88,61 +92,58 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CAD Grid Line Intersection with 3-Column Alignment */}
+        {/* Pembatas Garis Grid 3-Kolom Alur Ujian */}
         <GridDivider columns={3} />
 
-        {/* ================= 2. 3-STAGE CORE FLOW GRID ================= */}
+        {/* ================= 2. ALUR UTAMA: DAFTAR -> NGERJAIN -> HASIL ================= */}
         <section id="alur-tes" className="bg-background relative">
-          <div className="px-6 py-4 border-b border-border/40 font-mono text-xs text-muted-foreground flex items-center justify-between">
-            <span className="text-foreground font-bold">ALUR UTAMA — 3 TAHAP EVALUASI</span>
-            <span>INDEPENDENT CBT ENGINE</span>
+          <div className="px-6 py-3.5 border-b border-border text-xs font-semibold text-muted-foreground flex items-center justify-between">
+            <span className="text-foreground uppercase tracking-wider">Alur Pengerjaan Tes</span>
+            <span>3 Langkah Mandiri</span>
           </div>
 
-          {/* 3-Column Wireframe Grid */}
+          {/* 3 Kotak Alur Pengerjaan */}
           <CoreFlowGrid />
         </section>
 
-        {/* CAD Grid Line Intersection with 4-Column Alignment */}
+        {/* Pembatas Garis Grid 4-Kolom Rincian Seksi Ujian */}
         <GridDivider columns={4} />
 
-        {/* ================= 3. METRICS CELL ================= */}
-        <section id="metrik" className="bg-muted/5 relative">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-x divide-border/40">
-            {CORE_METRICS.map((metric) => (
-              <div
-                key={metric.label}
-                className="p-6 sm:p-8 space-y-2 hover:bg-muted/10 transition-colors"
-              >
-                <div className="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-primary">
-                  {metric.value}
+        {/* ================= 3. STRUKTUR RESMI 3 SEKSI TOEFL ITP ================= */}
+        <section id="struktur-tes" className="bg-muted/5 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border">
+            {EXAM_SECTIONS.map((sec) => {
+              const Icon = sec.icon;
+              return (
+                <div key={sec.title} className="p-6 space-y-3 hover:bg-muted/10 transition-colors">
+                  <div className="flex items-center justify-between text-muted-foreground">
+                    <Icon className="w-5 h-5 text-primary" />
+                    <span className="text-[11px] font-mono">{sec.duration}</span>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-foreground">{sec.title}</div>
+                    <div className="text-xs text-primary font-semibold">{sec.items}</div>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{sec.description}</p>
                 </div>
-                <div className="text-xs font-semibold text-foreground tracking-tight">
-                  {metric.label}
-                </div>
-                <p className="text-[11px] text-muted-foreground leading-snug">{metric.subtext}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
-        {/* CAD Grid Line Intersection */}
+        {/* Pembatas Garis Grid Penutup */}
         <GridDivider columns={1} />
 
-        {/* ================= 4. LAUNCHPAD CONSOLE CELL ================= */}
-        <section className="p-8 sm:p-14 lg:p-16 text-center space-y-6 bg-card/20 relative">
-          <div className="max-w-2xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-primary">
-              <ShieldCheck className="h-4 w-4" />
-              <span>Sesi Mandiri Siap Digunakan</span>
-            </div>
-
+        {/* ================= 4. KOTAK AJAKAN MEMULAI TES ================= */}
+        <section className="p-8 sm:p-14 text-center space-y-5 bg-card/10 relative">
+          <div className="max-w-xl mx-auto space-y-3">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-              Mulai Sesi Ujian TOEFL ITP Anda
+              Siap Menguji Kemampuan Anda?
             </h2>
 
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-xl mx-auto">
-              Simulasi penuh 140 soal: Listening (35m), Structure (25m), dan Reading (55m).
-              Auto-save real-time dengan kalkulasi skor diagnostik instan begitu tes diselesaikan.
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Tidak ada batasan waktu kapan harus memulai. Sediakan headphone untuk seksi Listening
+              dan koneksi internet yang stabil selama 115 menit.
             </p>
 
             <div className="pt-2 flex justify-center">
@@ -150,46 +151,52 @@ export default function HomePage() {
                 href="/dashboard"
                 className={cn(
                   buttonVariants({ variant: "default", size: "default" }),
-                  "group inline-flex items-center gap-2 rounded-lg h-11 px-8 font-mono text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md shadow-primary/20",
+                  "group inline-flex items-center gap-2 rounded-lg h-11 px-8 text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all",
                 )}
               >
-                <span>Masuk Ruang Ujian</span>
+                <span>Buka Lembar Ujian Sekarang</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </div>
         </section>
 
-        {/* CAD Grid Line Intersection before Footer */}
+        {/* Pembatas Garis Grid Sebelum Footer */}
         <GridDivider columns={1} />
       </main>
 
-      {/* ================= FOOTER (WRAPPED IN GRID FRAME) ================= */}
-      <footer className="w-full border-t border-border/40 bg-background/90">
-        <div className="max-w-6xl mx-auto border-x border-border/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="font-extrabold text-base tracking-tight text-foreground transition-opacity group-hover:opacity-80">
-              Lyxis
-            </span>
-            <span className="text-[10px] text-muted-foreground">ENGINE</span>
-          </Link>
-
-          <nav className="flex flex-wrap items-center gap-6 text-muted-foreground">
-            {FOOTER_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link href="/lab/illustrations" className="hover:text-cyan-400 transition-colors">
-              Special Effects Lab
+      {/* ================= FOOTER RESMI & NYATA ================= */}
+      <footer className="w-full border-t border-border bg-background/95">
+        <div className="max-w-6xl mx-auto border-x border-border p-6 sm:p-8 space-y-4 text-xs text-muted-foreground">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="font-extrabold text-base tracking-tight text-foreground">Lyxis</span>
+              <span className="text-[10px] text-muted-foreground px-1.5 py-0.5 rounded border border-border">
+                Simulator Mandiri
+              </span>
             </Link>
-          </nav>
 
-          <div className="text-muted-foreground">© 2026 Lyxis. Independent Standard.</div>
+            <nav className="flex flex-wrap items-center gap-6">
+              <Link href="/login" className="hover:text-foreground transition-colors">
+                Masuk Akun
+              </Link>
+              <Link href="/register" className="hover:text-foreground transition-colors">
+                Daftar Baru
+              </Link>
+              <Link href="/dashboard" className="hover:text-foreground transition-colors">
+                Mulai Tes
+              </Link>
+            </nav>
+          </div>
+
+          <div className="pt-4 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] leading-relaxed">
+            <p>
+              © 2026 Lyxis. TOEFL ITP® adalah merek dagang terdaftar dari Educational Testing
+              Service (ETS). Platform ini dikembangkan secara independen sebagai simulator
+              diagnostik persiapan ujian.
+            </p>
+            <p className="shrink-0 text-zinc-500">Durasi 115 Menit • 140 Soal • Skala 310–677</p>
+          </div>
         </div>
       </footer>
     </div>
