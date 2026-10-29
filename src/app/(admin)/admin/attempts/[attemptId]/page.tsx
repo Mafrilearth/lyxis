@@ -11,13 +11,30 @@ import {
   ShieldCheckIcon,
 } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ attemptId: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { attemptId } = await params;
+  return {
+    title: `Candidate Audit (${attemptId.slice(0, 8)}) | Administrator Console`,
+    description:
+      "Proctoring telemetry audit, ETS section scaled scores, and blur sensor event logs.",
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+    },
+  };
 }
 
 export default function AttemptDetailPage({ params }: PageProps) {

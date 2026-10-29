@@ -3,7 +3,21 @@ import { DataTable } from "./_components/data-table";
 import { SectionCards } from "./_components/section-cards";
 import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Executive Control Center | Administrator Console",
+  description:
+    "Cohort diagnostic analytics, ETS score distributions, and real-time proctoring metrics.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient();

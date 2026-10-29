@@ -4,18 +4,24 @@ import { Loader2 } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Standardized Assessment in Progress — Lyxis",
-  description: "Standardized Computer-Based Testing assessment active session.",
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-  },
-};
+export const dynamic = "force-dynamic";
 
 interface ExamPageProps {
   params: Promise<{ attemptId: string }>;
+}
+
+export async function generateMetadata({ params }: ExamPageProps): Promise<Metadata> {
+  const { attemptId } = await params;
+  return {
+    title: `Assessment Active Session (${attemptId.slice(0, 8)}) — Lyxis`,
+    description:
+      "Standardized Computer-Based Testing assessment active session with real-time proctoring.",
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+    },
+  };
 }
 
 async function ExamContent({ params }: ExamPageProps) {

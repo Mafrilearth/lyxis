@@ -21,14 +21,16 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import type { ExamAttempt } from "@/types";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-export const metadata = {
-  title: "Candidate Command Center — Lyxis",
+export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+  title: "Candidate Command Center — Lyxis",
   description:
     "Review your TOEFL ITP® diagnostic performance history, inspect scaled score predictions, and access verified digital credentials.",
 };

@@ -1,20 +1,26 @@
 import { Chip } from "@heroui/react";
 import { createClient } from "@/lib/supabase/server";
 import { Calendar, CheckCircle2, ShieldAlert, ShieldCheck, User } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
 import type { CertificateRecord, ExamAttempt } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 interface VerifyPageProps {
   params: Promise<{ token: string }>;
 }
 
-export const metadata = {
-  title: "Official Credential Verification — Lyxis",
-  description:
-    "Public authentication portal to verify the validity, scaled score, and registration record of a Lyxis TOEFL ITP® diagnostic certificate.",
-};
+export async function generateMetadata({ params }: VerifyPageProps): Promise<Metadata> {
+  const { token } = await params;
+  return {
+    title: `Official Credential Verification (${token.slice(0, 8)}) — Lyxis`,
+    description:
+      "Public authentication portal to verify the validity, scaled score, and registration record of a Lyxis TOEFL ITP® diagnostic certificate.",
+  };
+}
 
 async function VerifyContent({ params }: VerifyPageProps) {
   const { token } = await params;

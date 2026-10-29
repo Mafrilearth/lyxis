@@ -3,7 +3,21 @@ import { Button, Chip } from "@heroui/react";
 import { DownloadIcon, ShieldCheckIcon, UsersIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Candidate Attempts & Proctoring Audit | Administrator Console",
+  description:
+    "Complete telemetry logs of all candidate assessment sessions, ETS scaled scores, CEFR levels, and anti-cheat blur events.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default async function AttemptsPage() {
   const supabase = await createClient();

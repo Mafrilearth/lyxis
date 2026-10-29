@@ -51,8 +51,21 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       }
 
       if (data?.user) {
-        toast.success("Authentication successful. Redirecting to candidate portal...");
-        router.push(next as Route);
+        let destination = next;
+        if (!searchParams.get("next")) {
+          const { data: profile } = await supabase
+            .from("users")
+            .select("role")
+            .eq("id", data.user.id)
+            .single();
+
+          if (profile?.role === "ADMIN" || data.user.email === "admin@lyxis.mafrilearth.com") {
+            destination = "/admin";
+          }
+        }
+
+        toast.success("Authentication successful. Redirecting to portal...");
+        router.push(destination as Route);
         router.refresh();
       }
     } catch (err: unknown) {

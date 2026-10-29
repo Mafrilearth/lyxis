@@ -12,21 +12,25 @@ import { AlertCircle, ArrowLeft, Loader2, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-
-export const metadata: Metadata = {
-  title: "Diagnostic Assessment Score Report",
-  description: "Computer-Based Testing diagnostic evaluation results and certificate dossier.",
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-  },
-};
-
 import type { CertificateRecord, ExamAttempt } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 interface ResultPageProps {
   params: Promise<{ attemptId: string }>;
+}
+
+export async function generateMetadata({ params }: ResultPageProps): Promise<Metadata> {
+  const { attemptId } = await params;
+  return {
+    title: `Diagnostic Score Report (${attemptId.slice(0, 8)}) | Lyxis`,
+    description: "Computer-Based Testing diagnostic evaluation results and certificate dossier.",
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+    },
+  };
 }
 
 async function ResultContent({ params }: ResultPageProps) {
