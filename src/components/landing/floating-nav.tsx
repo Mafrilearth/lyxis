@@ -1,8 +1,8 @@
 "use client";
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -44,8 +44,8 @@ export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
               <Link
                 href="/dashboard"
                 className={cn(
-                  buttonVariants({ variant: "default", size: "default" }),
-                  "h-8 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg border border-transparent shadow-none",
+                  buttonVariants({ variant: "primary", size: "sm" }),
+                  "h-8 px-4 text-sm font-medium rounded-lg",
                 )}
               >
                 Dashboard
@@ -55,8 +55,8 @@ export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
                 <Link
                   href="/login"
                   className={cn(
-                    buttonVariants({ variant: "ghost", size: "default" }),
-                    "h-8 px-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg border border-transparent shadow-none",
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "h-8 px-4 text-sm font-medium rounded-lg text-muted-foreground hover:text-foreground",
                   )}
                 >
                   Sign In
@@ -65,8 +65,8 @@ export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
                 <Link
                   href="/register"
                   className={cn(
-                    buttonVariants({ variant: "default", size: "default" }),
-                    "h-8 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg border border-transparent shadow-none",
+                    buttonVariants({ variant: "primary", size: "sm" }),
+                    "h-8 px-4 text-sm font-medium rounded-lg",
                   )}
                 >
                   Sign Up

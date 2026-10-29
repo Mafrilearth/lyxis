@@ -1,5 +1,5 @@
 import { FloatingNav } from "@/components/landing/floating-nav";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@heroui/styles";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -59,8 +59,8 @@ export default async function HomePage() {
                 <Link
                   href="/dashboard"
                   className={cn(
-                    buttonVariants({ variant: "default", size: "default" }),
-                    "inline-flex items-center justify-center rounded-lg h-10 px-6 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none",
+                    buttonVariants({ variant: "primary", size: "lg" }),
+                    "inline-flex items-center justify-center rounded-lg h-10 px-6 text-sm font-semibold",
                   )}
                 >
                   Go to Dashboard
@@ -69,8 +69,8 @@ export default async function HomePage() {
                 <Link
                   href="/register"
                   className={cn(
-                    buttonVariants({ variant: "default", size: "default" }),
-                    "inline-flex items-center justify-center rounded-lg h-10 px-6 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none",
+                    buttonVariants({ variant: "primary", size: "lg" }),
+                    "inline-flex items-center justify-center rounded-lg h-10 px-6 text-sm font-semibold",
                   )}
                 >
                   Start Assessment
