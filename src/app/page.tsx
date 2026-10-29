@@ -1,6 +1,7 @@
 import { CoreFlowGrid } from "@/components/landing/core-flow-grid";
 import { FloatingNav } from "@/components/landing/floating-nav";
 import { buttonVariants } from "@/components/ui/button";
+import { GridCrosshair } from "@/components/ui/grid-crosshair";
 import { FOOTER_LINKS } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
@@ -39,31 +40,9 @@ export default function HomePage() {
       <main className="flex-1 max-w-6xl w-full mx-auto border-x border-border/40 bg-background flex flex-col">
         {/* ================= 1. HERO CELL (WRAPPED IN BORDER-B) ================= */}
         <section className="p-8 sm:p-14 lg:p-20 text-center space-y-8 border-b border-border/40 relative">
-          {/* Corner Crosshairs */}
-          <span
-            className="absolute -top-[5px] -left-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-            aria-hidden="true"
-          >
-            +
-          </span>
-          <span
-            className="absolute -top-[5px] -right-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-            aria-hidden="true"
-          >
-            +
-          </span>
-          <span
-            className="absolute -bottom-[5px] -left-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-            aria-hidden="true"
-          >
-            +
-          </span>
-          <span
-            className="absolute -bottom-[5px] -right-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-            aria-hidden="true"
-          >
-            +
-          </span>
+          {/* Precise Grid Intersection Crosshairs */}
+          <GridCrosshair position="bottom-left" />
+          <GridCrosshair position="bottom-right" />
 
           <div className="space-y-5 max-w-4xl mx-auto">
             {/* System Tag */}
@@ -112,6 +91,9 @@ export default function HomePage() {
 
         {/* ================= 2. 3-STAGE CORE FLOW GRID (WRAPPED IN BORDER-B) ================= */}
         <section id="alur-tes" className="border-b border-border/40 bg-background relative">
+          <GridCrosshair position="bottom-left" />
+          <GridCrosshair position="bottom-right" />
+
           <div className="px-6 py-4 border-b border-border/40 font-mono text-xs text-muted-foreground flex items-center justify-between">
             <span className="text-foreground font-bold">ALUR UTAMA — 3 TAHAP EVALUASI</span>
             <span>INDEPENDENT CBT ENGINE</span>
@@ -123,6 +105,9 @@ export default function HomePage() {
 
         {/* ================= 3. METRICS CELL (WRAPPED IN BORDER-B) ================= */}
         <section id="metrik" className="border-b border-border/40 bg-muted/5 relative">
+          <GridCrosshair position="bottom-left" />
+          <GridCrosshair position="bottom-right" />
+
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-x divide-border/40">
             {CORE_METRICS.map((metric) => (
               <div
@@ -143,6 +128,8 @@ export default function HomePage() {
 
         {/* ================= 4. LAUNCHPAD CONSOLE CELL (WRAPPED IN BORDER-B) ================= */}
         <section className="p-8 sm:p-14 lg:p-16 text-center space-y-6 border-b border-border/40 bg-card/20 relative">
+          <GridCrosshair position="bottom-left" />
+          <GridCrosshair position="bottom-right" />
           <div className="max-w-2xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-primary">
               <ShieldCheck className="h-4 w-4" />

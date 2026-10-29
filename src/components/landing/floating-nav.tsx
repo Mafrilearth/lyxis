@@ -2,6 +2,7 @@
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import { GridCrosshair } from "@/components/ui/grid-crosshair";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -57,19 +58,9 @@ export function FloatingNav() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md">
       {/* Grid-Wrapped Container to Align with Page Grid Lines */}
       <div className="max-w-6xl mx-auto border-x border-border/40 px-4 sm:px-8 h-16 flex items-center justify-between relative">
-        {/* Corner Crosshair Accents */}
-        <span
-          className="absolute -top-[5px] -left-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-          aria-hidden="true"
-        >
-          +
-        </span>
-        <span
-          className="absolute -top-[5px] -right-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
-          aria-hidden="true"
-        >
-          +
-        </span>
+        {/* Corner Crosshair Accents at Bottom Grid Intersection */}
+        <GridCrosshair position="bottom-left" />
+        <GridCrosshair position="bottom-right" />
 
         {/* Brand Identity Anchor */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
