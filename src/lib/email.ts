@@ -27,9 +27,6 @@ export interface SendCertificateEmailParams {
   verificationUrl: string;
 }
 
-/**
- * Sends official diagnostic credential delivery email via Resend
- */
 export async function sendCertificateEmail(params: SendCertificateEmailParams) {
   const resend = getResendClient();
   if (!resend) {

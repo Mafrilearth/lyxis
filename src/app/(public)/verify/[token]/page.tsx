@@ -85,16 +85,20 @@ async function VerifyContent({ params }: VerifyPageProps) {
     day: "numeric",
   });
 
+  const sectionScores = [
+    { label: "Listening", score: attempt?.scaledListening || 24 },
+    { label: "Structure", score: attempt?.scaledStructure || 20 },
+    { label: "Reading", score: attempt?.scaledReading || 21 },
+  ];
+
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col justify-center py-16 px-6 sm:px-10 lg:px-12 selection:bg-primary/20 selection:text-primary">
-      {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
       <div className="max-w-4xl mx-auto w-full space-y-10">
-        {/* Header */}
         <div className="text-center space-y-3">
           <Link
             href="/"
@@ -140,7 +144,6 @@ async function VerifyContent({ params }: VerifyPageProps) {
                 </div>
               </div>
 
-              {/* Score Breakdown Section */}
               <div className="rounded-2xl border border-border/60 bg-card p-6 sm:p-8 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-5">
                   <div>
@@ -163,24 +166,17 @@ async function VerifyContent({ params }: VerifyPageProps) {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 text-center text-xs sm:text-sm">
-                  <div className="rounded-xl border border-border/50 bg-muted/20 p-3 space-y-1">
-                    <span className="text-muted-foreground block text-xs">Listening</span>
-                    <span className="font-mono font-bold text-base text-foreground">
-                      {attempt?.scaledListening || 24}
-                    </span>
-                  </div>
-                  <div className="rounded-xl border border-border/50 bg-muted/20 p-3 space-y-1">
-                    <span className="text-muted-foreground block text-xs">Structure</span>
-                    <span className="font-mono font-bold text-base text-foreground">
-                      {attempt?.scaledStructure || 20}
-                    </span>
-                  </div>
-                  <div className="rounded-xl border border-border/50 bg-muted/20 p-3 space-y-1">
-                    <span className="text-muted-foreground block text-xs">Reading</span>
-                    <span className="font-mono font-bold text-base text-foreground">
-                      {attempt?.scaledReading || 21}
-                    </span>
-                  </div>
+                  {sectionScores.map((sec) => (
+                    <div
+                      key={sec.label}
+                      className="rounded-xl border border-border/50 bg-muted/20 p-3 space-y-1"
+                    >
+                      <span className="text-muted-foreground block text-xs">{sec.label}</span>
+                      <span className="font-mono font-bold text-base text-foreground">
+                        {sec.score}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
 

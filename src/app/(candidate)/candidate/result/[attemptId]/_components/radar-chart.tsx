@@ -19,7 +19,6 @@ export function CompetencyRadarChart({
   structureScore,
   readingScore,
 }: CompetencyRadarProps) {
-  // Normalize each to 100% scale
   const lNorm = Math.round(((listeningScore - 24) / (68 - 24)) * 100);
   const sNorm = Math.round(((structureScore - 20) / (68 - 20)) * 100);
   const rNorm = Math.round(((readingScore - 21) / (67 - 21)) * 100);

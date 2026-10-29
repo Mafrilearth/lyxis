@@ -101,7 +101,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
   return (
     <div className={cn("space-y-6 text-left", className)} {...props}>
-      {/* Header */}
       <div className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
           Sign In
@@ -111,7 +110,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         </p>
       </div>
 
-      {/* Error & Success Feedback Alerts */}
       {errorMessage && (
         <div
           role="alert"
@@ -132,7 +130,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         </div>
       )}
 
-      {/* Form */}
       <form onSubmit={handleLogin} className="space-y-4">
         <div className="space-y-1.5">
           <Label htmlFor="login-email">Email</Label>
@@ -179,7 +176,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         </Button>
       </form>
 
-      {/* Google OAuth Section */}
       <div className="space-y-4">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -219,7 +215,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         </Button>
       </div>
 
-      {/* Switcher to Register */}
       <div className="pt-2 text-center text-sm text-muted-foreground border-t border-border">
         Don&apos;t have an account?{" "}
         <Link

@@ -62,7 +62,6 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
 
   return (
     <>
-      {/* Mobile Header Bar */}
       <header className="lg:hidden flex h-14 items-center justify-between border-b bg-surface px-4">
         <div className="flex items-center gap-2">
           <Link
@@ -86,7 +85,6 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
         </Button>
       </header>
 
-      {/* Mobile Drawer Navigation */}
       {mobileOpen && (
         <div className="lg:hidden border-b bg-surface p-4 space-y-3">
           <nav className="flex flex-col gap-1">
@@ -124,9 +122,7 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
         </div>
       )}
 
-      {/* Desktop Sidebar */}
       <aside className="hidden lg:flex w-64 flex-col border-r bg-surface shrink-0 h-screen sticky top-0">
-        {/* Brand */}
         <div className="flex h-14 items-center justify-between border-b px-5">
           <Link href="/admin" className="flex items-center gap-2 font-bold tracking-tight">
             <span className="text-primary font-black text-lg">LYXIS</span>
@@ -136,7 +132,6 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
           </Link>
         </div>
 
-        {/* Links */}
         <div className="flex-1 overflow-y-auto p-3 space-y-6">
           <div className="space-y-1">
             <p className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
@@ -191,7 +186,6 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
           </div>
         </div>
 
-        {/* User Footer */}
         <div className="border-t p-3 bg-surface-secondary/20">
           <div className="flex items-center justify-between">
             <div className="flex flex-col min-w-0 pr-2">

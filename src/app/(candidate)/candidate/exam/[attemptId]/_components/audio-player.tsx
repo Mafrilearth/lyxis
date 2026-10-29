@@ -14,6 +14,15 @@ interface AudioPlayerProps {
   label?: string;
 }
 
+const WAVEFORM_BARS = [
+  { playH: "h-3", idleH: "h-2" },
+  { playH: "h-5", idleH: "h-3" },
+  { playH: "h-7", idleH: "h-4" },
+  { playH: "h-4", idleH: "h-3" },
+  { playH: "h-6", idleH: "h-2" },
+  { playH: "h-3", idleH: "h-2" },
+];
+
 export function AudioPlayer({
   itemId,
   audioUrl,
@@ -24,7 +33,6 @@ export function AudioPlayer({
   const setAudioState = useExamStore((state) => state.setAudioState);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Stop audio if component unmounts
   useEffect(() => {
     return () => {
       if (audioRef.current) {
@@ -57,7 +65,6 @@ export function AudioPlayer({
       };
 
       audio.onerror = () => {
-        // Fallback to synthetic speech if audio file fails to load
         fallbackToSpeechSynthesis();
       };
 
@@ -90,7 +97,6 @@ export function AudioPlayer({
     window.speechSynthesis.speak(utterance);
   };
 
-  // Listen for keyboard shortcut 'M'
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
@@ -161,72 +167,23 @@ export function AudioPlayer({
           </div>
         </div>
 
-        {/* Audio Frequency Waveform Visualizer */}
         <div className="flex items-center gap-1.5 h-9 px-4 py-1.5 rounded-xl bg-background/80 border border-border/60 self-start sm:self-auto shadow-xs">
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-3"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-2",
-            )}
-          />
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-5"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-3",
-            )}
-          />
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-7"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-4",
-            )}
-          />
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-4"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-3",
-            )}
-          />
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-6"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-2",
-            )}
-          />
-          <span
-            className={cn(
-              "w-1 rounded-full transition-all",
-              isPlaying
-                ? "bg-primary animate-pulse h-3"
-                : isPlayed
-                  ? "bg-rose-500/40 h-2"
-                  : "bg-muted-foreground/30 h-2",
-            )}
-          />
+          {WAVEFORM_BARS.map((bar, idx) => (
+            <span
+              key={idx}
+              className={cn(
+                "w-1 rounded-full transition-all",
+                isPlaying
+                  ? cn("bg-primary animate-pulse", bar.playH)
+                  : isPlayed
+                    ? "bg-rose-500/40 h-2"
+                    : cn("bg-muted-foreground/30", bar.idleH),
+              )}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Status Bar */}
       <div className="pt-2 border-t border-primary/10 flex flex-wrap items-center justify-between gap-2 text-xs">
         {audioPlaybackState === "idle" && (
           <>

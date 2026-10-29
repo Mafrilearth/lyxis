@@ -19,7 +19,6 @@ export function AntiCheatSensor({ attemptId }: AntiCheatSensorProps) {
 
     const handleIncident = (reason: "tab_blur" | "visibility_hidden") => {
       const now = Date.now();
-      // Debounce events within 2 seconds
       if (now - lastLoggedRef.current < 2000) {
         return;
       }
@@ -33,18 +32,13 @@ export function AntiCheatSensor({ attemptId }: AntiCheatSensorProps) {
         duration: 4000,
       });
 
-      // Send telemetry beacon to server via Server Action
       try {
         recordTelemetryAction({
           attemptId,
           eventType: reason,
           browserInfo: typeof navigator !== "undefined" ? navigator.userAgent : undefined,
-        }).catch(() => {
-          // Graceful silent network fallback
-        });
-      } catch {
-        // Safe silent catch
-      }
+        }).catch(() => {});
+      } catch {}
     };
 
     const onVisibilityChange = () => {

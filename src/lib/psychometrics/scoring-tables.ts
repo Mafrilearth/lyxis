@@ -1,8 +1,3 @@
-/**
- * Canonical ETS TOEFL ITP® Level 1 Scaled Score Conversion Tables
- * Reference: ETS TOEFL ITP® Score User Guide & ISO/IEC 23988:2007
- */
-
 export const LISTENING_CONVERSION_TABLE: Record<number, number> = {
   50: 68,
   49: 67,

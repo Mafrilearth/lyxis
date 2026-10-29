@@ -1,6 +1,7 @@
 "use client";
 
 import { useExamStore } from "@/lib/store/exam-store";
+import { cn } from "@/lib/utils";
 import type { ExamQuestion, SectionType } from "@/types/exam";
 import { CheckCircle2, Flag } from "lucide-react";
 
@@ -10,6 +11,31 @@ interface ItemMatrixProps {
   onSelectQuestion: (index: number) => void;
 }
 
+const PART_LABELS: Record<string, Record<number, string>> = {
+  LISTENING: {
+    0: "Part A: Short Dialogues (1–30)",
+    30: "Part B: Extended Conversations (31–38)",
+    38: "Part C: Academic Lectures (39–50)",
+  },
+  STRUCTURE: {
+    0: "Part A: Sentence Completion (1–15)",
+    15: "Part B: Error Recognition (16–40)",
+  },
+  READING: {
+    0: "Passage 1: Glacial Morphology (1–10)",
+    10: "Passage 2: Erie Canal (11–20)",
+    20: "Passage 3: Coral Reefs (21–30)",
+    30: "Passage 4: Bauhaus Typography (31–40)",
+    40: "Passage 5: Karst Hydrology (41–50)",
+  },
+};
+
+const LEGEND_ITEMS = [
+  { label: "Answered", dotClass: "bg-emerald-500" },
+  { label: "Active", dotClass: "bg-primary" },
+  { label: "Flagged", dotClass: "bg-amber-500" },
+];
+
 export function ItemMatrix({ questions, sectionType, onSelectQuestion }: ItemMatrixProps) {
   const currentIndex = useExamStore((state) => state.currentQuestionIndex);
   const answers = useExamStore((state) => state.answers);
@@ -17,28 +43,10 @@ export function ItemMatrix({ questions, sectionType, onSelectQuestion }: ItemMat
   const answeredCount = questions.filter((q) => answers[q.id]?.selectedOption).length;
   const totalCount = questions.length;
 
-  // Determine part labels for grouping
-  const getPartLabel = (index: number): string | null => {
-    if (sectionType === "LISTENING") {
-      if (index === 0) return "Part A: Short Dialogues (1–30)";
-      if (index === 30) return "Part B: Extended Conversations (31–38)";
-      if (index === 38) return "Part C: Academic Lectures (39–50)";
-    } else if (sectionType === "STRUCTURE") {
-      if (index === 0) return "Part A: Sentence Completion (1–15)";
-      if (index === 15) return "Part B: Error Recognition (16–40)";
-    } else if (sectionType === "READING") {
-      if (index === 0) return "Passage 1: Glacial Morphology (1–10)";
-      if (index === 10) return "Passage 2: Erie Canal (11–20)";
-      if (index === 20) return "Passage 3: Coral Reefs (21–30)";
-      if (index === 30) return "Passage 4: Bauhaus Typography (31–40)";
-      if (index === 40) return "Passage 5: Karst Hydrology (41–50)";
-    }
-    return null;
-  };
+  const getPartLabel = (index: number): string | null => PART_LABELS[sectionType]?.[index] ?? null;
 
   return (
     <div className="space-y-4">
-      {/* Progress Metric */}
       <div className="flex items-center justify-between border-b border-border/40 pb-3">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           Question Matrix
@@ -49,7 +57,6 @@ export function ItemMatrix({ questions, sectionType, onSelectQuestion }: ItemMat
         </span>
       </div>
 
-      {/* Clean 5-column grid with Part dividers */}
       <div className="space-y-3 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
         <div className="grid grid-cols-5 gap-1.5">
           {questions.map((q, index) => {
@@ -97,20 +104,13 @@ export function ItemMatrix({ questions, sectionType, onSelectQuestion }: ItemMat
         </div>
       </div>
 
-      {/* Legend */}
       <div className="grid grid-cols-3 gap-1 pt-2 border-t border-border/40 text-[10px] text-muted-foreground">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          <span>Answered</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-primary" />
-          <span>Active</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-amber-500" />
-          <span>Flagged</span>
-        </div>
+        {LEGEND_ITEMS.map((item) => (
+          <div key={item.label} className="flex items-center gap-1.5">
+            <span className={cn("h-2 w-2 rounded-full", item.dotClass)} />
+            <span>{item.label}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

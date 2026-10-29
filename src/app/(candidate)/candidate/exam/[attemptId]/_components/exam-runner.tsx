@@ -34,6 +34,12 @@ interface ExamRunnerProps {
   sections: ExamSection[];
 }
 
+const SECTIONS_TABS = [
+  { index: 0, label: "1. Listening (50 Items)", icon: Headphones },
+  { index: 1, label: "2. Structure (40 Items)", icon: PenTool },
+  { index: 2, label: "3. Reading (50 Items)", icon: Sparkles },
+];
+
 export function ExamRunner({
   attemptId,
   initialCandidateName = "Candidate",
@@ -55,7 +61,6 @@ export function ExamRunner({
   const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
   const [candidateName, setCandidateName] = useState(initialCandidateName);
 
-  // Initialize store on first mount
   useEffect(() => {
     let name = initialCandidateName;
     if (typeof window !== "undefined") {
@@ -76,7 +81,6 @@ export function ExamRunner({
   const currentQuestions = currentSection?.questions || [];
   const currentQuestion = currentQuestions[currentQuestionIndex] || currentQuestions[0];
 
-  // Find linked stimulus for reading or listening
   const currentStimulus = currentSection?.stimuli?.find(
     (s) => s.id === currentQuestion?.stimulusId,
   );
@@ -85,7 +89,6 @@ export function ExamRunner({
   const isLastQuestion = currentQuestionIndex === currentQuestions.length - 1;
   const isLastSection = currentSectionIndex === sections.length - 1;
 
-  // Background Autosave
   const handleAnswerSaved = async (questionId: string, option: CorrectOption) => {
     try {
       await saveAnswerAction({
@@ -93,9 +96,7 @@ export function ExamRunner({
         questionId,
         selectedOption: option,
       });
-    } catch {
-      // Offline fallback: Answer is already safely in Zustand & localStorage
-    }
+    } catch {}
   };
 
   const handleNextQuestion = () => {
@@ -110,7 +111,6 @@ export function ExamRunner({
     }
   };
 
-  // Keyboard navigation for Prev (P, ArrowLeft), Next (N, ArrowRight), Section (L), Submit (S)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
@@ -137,7 +137,6 @@ export function ExamRunner({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isLastQuestion, isFirstQuestion, isLastSection, currentQuestionIndex]);
 
-  // Proceed to next section
   const handleConfirmNextSection = () => {
     setIsNextSectionDialogOpen(false);
     if (!isLastSection) {
@@ -147,7 +146,6 @@ export function ExamRunner({
     }
   };
 
-  // Submit final examination
   const handleSubmitExam = async () => {
     setIsSubmitDialogOpen(false);
     setIsSubmitting(true);
@@ -194,10 +192,8 @@ export function ExamRunner({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Anti-Cheat Sensor */}
       <AntiCheatSensor attemptId={attemptId} />
 
-      {/* Top Header Bar */}
       <ExamHeader
         sectionTitle={currentSection.title}
         currentQuestionNumber={currentQuestionIndex + 1}
@@ -205,13 +201,10 @@ export function ExamRunner({
         onTimeExpired={handleTimeExpired}
       />
 
-      {/* Main Testing Viewport: Generous & Expansive */}
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left / Center: Question Canvas with Clean Primary Border Console Frame */}
         <div className="lg:col-span-9 flex flex-col justify-between">
           <div className="rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-2xl">
             <div className="rounded-[calc(2.5rem-0.5rem)] bg-card border border-border/60 overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
-              {/* Top Window Bar: Clear, Spacious, Uncluttered */}
               <div className="border-b border-border/60 bg-muted/25 px-6 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
@@ -241,57 +234,31 @@ export function ExamRunner({
                 </div>
               </div>
 
-              {/* Section Navigation Tabs: Identical to Homepage Console */}
               <div className="grid grid-cols-3 border-b border-border/60 bg-muted/15 text-sm font-bold divide-x divide-border/60">
-                <div
-                  className={cn(
-                    "py-4 px-3 sm:px-6 flex items-center justify-center gap-2.5 transition-all relative",
-                    currentSectionIndex === 0
-                      ? "bg-background text-primary shadow-xs"
-                      : "text-muted-foreground bg-muted/20 opacity-75 cursor-not-allowed",
-                  )}
-                >
-                  <Headphones className="h-4 w-4 shrink-0" />
-                  <span className="truncate">1. Listening (50 Items)</span>
-                  {currentSectionIndex === 0 && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
-                  )}
-                </div>
-
-                <div
-                  className={cn(
-                    "py-4 px-3 sm:px-6 flex items-center justify-center gap-2.5 transition-all relative",
-                    currentSectionIndex === 1
-                      ? "bg-background text-primary shadow-xs"
-                      : "text-muted-foreground bg-muted/20 opacity-75 cursor-not-allowed",
-                  )}
-                >
-                  <PenTool className="h-4 w-4 shrink-0" />
-                  <span className="truncate">2. Structure (40 Items)</span>
-                  {currentSectionIndex === 1 && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
-                  )}
-                </div>
-
-                <div
-                  className={cn(
-                    "py-4 px-3 sm:px-6 flex items-center justify-center gap-2.5 transition-all relative",
-                    currentSectionIndex === 2
-                      ? "bg-background text-primary shadow-xs"
-                      : "text-muted-foreground bg-muted/20 opacity-75 cursor-not-allowed",
-                  )}
-                >
-                  <Sparkles className="h-4 w-4 shrink-0" />
-                  <span className="truncate">3. Reading (50 Items)</span>
-                  {currentSectionIndex === 2 && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
-                  )}
-                </div>
+                {SECTIONS_TABS.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = currentSectionIndex === tab.index;
+                  return (
+                    <div
+                      key={tab.index}
+                      className={cn(
+                        "py-4 px-3 sm:px-6 flex items-center justify-center gap-2.5 transition-all relative",
+                        isActive
+                          ? "bg-background text-primary shadow-xs"
+                          : "text-muted-foreground bg-muted/20 opacity-75 cursor-not-allowed",
+                      )}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" />
+                      <span className="truncate">{tab.label}</span>
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Console Stage: Expansive & Crisp */}
               <div className="p-6 sm:p-10 space-y-6">
-                {/* Section 1: Listening Comprehension with Audio Stimulus */}
                 {currentSection.type === "LISTENING" && (
                   <div className="space-y-6">
                     <AudioPlayer
@@ -306,12 +273,10 @@ export function ExamRunner({
                   </div>
                 )}
 
-                {/* Section 2: Structure & Written Expression */}
                 {currentSection.type === "STRUCTURE" && (
                   <QuestionCard question={currentQuestion} onAnswerSaved={handleAnswerSaved} />
                 )}
 
-                {/* Section 3: Reading Comprehension with Split-Pane */}
                 {currentSection.type === "READING" && (
                   <ReadingView
                     stimulus={currentStimulus}
@@ -323,7 +288,6 @@ export function ExamRunner({
             </div>
           </div>
 
-          {/* Bottom Action / Navigation Bar: Spacious & Comfortable */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border/60 pt-6 mt-10">
             <Button
               variant="outline"
@@ -384,7 +348,6 @@ export function ExamRunner({
           </div>
         </div>
 
-        {/* Right: Item Navigation Matrix Panel */}
         <div className="lg:col-span-3 rounded-3xl border border-border/80 bg-card/75 p-6 sm:p-7 shadow-md sticky top-24">
           <ItemMatrix
             questions={currentQuestions}
@@ -394,7 +357,6 @@ export function ExamRunner({
         </div>
       </main>
 
-      {/* Confirmation Modal: Proceed to Next Section */}
       <Modal.Backdrop isOpen={isNextSectionDialogOpen} onOpenChange={setIsNextSectionDialogOpen}>
         <Modal.Container>
           <Modal.Dialog className="max-w-md p-6 sm:p-7 rounded-3xl">
@@ -430,7 +392,6 @@ export function ExamRunner({
         </Modal.Container>
       </Modal.Backdrop>
 
-      {/* Confirmation Modal: Submit Examination */}
       <Modal.Backdrop isOpen={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
         <Modal.Container>
           <Modal.Dialog className="max-w-md p-6 sm:p-7 rounded-3xl">

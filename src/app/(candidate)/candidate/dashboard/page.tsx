@@ -86,15 +86,61 @@ async function DashboardContent() {
         )
       : 0;
 
+  const metricCards = [
+    {
+      label: "Completed Assessments",
+      icon: <FileCheck2 className="h-5 w-5 text-accent" />,
+      value: completedAttempts.length,
+      description: "Standardized Form A sessions (140 Items)",
+    },
+    {
+      label: "Peak Scaled Score",
+      icon: <Award className="h-5 w-5 text-emerald-500" />,
+      value:
+        completedAttempts.length > 0 ? (
+          <>
+            {bestScore} <span className="text-sm font-normal text-muted font-mono">/ 677</span>
+          </>
+        ) : (
+          <span className="text-muted font-sans text-3xl font-semibold">—</span>
+        ),
+      valueClass: "text-emerald-600 dark:text-emerald-400",
+      description: "Official scaled score range (310–677)",
+    },
+    {
+      label: "Peak CEFR Band",
+      icon: <TrendingUp className="h-5 w-5 text-accent" />,
+      value:
+        completedAttempts.length > 0 ? (
+          completedAttempts[0]?.cefrLevel || "B1"
+        ) : (
+          <span className="text-muted font-sans text-3xl font-semibold">—</span>
+        ),
+      description:
+        completedAttempts.length > 0 ? "Global CEFR competency band" : "No assessments yet",
+    },
+    {
+      label: "Mean Scaled Score",
+      icon: <Clock className="h-5 w-5 text-accent" />,
+      value:
+        completedAttempts.length > 0 ? (
+          <>
+            {avgScore} <span className="text-sm font-normal text-muted font-mono">/ 677</span>
+          </>
+        ) : (
+          <span className="text-muted font-sans text-3xl font-semibold">—</span>
+        ),
+      description: "Average across all finished sessions",
+    },
+  ];
+
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col overflow-x-hidden selection:bg-primary/20 selection:text-primary">
-      {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
-      {/* Candidate Top Navigation: Spacious & Proportional */}
       <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -145,9 +191,7 @@ async function DashboardContent() {
         </div>
       </header>
 
-      {/* Main Content Dashboard: Expansive & Clean */}
       <main className="flex-1 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-16 w-full space-y-12">
-        {/* Welcome Banner: Clean Primary Border Frame */}
         <div className="rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-lg">
           <div className="rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.5rem-0.5rem)] bg-card p-8 sm:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
@@ -169,7 +213,6 @@ async function DashboardContent() {
           </div>
         </div>
 
-        {/* In-Progress Alert Banner (if candidate has an active session) */}
         {inProgressAttempt && (
           <div className="rounded-3xl border-2 border-primary/40 bg-primary/5 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md animate-pulse">
             <div className="space-y-1.5">
@@ -206,92 +249,28 @@ async function DashboardContent() {
           </div>
         )}
 
-        {/* Metric Overview Cards: Expansive & Proportional */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <Card.Header className="p-0 pb-1">
-              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
-                <span>Completed Assessments</span>
-                <FileCheck2 className="h-5 w-5 text-accent" />
-              </Card.Description>
-              <Card.Title className="text-4xl font-black font-mono pt-2">
-                {completedAttempts.length}
-              </Card.Title>
-            </Card.Header>
-            <Card.Content className="p-0">
-              <p className="text-xs text-muted">Standardized Form A sessions (140 Items)</p>
-            </Card.Content>
-          </Card>
-
-          <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <Card.Header className="p-0 pb-1">
-              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
-                <span>Peak Scaled Score</span>
-                <Award className="h-5 w-5 text-emerald-500" />
-              </Card.Description>
-              <Card.Title className="text-4xl font-black font-mono text-emerald-600 dark:text-emerald-400 pt-2">
-                {completedAttempts.length > 0 ? (
-                  <>
-                    {bestScore}{" "}
-                    <span className="text-sm font-normal text-muted font-mono">/ 677</span>
-                  </>
-                ) : (
-                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
-                )}
-              </Card.Title>
-            </Card.Header>
-            <Card.Content className="p-0">
-              <p className="text-xs text-muted">Official scaled score range (310–677)</p>
-            </Card.Content>
-          </Card>
-
-          <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <Card.Header className="p-0 pb-1">
-              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
-                <span>Peak CEFR Band</span>
-                <TrendingUp className="h-5 w-5 text-accent" />
-              </Card.Description>
-              <Card.Title className="text-4xl font-black font-mono pt-2">
-                {completedAttempts.length > 0 ? (
-                  completedAttempts[0]?.cefrLevel || "B1"
-                ) : (
-                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
-                )}
-              </Card.Title>
-            </Card.Header>
-            <Card.Content className="p-0">
-              <p className="text-xs text-muted">
-                {completedAttempts.length > 0
-                  ? "Global CEFR competency band"
-                  : "No assessments yet"}
-              </p>
-            </Card.Content>
-          </Card>
-
-          <Card className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3">
-            <Card.Header className="p-0 pb-1">
-              <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
-                <span>Mean Scaled Score</span>
-                <Clock className="h-5 w-5 text-accent" />
-              </Card.Description>
-              <Card.Title className="text-4xl font-black font-mono pt-2">
-                {completedAttempts.length > 0 ? (
-                  <>
-                    {avgScore}{" "}
-                    <span className="text-sm font-normal text-muted font-mono">/ 677</span>
-                  </>
-                ) : (
-                  <span className="text-muted font-sans text-3xl font-semibold">—</span>
-                )}
-              </Card.Title>
-            </Card.Header>
-            <Card.Content className="p-0">
-              <p className="text-xs text-muted">Average across all finished sessions</p>
-            </Card.Content>
-          </Card>
+          {metricCards.map((card) => (
+            <Card
+              key={card.label}
+              className="rounded-3xl border-border/80 bg-card/75 shadow-xs p-6 space-y-3"
+            >
+              <Card.Header className="p-0 pb-1">
+                <Card.Description className="text-xs font-bold uppercase tracking-wider flex items-center justify-between text-muted">
+                  <span>{card.label}</span>
+                  {card.icon}
+                </Card.Description>
+                <Card.Title className={cn("text-4xl font-black font-mono pt-2", card.valueClass)}>
+                  {card.value}
+                </Card.Title>
+              </Card.Header>
+              <Card.Content className="p-0">
+                <p className="text-xs text-muted">{card.description}</p>
+              </Card.Content>
+            </Card>
+          ))}
         </div>
 
-        {/* Available Test Package: Expansive */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold tracking-tight text-foreground">
@@ -339,7 +318,6 @@ async function DashboardContent() {
           </div>
         </div>
 
-        {/* Examination History & Verified Certificates */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold tracking-tight text-foreground">
@@ -483,7 +461,6 @@ async function DashboardContent() {
         </div>
       </main>
 
-      {/* Footer: Expansive & Clean */}
       <footer className="border-t border-border/40 bg-muted/20 py-8 px-6 sm:px-10 mt-16 text-xs text-muted-foreground text-center">
         <p className="font-medium text-foreground">
           Lyxis — CBT Platform for TOEFL ITP® Prediction

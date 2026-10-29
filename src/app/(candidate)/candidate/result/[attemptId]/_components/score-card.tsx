@@ -53,7 +53,6 @@ export function ScoreCard({ totalScore, cefrLevel, candidateName }: ScoreCardPro
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          {/* Giant Scaled Score Display: Expansive & Bold */}
           <div className="md:col-span-5 flex flex-col items-start justify-center border-b md:border-b-0 md:border-r border-border/40 pb-8 md:pb-0 md:pr-8">
             <span className="text-xs sm:text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
               <Award className="h-5 w-5 text-primary" /> Total Scaled Score
@@ -69,7 +68,6 @@ export function ScoreCard({ totalScore, cefrLevel, candidateName }: ScoreCardPro
             </span>
           </div>
 
-          {/* CEFR Interpretation: Spacious & Clear */}
           <div className="md:col-span-7 space-y-3">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
               <TrendingUp className="h-4 w-4" /> Global CEFR Competency Evaluation

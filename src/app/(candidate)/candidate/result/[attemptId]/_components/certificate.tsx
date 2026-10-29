@@ -31,7 +31,6 @@ export function Certificate({
   return (
     <div className="rounded-2xl border-2 border-primary/20 bg-card p-8 sm:p-12 shadow-xl relative overflow-hidden print:border-black print:shadow-none selection:bg-primary/20">
       <div className="flex flex-col items-center text-center space-y-6 relative z-10">
-        {/* Official Header */}
         <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-foreground select-none">
           Lyxis
         </span>
@@ -65,7 +64,6 @@ export function Certificate({
           Listening Comprehension, Structure & Written Expression, and Reading Comprehension.
         </div>
 
-        {/* Highlight Score & CEFR Pill */}
         <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 sm:p-6 flex flex-wrap items-center justify-center gap-8 text-center">
           <div>
             <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider font-mono">
@@ -89,7 +87,6 @@ export function Certificate({
           </div>
         </div>
 
-        {/* Institutional Graduation Benchmark Indicator */}
         <div
           className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold tracking-wide border ${
             isGraduationQualified
@@ -110,7 +107,6 @@ export function Certificate({
           )}
         </div>
 
-        {/* Verification & Security Footer */}
         <div className="w-full pt-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="text-center sm:text-left space-y-0.5">
             <div>

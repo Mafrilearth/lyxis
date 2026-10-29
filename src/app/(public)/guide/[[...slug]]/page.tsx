@@ -42,11 +42,17 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
   };
 }
 
+const GUIDE_TABS = [
+  { href: "/guide", key: "overview", label: "Overview", icon: FileText },
+  { href: "/guide/scoring", key: "scoring", label: "Scoring Matrix", icon: Scale },
+  { href: "/guide/anti-cheat", key: "anti-cheat", label: "Anti-Cheat", icon: ShieldAlert },
+  { href: "/guide/cefr", key: "cefr", label: "CEFR Benchmarks", icon: CheckCircle2 },
+];
+
 export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
   const currentSection = slug ? slug.join("/") : "overview";
 
-  // Validate allowed catch-all paths
   const validSections = ["overview", "scoring", "anti-cheat", "cefr"];
   if (slug && slug.length > 0 && !validSections.includes(slug[0])) {
     notFound();
@@ -55,7 +61,6 @@ export default async function GuidePage({ params }: GuidePageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between border-b border-border pb-4">
           <Link
             href="/candidate/dashboard"
@@ -70,7 +75,6 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
         </div>
 
-        {/* Header */}
         <div className="space-y-3">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight flex items-center gap-3">
             <BookOpen className="size-8 text-primary" />
@@ -82,47 +86,24 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </p>
         </div>
 
-        {/* Section Navigation Tabs */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          <Link
-            href={"/guide" as Route}
-            className={buttonVariants({
-              variant: currentSection === "overview" ? "primary" : "outline",
-              size: "sm",
-            })}
-          >
-            <FileText className="size-3.5 mr-1.5" /> Overview
-          </Link>
-          <Link
-            href={"/guide/scoring" as Route}
-            className={buttonVariants({
-              variant: currentSection === "scoring" ? "primary" : "outline",
-              size: "sm",
-            })}
-          >
-            <Scale className="size-3.5 mr-1.5" /> Scoring Matrix
-          </Link>
-          <Link
-            href={"/guide/anti-cheat" as Route}
-            className={buttonVariants({
-              variant: currentSection === "anti-cheat" ? "primary" : "outline",
-              size: "sm",
-            })}
-          >
-            <ShieldAlert className="size-3.5 mr-1.5" /> Anti-Cheat
-          </Link>
-          <Link
-            href={"/guide/cefr" as Route}
-            className={buttonVariants({
-              variant: currentSection === "cefr" ? "primary" : "outline",
-              size: "sm",
-            })}
-          >
-            <CheckCircle2 className="size-3.5 mr-1.5" /> CEFR Benchmarks
-          </Link>
+          {GUIDE_TABS.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <Link
+                key={tab.key}
+                href={tab.href as Route}
+                className={buttonVariants({
+                  variant: currentSection === tab.key ? "primary" : "outline",
+                  size: "sm",
+                })}
+              >
+                <Icon className="size-3.5 mr-1.5" /> {tab.label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Content Body based on Catch-all Segment */}
         {currentSection === "overview" && (
           <Card className="p-6 space-y-4 border border-border bg-surface">
             <h2 className="text-xl font-bold">Standard Examination Structure</h2>

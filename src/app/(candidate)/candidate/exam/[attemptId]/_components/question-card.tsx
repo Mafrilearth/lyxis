@@ -24,7 +24,6 @@ export function QuestionCard({ question, onAnswerSaved }: QuestionCardProps) {
     onAnswerSaved(question.id, option);
   };
 
-  // Keyboard shortcut listener for A, B, C, D and F
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
@@ -32,7 +31,7 @@ export function QuestionCard({ question, onAnswerSaved }: QuestionCardProps) {
       }
 
       const key = e.key.toUpperCase();
-      if (key === "A" || key === "B" || key === "C" || key === "D") {
+      if (["A", "B", "C", "D"].includes(key)) {
         e.preventDefault();
         handleSelect(key as CorrectOption);
       } else if (key === "F") {
@@ -54,7 +53,6 @@ export function QuestionCard({ question, onAnswerSaved }: QuestionCardProps) {
 
   return (
     <div className="space-y-8 w-full py-4">
-      {/* Header with question number and flag button */}
       <div className="flex items-center justify-between border-b border-border/60 pb-4">
         <div className="flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-black text-sm shadow-xs">
@@ -80,14 +78,12 @@ export function QuestionCard({ question, onAnswerSaved }: QuestionCardProps) {
         </Button>
       </div>
 
-      {/* Question Prompt: Expansive & Clear */}
       {question.prompt && (
         <div className="text-lg sm:text-xl font-bold leading-relaxed text-foreground">
           {question.prompt}
         </div>
       )}
 
-      {/* Answer Options A, B, C, D: Expansive & Proportional */}
       <div className="space-y-3.5" role="radiogroup" aria-label="Answer options">
         {options.map((opt) => {
           const isSelected = selectedOption === opt.key;

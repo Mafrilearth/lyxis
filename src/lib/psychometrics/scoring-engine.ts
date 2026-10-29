@@ -17,34 +17,31 @@ export interface PsychometricResult {
   cefrLevel: CefrLevel;
 }
 
+const TABLE_MAP = {
+  listening: { table: LISTENING_CONVERSION_TABLE, cap: 50, def: 24 },
+  structure: { table: STRUCTURE_CONVERSION_TABLE, cap: 40, def: 20 },
+  reading: { table: READING_CONVERSION_TABLE, cap: 50, def: 21 },
+} as const;
+
 export function convertRawScore(
   section: "listening" | "structure" | "reading",
   rawCorrect: number,
 ): number {
-  const safeCorrect = Math.max(0, Math.floor(rawCorrect));
-
-  switch (section) {
-    case "listening": {
-      const capped = Math.min(50, safeCorrect);
-      return LISTENING_CONVERSION_TABLE[capped] ?? 24;
-    }
-    case "structure": {
-      const capped = Math.min(40, safeCorrect);
-      return STRUCTURE_CONVERSION_TABLE[capped] ?? 20;
-    }
-    case "reading": {
-      const capped = Math.min(50, safeCorrect);
-      return READING_CONVERSION_TABLE[capped] ?? 21;
-    }
-    default:
-      return 0;
-  }
+  const config = TABLE_MAP[section];
+  if (!config) return 0;
+  const safeCorrect = Math.min(config.cap, Math.max(0, Math.floor(rawCorrect)));
+  return config.table[safeCorrect] ?? config.def;
 }
 
 export function determineCefrBand(totalScore: number): CefrLevel {
-  if (totalScore >= 627) return "C1";
-  if (totalScore >= 543) return "B2";
-  if (totalScore >= 460) return "B1";
+  const bands: Array<{ threshold: number; band: CefrLevel }> = [
+    { threshold: 627, band: "C1" },
+    { threshold: 543, band: "B2" },
+    { threshold: 460, band: "B1" },
+  ];
+  for (const b of bands) {
+    if (totalScore >= b.threshold) return b.band;
+  }
   return "A2";
 }
 
@@ -59,7 +56,6 @@ export function calculatePsychometrics(
 
   const totalRawSum = rawListening + rawStructure + rawReading;
 
-  // If candidate has 0 correct answers across the entire test
   if (totalRawSum === 0) {
     return {
       rawListening: 0,
@@ -73,7 +69,6 @@ export function calculatePsychometrics(
     };
   }
 
-  // Official ETS Formula: ((Scaled L + Scaled S + Scaled R) * 10) / 3
   const convertedSum = scaledListening + scaledStructure + scaledReading;
   const totalScaledScore = Math.min(677, Math.max(310, Math.round((convertedSum * 10) / 3)));
   const cefrLevel = determineCefrBand(totalScaledScore);

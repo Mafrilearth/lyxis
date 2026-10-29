@@ -35,7 +35,6 @@ export function DataTable({ data = [] }: DataTableProps) {
   const [page, setPage] = React.useState(1);
   const pageSize = 10;
 
-  // Filter
   const filtered = React.useMemo(() => {
     return data.filter((item) => {
       const matchSearch =
@@ -47,7 +46,6 @@ export function DataTable({ data = [] }: DataTableProps) {
     });
   }, [data, search, statusFilter]);
 
-  // Sort
   const sorted = React.useMemo(() => {
     return [...filtered].sort((a, b) => {
       if (sortAsc) {
@@ -57,7 +55,6 @@ export function DataTable({ data = [] }: DataTableProps) {
     });
   }, [filtered, sortAsc]);
 
-  // Paginate
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
   const currentPage = Math.min(page, totalPages);
   const paginated = React.useMemo(() => {
@@ -98,7 +95,6 @@ export function DataTable({ data = [] }: DataTableProps) {
 
   return (
     <div className="space-y-4">
-      {/* Controls */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative flex-1 max-w-sm">
           <Input
@@ -152,7 +148,6 @@ export function DataTable({ data = [] }: DataTableProps) {
         </div>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto rounded-xl border bg-surface">
         <table className="w-full text-left text-xs">
           <thead className="border-b bg-surface-secondary text-muted-foreground">
@@ -246,7 +241,6 @@ export function DataTable({ data = [] }: DataTableProps) {
         </table>
       </div>
 
-      {/* Pagination */}
       <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
         <span>
           Showing {paginated.length > 0 ? (currentPage - 1) * pageSize + 1 : 0} to{" "}

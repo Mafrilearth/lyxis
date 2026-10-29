@@ -19,12 +19,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     data: { user },
   } = await supabase.auth.getUser();
 
-  // 1. Unauthenticated users are redirected to login
   if (!user) {
     redirect("/login?next=/admin");
   }
 
-  // 2. Strict Role-Based Access Control (RBAC): Only designated ADMINs allowed
   const adminEmailConfig = process.env.ADMIN_EMAIL || "admin@lyxis.mafrilearth.com";
   let isAdmin = user.email === adminEmailConfig;
 
@@ -40,7 +38,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     }
   }
 
-  // 3. Regular candidates attempting to access any admin surface are redirected to their dashboard
   if (!isAdmin) {
     redirect("/candidate/dashboard");
   }

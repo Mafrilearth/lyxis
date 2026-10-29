@@ -77,7 +77,6 @@ export default async function AdminDashboardPage() {
   const integrityIndex =
     attempts.length > 0 ? Math.round((cleanCount / attempts.length) * 1000) / 10 : 100;
 
-  // Aggregate daily volume for the throughput chart
   const volumeByDate: { [dateStr: string]: number } = {};
   for (const a of attempts) {
     const dateStr = a.startedAt.slice(0, 10);

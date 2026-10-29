@@ -1,7 +1,3 @@
-// Lyxis CBT Database Schema
-// Connected to Supabase PostgreSQL 17+
-// Compliant with ISO/IEC 23988:2007 & ETS TOEFL ITP® Specifications
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,9 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// ==========================================
-// 1. ENUMS (RBAC, TAXONOMY & METRICS)
-// ==========================================
 enum Role {
   ADMIN
   CANDIDATE
@@ -47,9 +40,6 @@ enum CefrBand {
   C1
 }
 
-// ==========================================
-// 2. USER & CANDIDATE PROFILES
-// ==========================================
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -63,15 +53,12 @@ model User {
   @@map("users")
 }
 
-// ==========================================
-// 3. TEST PACKAGES & CANONICAL SECTIONS
-// ==========================================
 model TestPackage {
   id             String   @id @default(uuid())
   title          String
   description    String?
   totalQuestions Int      @default(140)
-  totalDuration  Int      @default(115) // Minutes (35 + 25 + 55)
+  totalDuration  Int      @default(115)
   isPublished    Boolean  @default(false)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -86,7 +73,7 @@ model Section {
   id              String      @id @default(uuid())
   packageId       String
   type            SectionType
-  orderIndex      Int // 1: Listening, 2: Structure, 3: Reading
+  orderIndex      Int
   title           String
   durationMinutes Int
   totalItems      Int
@@ -98,15 +85,12 @@ model Section {
   @@map("sections")
 }
 
-// ==========================================
-// 4. ASSESSMENT STIMULI (AUDIO & PASSAGES)
-// ==========================================
 model Stimulus {
   id         String  @id @default(uuid())
   sectionId  String
   title      String?
-  content    String? // Reading passage text
-  audioUrl   String? // Supabase Storage CDN Audio URL
+  content    String?
+  audioUrl   String?
   orderIndex Int
 
   section   Section    @relation(fields: [sectionId], references: [id], onDelete: Cascade)
@@ -115,9 +99,6 @@ model Stimulus {
   @@map("stimuli")
 }
 
-// ==========================================
-// 5. TEST ITEMS (140 QUESTIONS & ANSWER KEYS)
-// ==========================================
 model Question {
   id             String        @id @default(uuid())
   sectionId      String
@@ -128,7 +109,7 @@ model Question {
   optionB        String
   optionC        String
   optionD        String
-  correctAnswer  CorrectOption // Server-only, strictly protected
+  correctAnswer  CorrectOption
   explanation    String?
   skillCategory  String?
 
@@ -139,9 +120,6 @@ model Question {
   @@map("questions")
 }
 
-// ==========================================
-// 6. EXAM ATTEMPTS & ANTI-CHEAT TELEMETRY
-// ==========================================
 model ExamAttempt {
   id             String        @id @default(uuid())
   candidateId    String?
@@ -150,16 +128,13 @@ model ExamAttempt {
   packageId      String
   status         AttemptStatus @default(IN_PROGRESS)
 
-  // Server-Authoritative Timer
   startedAt   DateTime  @default(now())
   submittedAt DateTime?
   expiresAt   DateTime
 
-  // Anti-Cheat Telemetry
   tabSwitchCount Int     @default(0)
   browserDetails String?
 
-  // Official ETS TOEFL ITP® Scaled Metric
   rawListening    Int?
   scaledListening Int?
 
@@ -169,10 +144,9 @@ model ExamAttempt {
   rawReading    Int?
   scaledReading Int?
 
-  totalScaledScore Int? // 310 - 677
+  totalScaledScore Int?
   cefrLevel        CefrBand?
 
-  // Cryptographic Verification
   verificationToken String @unique @default(cuid())
 
   candidate   User?             @relation(fields: [candidateId], references: [id], onDelete: SetNull)
@@ -183,9 +157,6 @@ model ExamAttempt {
   @@map("exam_attempts")
 }
 
-// ==========================================
-// 7. CANDIDATE RESPONSES
-// ==========================================
 model CandidateAnswer {
   id             String         @id @default(uuid())
   attemptId      String
@@ -202,9 +173,6 @@ model CandidateAnswer {
   @@map("candidate_answers")
 }
 
-// ==========================================
-// 8. VERIFIABLE CERTIFICATES & DOSSIERS
-// ==========================================
 model Certificate {
   id                String   @id @default(uuid())
   attemptId         String   @unique
@@ -213,7 +181,7 @@ model Certificate {
   totalScore        Int
   cefrLevel         CefrBand
   issuedAt          DateTime @default(now())
-  securityHash      String // HMAC-SHA256 digital signature
+  securityHash      String
 
   attempt ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
 

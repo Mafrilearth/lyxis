@@ -28,9 +28,6 @@ export type {
   SubmitExamResult,
 };
 
-/**
- * Initializes a new examination attempt and sets up the candidate session.
- */
 export async function startExamAction(input: StartExamInput): Promise<StartExamResult> {
   try {
     const validation = candidateRegisterSchema.safeParse({
@@ -49,7 +46,7 @@ export async function startExamAction(input: StartExamInput): Promise<StartExamR
     const attemptId = crypto.randomUUID();
     const verificationToken = crypto.randomUUID();
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + 115 * 60 * 1000); // 115 minutes
+    const expiresAt = new Date(now.getTime() + 115 * 60 * 1000);
 
     try {
       const supabase = await createClient();
@@ -88,9 +85,6 @@ export async function startExamAction(input: StartExamInput): Promise<StartExamR
   }
 }
 
-/**
- * Persists an individual answer selection in real time.
- */
 export async function saveAnswerAction(
   input: SaveAnswerInput,
 ): Promise<{ success: boolean; error?: string }> {
@@ -128,9 +122,6 @@ export async function saveAnswerAction(
   }
 }
 
-/**
- * Records window blur, visibility loss, or proctoring incident telemetry.
- */
 export async function recordTelemetryAction(input: TelemetryInput): Promise<{ success: boolean }> {
   try {
     const validation = telemetryEventSchema.safeParse({
@@ -171,14 +162,10 @@ export async function recordTelemetryAction(input: TelemetryInput): Promise<{ su
   }
 }
 
-/**
- * Calibrates psychometric raw and scaled scores, issues digital certificate, and finalizes attempt.
- */
 export async function submitExamAction(input: SubmitExamInput): Promise<SubmitExamResult> {
   try {
     const { attemptId, candidateName = "Candidate", answers = {} } = input;
 
-    // Canonical 140 question benchmark keys (statically bundled)
     const allQuestions: Array<{
       id: string;
       sectionId: string;
@@ -189,19 +176,21 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
       correctAnswer: string;
     }>;
 
-    // Tally raw scores per section
-    let rawListening = 0;
-    let rawStructure = 0;
-    let rawReading = 0;
+    const sectionCounts: Record<string, number> = {
+      "sec-listening-01": 0,
+      "sec-structure-02": 0,
+      "sec-reading-03": 0,
+    };
 
     for (const q of allQuestions) {
-      const selected = answers[q.id]?.selectedOption;
-      if (selected && selected === q.correctAnswer) {
-        if (q.sectionId === "sec-listening-01") rawListening++;
-        else if (q.sectionId === "sec-structure-02") rawStructure++;
-        else if (q.sectionId === "sec-reading-03") rawReading++;
+      if (answers[q.id]?.selectedOption === q.correctAnswer && q.sectionId in sectionCounts) {
+        sectionCounts[q.sectionId]++;
       }
     }
+
+    const rawListening = sectionCounts["sec-listening-01"];
+    const rawStructure = sectionCounts["sec-structure-02"];
+    const rawReading = sectionCounts["sec-reading-03"];
 
     const psychometrics = calculatePsychometrics(rawListening, rawStructure, rawReading);
     const certificateNumber = `LYXIS-${new Date().getFullYear()}-${attemptId.slice(0, 8).toUpperCase()}`;
@@ -266,7 +255,6 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
         { onConflict: "attemptId" },
       );
 
-      // Non-blocking background email dispatch via official Next.js / Vercel after()
       if (candidateEmail) {
         const email = candidateEmail;
         const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.com";

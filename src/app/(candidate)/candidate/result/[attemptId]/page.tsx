@@ -146,14 +146,12 @@ async function ResultContent({ params }: ResultPageProps) {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col py-10 sm:py-16 px-6 sm:px-10 lg:px-12 selection:bg-primary/20 selection:text-primary">
-      {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
       <div className="max-w-7xl mx-auto w-full space-y-12">
-        {/* Top Navigation: Spacious & Clean */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-6 print:hidden">
           <div className="flex items-center gap-6">
             <Link
@@ -175,10 +173,8 @@ async function ResultContent({ params }: ResultPageProps) {
           </div>
         </div>
 
-        {/* Section 1: Score Overview Card */}
         <ScoreCard totalScore={totalScore} cefrLevel={cefrLevel} candidateName={candidateName} />
 
-        {/* Section 2: Sectional Breakdown & Psychometric Competency Radar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-7">
             <SectionBreakdown
@@ -204,7 +200,6 @@ async function ResultContent({ params }: ResultPageProps) {
           </div>
         </div>
 
-        {/* Section 3: Digital Verifiable Certificate */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold tracking-tight text-foreground">

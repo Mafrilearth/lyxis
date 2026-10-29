@@ -13,7 +13,6 @@ interface ExamStoreState {
   tabSwitchCount: number;
   isSubmitting: boolean;
 
-  // Actions
   initializeSession: (payload: {
     attemptId: string;
     candidateName: string;
