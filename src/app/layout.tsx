@@ -55,13 +55,6 @@ export const metadata: Metadata = {
   creator: "Lyxis",
   publisher: "Lyxis",
   manifest: "/manifest.webmanifest",
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
-  },
   formatDetection: {
     email: false,
     address: false,

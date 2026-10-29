@@ -1,0 +1,9 @@
+# Vercel Deployment Ignore
+.git
+.github
+.agents
+.gemini
+docs/
+*.md
+!README.md
+lefthook.yml

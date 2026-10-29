@@ -1,6 +1,7 @@
 "use server";
 
 import { sendCertificateEmail } from "@/lib/email";
+import seedQuestions from "@/lib/data/seed-questions.json";
 import { calculatePsychometrics } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";
 import { createClient } from "@/lib/supabase/server";
@@ -8,8 +9,7 @@ import { candidateRegisterSchema } from "@/lib/validations/candidate";
 import { answerSubmissionSchema, telemetryEventSchema } from "@/lib/validations/exam";
 import * as Sentry from "@sentry/nextjs";
 import crypto from "node:crypto";
-import * as fs from "node:fs";
-import * as path from "node:path";
+import { after } from "next/server";
 import type {
   SaveAnswerInput,
   StartExamInput,
@@ -178,17 +178,16 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
   try {
     const { attemptId, candidateName = "Candidate", answers = {} } = input;
 
-    // Load canonical 140 question benchmark keys
-    const questionsPath = path.resolve(process.cwd(), "src/lib/data/seed-questions.json");
-    let allQuestions: Array<{
+    // Canonical 140 question benchmark keys (statically bundled)
+    const allQuestions: Array<{
       id: string;
       sectionId: string;
       correctAnswer: string;
-    }> = [];
-
-    if (fs.existsSync(questionsPath)) {
-      allQuestions = JSON.parse(fs.readFileSync(questionsPath, "utf-8"));
-    }
+    }> = seedQuestions as Array<{
+      id: string;
+      sectionId: string;
+      correctAnswer: string;
+    }>;
 
     // Tally raw scores per section
     let rawListening = 0;
@@ -267,17 +266,24 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
         { onConflict: "attemptId" },
       );
 
-      // Asynchronously trigger Resend certificate delivery
+      // Non-blocking background email dispatch via official Next.js / Vercel after()
       if (candidateEmail) {
+        const email = candidateEmail;
         const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.com";
-        sendCertificateEmail({
-          candidateEmail,
-          candidateName,
-          totalScore: psychometrics.totalScaledScore,
-          cefrLevel: psychometrics.cefrLevel,
-          certificateNumber,
-          verificationUrl: `${appUrl}/verify/${attemptId}`,
-        }).catch((err) => console.warn("[Email] Failed to send certificate email:", err));
+        after(async () => {
+          try {
+            await sendCertificateEmail({
+              candidateEmail: email,
+              candidateName,
+              totalScore: psychometrics.totalScaledScore,
+              cefrLevel: psychometrics.cefrLevel,
+              certificateNumber,
+              verificationUrl: `${appUrl}/verify/${attemptId}`,
+            });
+          } catch (err) {
+            console.warn("[Email] Failed to send certificate email:", err);
+          }
+        });
       }
     } catch (dbError) {
       console.warn("Notice: Submission scores calculated with in-memory persistence:", dbError);
