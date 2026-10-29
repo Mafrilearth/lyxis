@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 interface ExamPageProps {
   params: Promise<{ attemptId: string }>;

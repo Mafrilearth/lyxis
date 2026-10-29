@@ -15,6 +15,7 @@ import { Suspense } from "react";
 import type { CertificateRecord, ExamAttempt } from "@/types";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 interface ResultPageProps {
   params: Promise<{ attemptId: string }>;

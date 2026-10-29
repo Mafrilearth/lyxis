@@ -18,6 +18,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { ExamAttempt } from "@/types";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 interface PageProps {
   params: Promise<{ attemptId: string }>;
