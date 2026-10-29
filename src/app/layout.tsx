@@ -32,7 +32,7 @@ const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.co
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F8FAFC" },
-    { media: "(prefers-color-scheme: dark)", color: "#07080B" },
+    { media: "(prefers-color-scheme: dark)", color: "#080D16" },
   ],
   width: "device-width",
   initialScale: 1,

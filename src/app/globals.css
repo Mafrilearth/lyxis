@@ -5,6 +5,11 @@
 @theme inline {
   --font-sans: var(--font-ibm-plex-sans), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
 }
 
 :root,
@@ -12,75 +17,163 @@
 .default,
 [data-theme="light"],
 [data-theme="default"] {
-  --accent: oklch(56.48% 0.2169 260.45);
-  --accent-foreground: oklch(99.11% 0 0);
-  --background: oklch(97.02% 0.02 260.45);
-  --border: oklch(90.00% 0.02 260.45);
-  --danger: oklch(65.32% 0.2421 26.53);
-  --danger-foreground: oklch(99.11% 0 0);
-  --default: oklch(94.00% 0.02 260.45);
-  --default-foreground: oklch(21.03% 0.0059 260.45);
-  --field-background: oklch(100.00% 0.01 260.45);
-  --field-border: transparent;
-  --field-foreground: oklch(21.03% 0.02 260.45);
-  --field-placeholder: oklch(55.17% 0.04 260.45);
-  --focus: oklch(56.48% 0.2169 260.45);
-  --foreground: oklch(21.03% 0.02 260.45);
-  --muted: oklch(55.17% 0.04 260.45);
-  --overlay: oklch(100.00% 0.006 260.45);
-  --overlay-foreground: oklch(21.03% 0.02 260.45);
-  --scrollbar: oklch(87.10% 0.02 260.45);
-  --segment: oklch(100.00% 0.02 260.45);
-  --segment-foreground: oklch(21.03% 0.02 260.45);
-  --separator: oklch(92.00% 0.02 260.45);
-  --success: oklch(73.29% 0.2012 151.6);
-  --success-foreground: oklch(21.03% 0.0059 151.6);
-  --surface: oklch(100.00% 0.01 260.45);
-  --surface-foreground: oklch(21.03% 0.02 260.45);
-  --surface-secondary: oklch(95.24% 0.016 260.45);
-  --surface-secondary-foreground: oklch(21.03% 0.02 260.45);
-  --surface-tertiary: oklch(93.73% 0.016 260.45);
-  --surface-tertiary-foreground: oklch(21.03% 0.02 260.45);
-  --warning: oklch(78.19% 0.1648 73.12);
-  --warning-foreground: oklch(21.03% 0.0059 73.12);
-  --radius: 0.75rem;
+  --accent: #186bf2;
+  --accent-foreground: #ffffff;
+  --accent-hover: color-mix(in srgb, var(--accent) 90%, var(--accent-foreground) 10%);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-soft-foreground: var(--accent);
+  --accent-soft-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+  --default: #f1f5f9;
+  --default-foreground: #1c222b;
+  --default-hover: color-mix(in srgb, var(--default) 96%, var(--default-foreground) 4%);
+  --default-soft: color-mix(in srgb, var(--default) 50%, transparent);
+  --default-soft-foreground: var(--default-foreground);
+  --default-soft-hover: color-mix(in srgb, var(--default) 60%, transparent);
+  --background: #f8fafc;
+  --background-secondary: color-mix(in srgb, var(--background) 96%, var(--foreground) 4%);
+  --background-tertiary: color-mix(in srgb, var(--background) 92%, var(--foreground) 8%);
+  --background-inverse: var(--foreground);
+  --foreground: #1c222b;
+  --muted: #64748b;
+  --surface: #ffffff;
+  --surface-foreground: var(--foreground);
+  --surface-hover: color-mix(in srgb, var(--surface) 96%, var(--surface-foreground) 4%);
+  --surface-secondary: #f1f5f9;
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: #e2e8f0;
+  --surface-tertiary-foreground: var(--foreground);
+  --overlay: #ffffff;
+  --overlay-foreground: var(--foreground);
+  --backdrop: rgba(0, 0, 0, 0.4);
+  --border: #e2e8f0;
+  --border-secondary: color-mix(in srgb, var(--surface) 78%, var(--surface-foreground) 22%);
+  --border-tertiary: color-mix(in srgb, var(--surface) 66%, var(--surface-foreground) 34%);
+  --separator: #e2e8f0;
+  --separator-secondary: color-mix(in srgb, var(--surface) 85%, var(--surface-foreground) 15%);
+  --separator-tertiary: color-mix(in srgb, var(--surface) 81%, var(--surface-foreground) 19%);
+  --focus: var(--accent);
+  --link: var(--accent);
+  --field-background: #ffffff;
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-background-hover: color-mix(
+    in srgb,
+    var(--field-background) 96%,
+    var(--field-foreground) 4%
+  );
+  --field-focus: var(--field-background);
+  --field-border: #cbd5e1;
+  --field-border-hover: color-mix(in srgb, var(--field-border) 88%, var(--field-foreground) 10%);
+  --field-border-focus: color-mix(in srgb, var(--field-border) 74%, var(--field-foreground) 22%);
+  --scrollbar: #cbd5e1;
+  --segment: #e2e8f0;
+  --segment-foreground: var(--foreground);
+  --success: #17c964;
+  --success-foreground: #ffffff;
+  --success-hover: color-mix(in srgb, var(--success) 90%, var(--success-foreground) 10%);
+  --success-soft: color-mix(in srgb, var(--success) 12%, transparent);
+  --success-soft-foreground: #0d7037;
+  --success-soft-hover: color-mix(in srgb, var(--success) 16%, transparent);
+  --warning: #f7b750;
+  --warning-foreground: #1c222b;
+  --warning-hover: color-mix(in srgb, var(--warning) 90%, var(--warning-foreground) 10%);
+  --warning-soft: color-mix(in srgb, var(--warning) 12%, transparent);
+  --warning-soft-foreground: #9a6700;
+  --warning-soft-hover: color-mix(in srgb, var(--warning) 16%, transparent);
+  --danger: #db3b3e;
+  --danger-foreground: #ffffff;
+  --danger-hover: color-mix(in srgb, var(--danger) 90%, var(--danger-foreground) 10%);
+  --danger-soft: color-mix(in srgb, var(--danger) 12%, transparent);
+  --danger-soft-foreground: #b91c1c;
+  --danger-soft-hover: color-mix(in srgb, var(--danger) 16%, transparent);
+  --chart-1: #186bf2;
+  --chart-2: #3962a7;
+  --chart-3: #4d7ed3;
+  --chart-4: #629cff;
+  --chart-5: #8bb8ff;
+  --radius: 0.55rem;
   --field-radius: 1rem;
 }
 
 .dark,
 [data-theme="dark"] {
   color-scheme: dark;
-  --accent: oklch(56.48% 0.2169 260.45);
-  --accent-foreground: oklch(99.11% 0 0);
-  --background: oklch(12.00% 0.02 260.45);
-  --border: oklch(28.00% 0.02 260.45);
-  --danger: oklch(59.40% 0.2046 25.42);
-  --danger-foreground: oklch(99.11% 0 0);
-  --default: oklch(27.40% 0.02 260.45);
-  --default-foreground: oklch(99.11% 0 0);
-  --field-background: oklch(21.03% 0.04 260.45);
-  --field-border: transparent;
-  --field-foreground: oklch(99.11% 0.02 260.45);
-  --field-placeholder: oklch(70.50% 0.04 260.45);
-  --focus: oklch(56.48% 0.2169 260.45);
-  --foreground: oklch(99.11% 0.02 260.45);
-  --muted: oklch(70.50% 0.04 260.45);
-  --overlay: oklch(21.03% 0.04 260.45);
-  --overlay-foreground: oklch(99.11% 0.02 260.45);
-  --scrollbar: oklch(70.50% 0.02 260.45);
-  --segment: oklch(39.64% 0.02 260.45);
-  --segment-foreground: oklch(99.11% 0.02 260.45);
-  --separator: oklch(25.00% 0.02 260.45);
-  --success: oklch(73.29% 0.2012 151.6);
-  --success-foreground: oklch(21.03% 0.0059 151.6);
-  --surface: oklch(21.03% 0.04 260.45);
-  --surface-foreground: oklch(99.11% 0.02 260.45);
-  --surface-secondary: oklch(25.70% 0.03 260.45);
-  --surface-secondary-foreground: oklch(99.11% 0.02 260.45);
-  --surface-tertiary: oklch(27.21% 0.03 260.45);
-  --surface-tertiary-foreground: oklch(99.11% 0.02 260.45);
-  --warning: oklch(82.03% 0.1444 77.13);
-  --warning-foreground: oklch(21.03% 0.0059 77.13);
+  --accent: #186bf2;
+  --accent-foreground: #fcfcfc;
+  --accent-hover: color-mix(in srgb, var(--accent) 90%, var(--accent-foreground) 10%);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-soft-foreground: color-mix(in srgb, var(--accent) 80%, var(--foreground) 30%);
+  --accent-soft-hover: color-mix(in srgb, var(--accent) 16%, transparent);
+  --default: #1e242e;
+  --default-foreground: #fcfcfc;
+  --default-hover: color-mix(in srgb, var(--default) 96%, var(--default-foreground) 4%);
+  --default-soft: color-mix(in srgb, var(--default) 50%, transparent);
+  --default-soft-foreground: var(--default-foreground);
+  --default-soft-hover: color-mix(in srgb, var(--default) 60%, transparent);
+  --background: #080d16;
+  --background-secondary: color-mix(in srgb, var(--background) 96%, var(--foreground) 4%);
+  --background-tertiary: color-mix(in srgb, var(--background) 92%, var(--foreground) 8%);
+  --background-inverse: var(--foreground);
+  --foreground: #fcfcfc;
+  --muted: #88909c;
+  --surface: #11161f;
+  --surface-foreground: var(--foreground);
+  --surface-hover: color-mix(in srgb, var(--surface) 92%, var(--surface-foreground) 8%);
+  --surface-secondary: #1a1f29;
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: #212730;
+  --surface-tertiary-foreground: var(--foreground);
+  --overlay: #11161f;
+  --overlay-foreground: var(--foreground);
+  --backdrop: rgba(0, 0, 0, 0.5);
+  --border: #282e38;
+  --border-secondary: color-mix(in srgb, var(--surface) 78%, var(--surface-foreground) 22%);
+  --border-tertiary: color-mix(in srgb, var(--surface) 66%, var(--surface-foreground) 34%);
+  --separator: #242932;
+  --separator-secondary: color-mix(in srgb, var(--surface) 85%, var(--surface-foreground) 15%);
+  --separator-tertiary: color-mix(in srgb, var(--surface) 81%, var(--surface-foreground) 19%);
+  --focus: var(--accent);
+  --link: var(--foreground);
+  --field-background: #161b23;
+  --field-foreground: var(--foreground);
+  --field-placeholder: var(--muted);
+  --field-background-hover: color-mix(
+    in srgb,
+    var(--field-background) 90%,
+    var(--field-foreground) 2%
+  );
+  --field-focus: var(--field-background);
+  --field-border: #2c3340;
+  --field-border-hover: color-mix(in srgb, var(--field-border) 88%, var(--field-foreground) 10%);
+  --field-border-focus: color-mix(in srgb, var(--field-border) 74%, var(--field-foreground) 22%);
+  --scrollbar: #353b45;
+  --segment: #222935;
+  --segment-foreground: var(--foreground);
+  --success: #17c964;
+  --success-foreground: #1c222b;
+  --success-hover: color-mix(in srgb, var(--success) 90%, var(--success-foreground) 10%);
+  --success-soft: color-mix(in srgb, var(--success) 12%, transparent);
+  --success-soft-foreground: color-mix(in srgb, var(--success) 80%, var(--foreground) 30%);
+  --success-soft-hover: color-mix(in srgb, var(--success) 16%, transparent);
+  --warning: #f7b750;
+  --warning-foreground: #1c222b;
+  --warning-hover: color-mix(in srgb, var(--warning) 90%, var(--warning-foreground) 10%);
+  --warning-soft: color-mix(in srgb, var(--warning) 12%, transparent);
+  --warning-soft-foreground: color-mix(in srgb, var(--warning) 80%, var(--foreground) 30%);
+  --warning-soft-hover: color-mix(in srgb, var(--warning) 16%, transparent);
+  --danger: #db3b3e;
+  --danger-foreground: #fcfcfc;
+  --danger-hover: color-mix(in srgb, var(--danger) 90%, var(--danger-foreground) 10%);
+  --danger-soft: color-mix(in srgb, var(--danger) 15%, transparent);
+  --danger-soft-foreground: color-mix(in srgb, var(--danger) 80%, var(--foreground) 30%);
+  --danger-soft-hover: color-mix(in srgb, var(--danger) 20%, transparent);
+  --chart-1: #3962a7;
+  --chart-2: #4d7ed3;
+  --chart-3: #629cff;
+  --chart-4: #8bb8ff;
+  --chart-5: #b0cfff;
+  --radius: 0.55rem;
+  --field-radius: 1rem;
 }
 
 body {
