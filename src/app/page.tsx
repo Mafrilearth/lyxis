@@ -1,8 +1,6 @@
+import { CoreFlowGrid } from "@/components/landing/core-flow-grid";
 import { FloatingNav } from "@/components/landing/floating-nav";
-import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FOOTER_LINKS } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
@@ -11,160 +9,182 @@ import Link from "next/link";
 const CORE_METRICS = [
   {
     value: "115 Mins",
-    label: "Standard Duration",
-    subtext: "Paced Across 3 Sections",
+    label: "Total Durasi Ujian",
+    subtext: "Terbagi dalam 3 seksi ketat",
   },
   {
-    value: "140 Items",
-    label: "Diagnostic Questions",
+    value: "140 Soal",
+    label: "Butir Evaluasi",
     subtext: "Listening, Structure, Reading",
   },
   {
     value: "310 – 677",
-    label: "Scaled Score Range",
-    subtext: "Official ETS Diagnostic Metric",
+    label: "Skala Skor ETS",
+    subtext: "Kalibrasi konversi standar resmi",
   },
   {
     value: "CEFR A2–C1",
-    label: "Global Benchmark",
-    subtext: "Instant Cryptographic QR Hash",
+    label: "Validasi Global",
+    subtext: "Pemetaan kecakapan internasional",
   },
 ] as const;
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground flex flex-col overflow-x-hidden selection:bg-primary/20 selection:text-primary">
-      {/* Living Ambient Canvas */}
-      <AmbientMeshCanvas />
-
-      {/* Solid Primary Atmosphere Glow (No Gradients) */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-primary/5 blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-grid-subtle text-foreground/[0.025] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-
-      {/* Detached Floating Island Navigation */}
+    <div className="relative min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/20 selection:text-primary">
+      {/* Docked Full-Width Top Header */}
       <FloatingNav />
 
-      <main className="flex-1">
-        {/* Core Hero Section: Authoritative, Editorial, Direct */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-20 pb-16 sm:pb-24 text-center space-y-12">
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {/* Core Badge */}
-            <div className="flex justify-center">
-              <Badge
-                variant="outline"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase shadow-xs"
-              >
-                <Sparkles className="h-3.5 w-3.5" /> TOEFL ITP® Diagnostic Standard
-              </Badge>
+      {/* Main Container Wrapped in Continuous Vertical CAD Grid Rails */}
+      <main className="flex-1 max-w-6xl w-full mx-auto border-x border-border/40 bg-background flex flex-col">
+        {/* ================= 1. HERO CELL (WRAPPED IN BORDER-B) ================= */}
+        <section className="p-8 sm:p-14 lg:p-20 text-center space-y-8 border-b border-border/40 relative">
+          {/* Corner Crosshairs */}
+          <span
+            className="absolute -top-[5px] -left-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            +
+          </span>
+          <span
+            className="absolute -top-[5px] -right-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            +
+          </span>
+          <span
+            className="absolute -bottom-[5px] -left-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            +
+          </span>
+          <span
+            className="absolute -bottom-[5px] -right-[5px] font-mono text-[10px] text-border leading-none select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            +
+          </span>
+
+          <div className="space-y-5 max-w-4xl mx-auto">
+            {/* System Tag */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/10 text-primary text-xs font-mono font-semibold tracking-wider uppercase">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>TOEFL ITP® INDEPENDENT DIAGNOSTIC ENGINE</span>
             </div>
 
-            {/* Authoritative Heading (Pure Solid Typography, No Gradients) */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground max-w-4xl mx-auto leading-[1.08] text-balance">
-              The Standard in TOEFL ITP® Assessment.{" "}
-              <span className="text-primary block sm:inline">
-                Calibrated for Scholarships & Degrees.
-              </span>
+            {/* Authoritative Solid Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1] text-balance">
+              Standar Diagnostik TOEFL ITP®.{" "}
+              <span className="text-primary block sm:inline">Langsung Inti, Bebas Birokrasi.</span>
             </h1>
 
             {/* Core Value Statement */}
-            <p className="text-base sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-normal text-balance">
-              Calibrated 115-minute diagnostic testing mapped to the official 310–677 scaled metric.
-              Benchmark your proficiency on demand with verified cryptographic credentials.
+            <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto font-normal text-balance">
+              Software evaluasi mandiri terkalibrasi ke standar skor ETS 310–677. Cukup 3 tahap:
+              Daftar akun, selesaikan 140 soal (115 menit), dan terima hasil prediksi instan.
             </p>
 
-            {/* Core Action CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 pt-4 w-full max-w-md sm:max-w-none mx-auto">
+            {/* Primary Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 pt-4 w-full max-w-md sm:max-w-none mx-auto font-mono text-sm">
               <Link
                 href="/dashboard"
                 className={cn(
                   buttonVariants({ variant: "default", size: "default" }),
-                  "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full h-12 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20 active:scale-[0.98] transition-all",
+                  "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all",
                 )}
               >
-                <span>Start Assessment</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span>Mulai Tes Sekarang</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
               <Link
                 href="/login"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "default" }),
-                  "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full h-12 px-8 text-base font-semibold border-border bg-card/80 hover:bg-muted active:scale-[0.98] transition-all",
+                  "w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg h-11 px-7 font-semibold border-border/80 bg-background hover:bg-muted transition-all",
                 )}
               >
-                <span>Candidate Portal</span>
+                <span>Masuk Akun</span>
               </Link>
             </div>
           </div>
+        </section>
 
-          {/* Core Metrics: Straight to the Point (Solid Primary, No Gradients) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4">
-            {CORE_METRICS.map((metric) => (
-              <Card
-                key={metric.label}
-                className="rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md p-6 sm:p-8 text-left shadow-xs border-t-2 border-t-primary transition-all"
-              >
-                <div className="space-y-2">
-                  <div className="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-primary">
-                    {metric.value}
-                  </div>
-                  <div className="text-sm font-semibold text-foreground tracking-tight">
-                    {metric.label}
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-snug">{metric.subtext}</p>
-                </div>
-              </Card>
-            ))}
+        {/* ================= 2. 3-STAGE CORE FLOW GRID (WRAPPED IN BORDER-B) ================= */}
+        <section id="alur-tes" className="border-b border-border/40 bg-background relative">
+          <div className="px-6 py-4 border-b border-border/40 font-mono text-xs text-muted-foreground flex items-center justify-between">
+            <span className="text-foreground font-bold">ALUR UTAMA — 3 TAHAP EVALUASI</span>
+            <span>INDEPENDENT CBT ENGINE</span>
           </div>
 
-          {/* Core Direct Test Launch Console (Solid Primary Styling, No Gradients) */}
-          <Card className="rounded-3xl border-2 border-primary/30 bg-card/80 backdrop-blur-md p-8 sm:p-12 lg:p-16 text-center space-y-6 shadow-sm max-w-4xl mx-auto">
-            <CardHeader className="p-0 space-y-4 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-primary">
-                <ShieldCheck className="h-4 w-4" /> Ready for Immediate Evaluation
-              </div>
-              <CardTitle className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground leading-tight">
-                Begin Your Diagnostic Test Now.
-              </CardTitle>
-              <CardDescription className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Take the full 140-item examination across Listening (35m), Structure (25m), and
-                Reading (55m). Real-time server state persistence and instant calibrated score
-                reporting upon completion.
-              </CardDescription>
-            </CardHeader>
+          {/* 3-Column Wireframe Grid */}
+          <CoreFlowGrid />
+        </section>
 
-            <CardContent className="p-0 pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* ================= 3. METRICS CELL (WRAPPED IN BORDER-B) ================= */}
+        <section id="metrik" className="border-b border-border/40 bg-muted/5 relative">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-x divide-border/40">
+            {CORE_METRICS.map((metric) => (
+              <div
+                key={metric.label}
+                className="p-6 sm:p-8 space-y-2 hover:bg-muted/10 transition-colors"
+              >
+                <div className="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-primary">
+                  {metric.value}
+                </div>
+                <div className="text-xs font-semibold text-foreground tracking-tight">
+                  {metric.label}
+                </div>
+                <p className="text-[11px] text-muted-foreground leading-snug">{metric.subtext}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= 4. LAUNCHPAD CONSOLE CELL (WRAPPED IN BORDER-B) ================= */}
+        <section className="p-8 sm:p-14 lg:p-16 text-center space-y-6 border-b border-border/40 bg-card/20 relative">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-primary">
+              <ShieldCheck className="h-4 w-4" />
+              <span>Sesi Mandiri Siap Digunakan</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+              Mulai Sesi Ujian TOEFL ITP Anda
+            </h2>
+
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-xl mx-auto">
+              Simulasi penuh 140 soal: Listening (35m), Structure (25m), dan Reading (55m).
+              Auto-save real-time dengan kalkulasi skor diagnostik instan begitu tes diselesaikan.
+            </p>
+
+            <div className="pt-2 flex justify-center">
               <Link
                 href="/dashboard"
                 className={cn(
                   buttonVariants({ variant: "default", size: "default" }),
-                  "group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full h-12 px-8 text-base font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/25 active:scale-[0.98] transition-all",
+                  "group inline-flex items-center gap-2 rounded-lg h-11 px-8 font-mono text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md shadow-primary/20",
                 )}
               >
-                <span>Take Diagnostic Test</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span>Masuk Ruang Ujian</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </section>
       </main>
 
-      {/* Clean Commercial Footer */}
-      <footer className="border-t border-border/40 bg-background/50 backdrop-blur-sm py-10 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <Link href="/" className="flex items-center group">
-            <span className="font-extrabold text-lg tracking-tight text-foreground leading-none transition-opacity group-hover:opacity-80">
+      {/* ================= FOOTER (WRAPPED IN GRID FRAME) ================= */}
+      <footer className="w-full border-t border-border/40 bg-background/90">
+        <div className="max-w-6xl mx-auto border-x border-border/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs">
+          <Link href="/" className="flex items-center gap-2 group">
+            <span className="font-extrabold text-base tracking-tight text-foreground transition-opacity group-hover:opacity-80">
               Lyxis
             </span>
+            <span className="text-[10px] text-muted-foreground">ENGINE</span>
           </Link>
 
-          <nav className="flex flex-wrap items-center gap-6 sm:gap-8 text-xs sm:text-sm font-semibold text-muted-foreground">
+          <nav className="flex flex-wrap items-center gap-6 text-muted-foreground">
             {FOOTER_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -174,11 +194,12 @@ export default function HomePage() {
                 {link.label}
               </Link>
             ))}
+            <Link href="/lab/illustrations" className="hover:text-cyan-400 transition-colors">
+              Special Effects Lab
+            </Link>
           </nav>
 
-          <div className="text-xs text-muted-foreground text-center sm:text-right font-mono">
-            © 2026 Lyxis. All rights reserved.
-          </div>
+          <div className="text-muted-foreground">© 2026 Lyxis. Independent Standard.</div>
         </div>
       </footer>
     </div>
