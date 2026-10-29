@@ -25,6 +25,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - All files in `app/` are Server Components by default.
    - Only add `'use client'` when state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), browser APIs, or custom hooks are required.
    - Keep `'use client'` boundaries pushed to the leaves of the component tree to maximize server-rendering benefits and reduce client JS bundle size.
+   - Data passed from Server Components to Client Components across the network boundary must be serializable.
 
 4. **Component Hierarchy in Route Segments:**
    - The components render in strict nested hierarchy:
@@ -32,7 +33,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 5. **Data Mutations & Server Functions (`01-getting-started/07-mutating-data.md`):**
    - Use Server Functions / Server Actions with the `'use server'` directive.
-   - Leverage React 19 form actions (`<form action={action}>`).
+   - Leverage React 19 form actions (`<form action={action}>`) and `useActionState`.
    - Security rule: Server Functions are callable via direct HTTP POST requests; always authenticate and authorize the user inside every Server Function.
 
 6. **Request Interception & Proxying (`01-getting-started/16-proxy.md`):**
@@ -43,6 +44,27 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - Use the `"use cache"` directive paired with `cacheLife()` for cached computation.
    - Wrap dynamic or uncached data access in `<Suspense fallback={...}>` to stream content at request time without blocking page prerendering.
 
+8. **On-Demand Cache Revalidation (`01-getting-started/09-revalidating.md`):**
+   - Use `revalidatePath('/path')` or `revalidateTag('tag')` inside Server Functions to immediately purge cached data upon successful mutation.
+
+9. **Error Handling Architecture (`01-getting-started/10-error-handling.md`):**
+   - Model expected form or business errors as return values (e.g. `{ error: "Invalid credentials" }`), not thrown exceptions.
+   - Catch unexpected exceptions via `error.tsx` boundaries (Client Components offering `reset()` retry mechanisms) and root-level `global-error.tsx`.
+   - Use `notFound()` to immediately render the nearest `not-found.tsx` boundary.
+
+10. **Metadata, OpenGraph & Special Files (`01-getting-started/14-metadata-and-og-images.md`):**
+    - Define static metadata via `export const metadata: Metadata = { ... }` or dynamic metadata via `export async function generateMetadata({ params, searchParams })`.
+    - Supported file conventions: `icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx`, `twitter-image.tsx`, `sitemap.ts`, `robots.ts`, `manifest.ts`.
+
+11. **Route Handlers (`01-getting-started/15-route-handlers.md`):**
+    - Defined in `route.ts` using Web standard `Request` and `Response` APIs (extended via `NextRequest` and `NextResponse`).
+    - Handlers support `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, `OPTIONS`.
+    - A `route.ts` file cannot exist at the same folder segment level as a `page.tsx` file.
+
+12. **Next.js AI Tooling & MCP Protocols (`02-guides/ai-agents.md` & `02-guides/mcp.md`):**
+    - Always reference version-matched framework documentation in `node_modules/next/dist/docs/`.
+    - Use the built-in development server MCP endpoint at `/_next/mcp` for real-time runtime diagnostics, compilation issue detection, and route inspection.
+
 <!-- END:nextjs-agent-rules -->
 
 <!-- BEGIN:heroui-agent-rules -->
@@ -52,7 +74,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 Follow [DESIGN.md](DESIGN.md) for all visual and interaction decisions.
 
 HeroUI v3 is the primary UI component system for this application, built on **Tailwind CSS v4** and **React Aria Components**. Always follow these strict conventions:
-
 1. **v3 Only — Never Use v2 Patterns:**
    - **No Provider:** Never wrap the application in `<HeroUIProvider>`. HeroUI v3 is zero-config and provider-less.
    - **Imports:** Import components directly from `@heroui/react` and style variants from `@heroui/styles`.
@@ -62,9 +83,11 @@ HeroUI v3 is the primary UI component system for this application, built on **Ta
    - **Compound Pattern:** Use compound components (`<Card><Card.Header><Card.Title>...</Card.Title></Card.Header><Card.Content>...</Card.Content></Card>`).
    - **Semantic Variants:** Use semantic variants (`primary`, `secondary`, `tertiary`, `outline`, `ghost`, `danger`) instead of visual descriptions.
    - **Next.js Link Integration:** Use the render function prop or variant helper:
+
      ```tsx
      <Button render={(props) => <Link href="/destination" {...props}>Label</Link>} />
      ```
+
      Or apply variant classes directly: `className={buttonVariants({ variant: "primary", size: "md" })}`.
 
 3. **Accessibility Standards (React Aria):**
