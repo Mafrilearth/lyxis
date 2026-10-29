@@ -2,241 +2,465 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Pause, Play, RotateCcw } from "lucide-react";
 import { useRef, useState } from "react";
 
-gsap.registerPlugin(useGSAP);
-
 /**
- * Implementation C: GSAP (GreenSock Animation Platform)
- * - Timeline sequencing & mathematical precision
- * - Blueprint Line-Drawing effect (strokeDashoffset CAD animation)
- * - Assembly choreography with Play/Pause/Restart timeline controls
+ * Implementation C: GSAP (GreenSock) Choreographed CAD Timeline (MK-IV Monolith)
+ * - Bundle size: ~23 KB
+ * - Unconventional Animation:
+ *   1. Architectural CAD Laser Vector Plotting via strokeDashoffset
+ *   2. Dual-Axis Gyroscopic Counter-Rotation with Harmonic Easing
+ *   3. Interactive Timeline Scrubber (Seek to exact frame)
+ *   4. Multi-Speed Warping (0.5x, 1x, 2x) & Bidirectional Scrubbing
  */
 export function GsapLinearMark() {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [speed, setSpeed] = useState<number>(1);
 
   useGSAP(
     () => {
+      // Create master timeline
       const tl = gsap.timeline({
         repeat: -1,
-        repeatDelay: 1.5,
+        yoyo: true,
+        repeatDelay: 0.8,
+        onUpdate: () => {
+          if (tl) {
+            setProgress(Number((tl.progress() * 100).toFixed(1)));
+          }
+        },
       });
+
       timelineRef.current = tl;
 
-      // Initial state: hide strokes and offset tiers
-      tl.set(".gsap-path", { strokeDashoffset: 500, strokeDasharray: 500 })
-        .set(".gsap-tier-1", { y: 20, opacity: 0 })
-        .set(".gsap-tier-2", { y: -20, opacity: 0 })
-        .set(".gsap-tier-3", { y: -50, opacity: 0 })
-        .set(".gsap-reticle", { scale: 0, opacity: 0, transformOrigin: "160px 145px" })
+      // 1. Initial CAD Blueprint Line Draw
+      tl.fromTo(
+        ".gsap-cad-line",
+        { strokeDasharray: 300, strokeDashoffset: 300, opacity: 0 },
+        {
+          strokeDashoffset: 0,
+          opacity: 1,
+          duration: 1.6,
+          stagger: 0.04,
+          ease: "power2.out",
+        },
+      );
 
-        // 1. Draw base structure (Blueprint Construction)
-        .to(".gsap-tier-1", { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" })
-        .to(
-          ".gsap-path-1",
-          { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut", stagger: 0.1 },
-          "-=0.6",
-        )
+      // 2. Explode & Elevate Master Tiers
+      tl.to(
+        ".gsap-deck-top",
+        {
+          y: -24,
+          duration: 1.2,
+          ease: "power3.inOut",
+        },
+        "-=0.6",
+      );
 
-        // 2. Dock middle tier (Structure)
-        .to(".gsap-tier-2", { y: 0, opacity: 1, duration: 0.8, ease: "back.out(1.4)" }, "-=0.4")
-        .to(
-          ".gsap-path-2",
-          { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut", stagger: 0.1 },
-          "-=0.6",
-        )
+      tl.to(
+        ".gsap-fin-blade",
+        {
+          scaleY: 1.25,
+          transformOrigin: "bottom center",
+          duration: 1.0,
+          stagger: 0.05,
+          ease: "elastic.out(1, 0.4)",
+        },
+        "-=0.8",
+      );
 
-        // 3. Lock top tier (Reading & Calibration Disc)
-        .to(".gsap-tier-3", { y: 0, opacity: 1, duration: 0.9, ease: "back.out(1.7)" }, "-=0.3")
-        .to(".gsap-path-3", { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, "-=0.7")
+      // 3. Gyroscopic Dual-Axis Protractor Rotation
+      tl.to(
+        ".gsap-dial-ring",
+        {
+          rotation: 180,
+          transformOrigin: "220px 158px",
+          duration: 2.0,
+          ease: "sine.inOut",
+        },
+        "-=1.2",
+      );
 
-        // 4. Activate central reticle calibration pulse
-        .to(".gsap-reticle", { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.4)" })
-        .to(".gsap-disc-spin", {
-          rotation: 360,
-          duration: 3,
-          ease: "none",
-          transformOrigin: "160px 145px",
-        })
-
-        // 5. Ambient hold and calm fadeout to loop
-        .to([".gsap-tier-1", ".gsap-tier-2", ".gsap-tier-3"], {
-          opacity: 0.3,
+      // 4. Photonic Iris Dilation
+      tl.to(
+        ".gsap-laser-core",
+        {
+          scale: 1.8,
+          transformOrigin: "220px 145px",
+          fill: "#60A5FA",
           duration: 0.8,
           ease: "power2.inOut",
-        });
+        },
+        "-=1.0",
+      );
     },
     { scope: containerRef },
   );
 
-  const togglePlayback = () => {
+  const togglePlay = () => {
     if (!timelineRef.current) return;
-    if (timelineRef.current.paused()) {
-      timelineRef.current.play();
-      setIsPlaying(true);
-    } else {
+    if (isPlaying) {
       timelineRef.current.pause();
-      setIsPlaying(false);
+    } else {
+      timelineRef.current.play();
     }
+    setIsPlaying(!isPlaying);
   };
 
-  const restartTimeline = () => {
+  const handleRestart = () => {
     if (!timelineRef.current) return;
     timelineRef.current.restart();
     setIsPlaying(true);
   };
 
+  const handleSpeedChange = (newSpeed: number) => {
+    if (!timelineRef.current) return;
+    timelineRef.current.timeScale(newSpeed);
+    setSpeed(newSpeed);
+  };
+
+  const handleScrub = (val: number) => {
+    if (!timelineRef.current) return;
+    timelineRef.current.pause();
+    timelineRef.current.progress(val / 100);
+    setProgress(val);
+    setIsPlaying(false);
+  };
+
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-[360px] aspect-square mx-auto flex items-center justify-center bg-[#07090E] rounded-2xl border border-border/40 p-6 overflow-hidden select-none"
+      className="relative w-full max-w-[420px] aspect-square mx-auto flex flex-col items-center justify-center bg-[#05070B] rounded-2xl border border-white/10 p-5 overflow-hidden select-none shadow-2xl shadow-black/80"
     >
-      {/* Technical Header Callout */}
-      <div className="absolute top-4 left-4 font-mono text-[10px] text-muted-foreground uppercase tracking-widest flex items-center gap-2 z-10">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span>FIG 0.1 — GSAP TIMELINE ENGINE</span>
-      </div>
-
-      {/* Control Buttons */}
-      <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
-        <button
-          type="button"
-          onClick={togglePlayback}
-          className="p-1 rounded bg-muted/40 hover:bg-muted text-foreground transition-colors border border-border/60"
-          title={isPlaying ? "Pause Timeline" : "Play Timeline"}
-        >
-          {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-        </button>
-        <button
-          type="button"
-          onClick={restartTimeline}
-          className="p-1 rounded bg-muted/40 hover:bg-muted text-foreground transition-colors border border-border/60"
-          title="Restart Assembly"
-        >
-          <RotateCcw className="w-3 h-3" />
-        </button>
-      </div>
-
-      {/* SVG Illustration */}
+      {/* Precision CAD Matrix Grid Background */}
       <svg
-        viewBox="0 0 320 320"
-        className="w-full h-full drop-shadow-[0_0_24px_rgba(16,185,129,0.15)]"
-        fill="none"
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="GSAP 3-Tier Isometric Calibration Core"
       >
-        <title>GSAP 3-Tier Isometric Calibration Core</title>
-        {/* ================= TIER 1: BASE ================= */}
-        <g className="gsap-tier-1">
-          <polygon
-            className="gsap-path gsap-path-1"
-            points="160,205 240,245 160,285 80,245"
-            fill="#090C15"
-            stroke="#334155"
-            strokeWidth="1.2"
-          />
-          <polygon
-            className="gsap-path gsap-path-1"
-            points="80,245 160,285 160,297 80,257"
-            fill="#07090E"
-            stroke="#475569"
-            strokeWidth="1.2"
-          />
-          <polygon
-            className="gsap-path gsap-path-1"
-            points="160,285 240,245 240,257 160,297"
-            fill="#05070A"
-            stroke="#334155"
-            strokeWidth="1.2"
-          />
-        </g>
-
-        {/* ================= TIER 2: MIDDLE ================= */}
-        <g className="gsap-tier-2">
-          <polygon
-            className="gsap-path gsap-path-2"
-            points="160,160 230,195 160,230 90,195"
-            fill="#0B0F19"
-            stroke="#64748B"
-            strokeWidth="1.2"
-          />
-          <polygon
-            className="gsap-path gsap-path-2"
-            points="90,195 160,230 160,240 90,205"
-            fill="#090C15"
-            stroke="#475569"
-            strokeWidth="1.2"
-          />
-          <polygon
-            className="gsap-path gsap-path-2"
-            points="160,230 230,195 230,205 160,240"
-            fill="#07090E"
-            stroke="#334155"
-            strokeWidth="1.2"
-          />
-        </g>
-
-        {/* ================= TIER 3: TOP ================= */}
-        <g className="gsap-tier-3">
-          <polygon
-            className="gsap-path gsap-path-3"
-            points="160,115 220,145 160,175 100,145"
-            fill="#0E1322"
-            stroke="#94A3B8"
-            strokeWidth="1.4"
-          />
-          <polygon
-            className="gsap-path gsap-path-3"
-            points="100,145 160,175 160,185 100,155"
-            fill="#0B0F19"
-            stroke="#64748B"
-            strokeWidth="1.2"
-          />
-          <polygon
-            className="gsap-path gsap-path-3"
-            points="160,175 220,145 220,155 160,185"
-            fill="#090C15"
-            stroke="#475569"
-            strokeWidth="1.2"
-          />
-
-          {/* Central Circular Calibration Disc */}
-          <g className="gsap-reticle">
-            <ellipse
-              cx="160"
-              cy="145"
-              rx="30"
-              ry="16"
-              fill="#07090E"
-              stroke="#059669"
-              strokeWidth="1.4"
-            />
-            <ellipse
-              className="gsap-disc-spin"
-              cx="160"
-              cy="145"
-              rx="20"
-              ry="10.5"
+        <title>Technical CAD Isometric Grid</title>
+        <defs>
+          <pattern id="cad-grid-gsap-mk4" width="40" height="23.094" patternUnits="userSpaceOnUse">
+            <path
+              d="M0 11.547 L20 0 L40 11.547 L20 23.094 Z"
               fill="none"
-              stroke="#10B981"
-              strokeWidth="0.8"
-              strokeDasharray="3 3"
+              stroke="#334155"
+              strokeWidth="0.4"
+              strokeDasharray="1 3"
             />
-            <line x1="160" y1="130" x2="160" y2="160" stroke="#34D399" strokeWidth="0.8" />
-            <line x1="135" y1="145" x2="185" y2="145" stroke="#34D399" strokeWidth="0.8" />
-            <circle cx="160" cy="145" r="2" fill="#FFFFFF" />
-          </g>
-        </g>
+            <circle cx="20" cy="11.547" r="0.75" fill="#475569" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cad-grid-gsap-mk4)" />
       </svg>
 
-      {/* Footer Specification Badge */}
-      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[10px] font-mono text-muted-foreground border-t border-border/30 pt-2 z-10">
-        <span>GSAP BLUEPRINT CHOREOGRAPHY</span>
-        <span className="text-emerald-400 font-bold">STROKE DRAW-IN</span>
+      {/* Header Controls */}
+      <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-auto">
+        <div className="font-mono text-[9px] text-muted-foreground/80 tracking-widest flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>FIG 0.3 — CAD PLOTTER</span>
+        </div>
+
+        {/* Speed Controls */}
+        <div className="flex items-center gap-1 bg-black/60 border border-white/10 rounded-lg p-0.5 backdrop-blur-md">
+          {[0.5, 1, 2].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => handleSpeedChange(s)}
+              className={`px-1.5 py-0.5 text-[8px] font-mono rounded transition-colors ${
+                speed === s
+                  ? "bg-emerald-500 text-black font-semibold"
+                  : "text-muted-foreground hover:text-white"
+              }`}
+            >
+              {s}x
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={togglePlay}
+            className="px-1.5 py-0.5 text-[8px] font-mono rounded bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
+            {isPlaying ? "PAUSE" : "PLAY"}
+          </button>
+          <button
+            type="button"
+            onClick={handleRestart}
+            className="px-1.5 py-0.5 text-[8px] font-mono rounded bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
+            RESET
+          </button>
+        </div>
       </div>
+
+      {/* Bottom Interactive Scrubber */}
+      <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 bg-black/70 border border-white/10 rounded-lg px-2.5 py-1 z-20 backdrop-blur-md">
+        <span className="font-mono text-[8px] text-muted-foreground shrink-0">TIMELINE</span>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="0.5"
+          value={progress}
+          onChange={(e) => handleScrub(Number(e.target.value))}
+          className="w-full accent-emerald-400 h-1 bg-white/10 rounded cursor-pointer"
+        />
+        <span className="font-mono text-[8px] text-emerald-400 shrink-0 w-8 text-right tabular-nums">
+          {progress}%
+        </span>
+      </div>
+
+      {/* GSAP SVG Artwork */}
+      <svg
+        viewBox="0 0 440 440"
+        className="w-full h-full drop-shadow-[0_0_35px_rgba(52,211,153,0.15)]"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="GSAP CAD Blueprint Isometric Monolith"
+      >
+        <title>GSAP CAD Blueprint Isometric Monolith</title>
+
+        {/* ================= TIER 1: BASE CHASSIS ================= */}
+        <g className="gsap-tier-base">
+          <polygon
+            className="gsap-cad-line"
+            points="206,285 234,285 330,336 330,348 234,398 206,398 110,348 110,336"
+            fill="#080C14"
+            stroke="#1E293B"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="208,287 232,287 326,337 326,346 232,395 208,395 114,346 114,337"
+            fill="none"
+            stroke="#334155"
+            strokeWidth="0.6"
+          />
+
+          <polygon
+            className="gsap-cad-line"
+            points="234,398 330,348 330,364 234,414"
+            fill="#05070B"
+            stroke="#1E293B"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="206,398 234,398 234,414 206,414"
+            fill="#070A10"
+            stroke="#334155"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="110,348 206,398 206,414 110,364"
+            fill="#0A0E18"
+            stroke="#1E293B"
+            strokeWidth="1.2"
+          />
+
+          {/* Acoustic Lines */}
+          <line
+            className="gsap-cad-line"
+            x1="124"
+            y1="358"
+            x2="124"
+            y2="370"
+            stroke="#334155"
+            strokeWidth="1"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="152"
+            y1="372"
+            x2="152"
+            y2="384"
+            stroke="#334155"
+            strokeWidth="1"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="180"
+            y1="387"
+            x2="180"
+            y2="399"
+            stroke="#334155"
+            strokeWidth="1"
+          />
+        </g>
+
+        {/* ================= TIER 2: STEPPED FINS ================= */}
+        <g className="gsap-tier-mid">
+          {[
+            { x: 154, y: 220, h: 28 },
+            { x: 176, y: 232, h: 36 },
+            { x: 198, y: 244, h: 44 },
+            { x: 220, y: 256, h: 48 },
+            { x: 242, y: 244, h: 44 },
+            { x: 264, y: 232, h: 36 },
+            { x: 286, y: 220, h: 28 },
+          ].map((fin, idx) => (
+            <g key={`gsap-fin-${fin.x}-${fin.y}`} className="gsap-fin-blade">
+              <polygon
+                className="gsap-cad-line"
+                points={`${fin.x - 7},${fin.y - 4} ${fin.x + 7},${fin.y + 4} ${fin.x + 7},${fin.y + 7} ${fin.x - 7},${fin.y - 1}`}
+                fill="#0F172A"
+                stroke={idx === 3 ? "#34D399" : "#38BDF8"}
+                strokeWidth="0.8"
+              />
+              <polygon
+                className="gsap-cad-line"
+                points={`${fin.x - 7},${fin.y - 1} ${fin.x + 7},${fin.y + 7} ${fin.x + 7},${fin.y + 7 + fin.h} ${fin.x - 7},${fin.y - 1 + fin.h}`}
+                fill="#070B14"
+                stroke="#1E293B"
+                strokeWidth="0.8"
+              />
+            </g>
+          ))}
+        </g>
+
+        {/* ================= TIER 3: APERTURE MONOLITH DECK ================= */}
+        <g className="gsap-deck-top">
+          <polygon
+            className="gsap-cad-line"
+            points="206,100 234,100 334,154 334,166 234,220 206,220 106,166 106,154"
+            fill="#090E1A"
+            stroke="#34D399"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="208,103 232,103 328,155 328,164 232,217 208,217 112,164 112,155"
+            fill="none"
+            stroke="#475569"
+            strokeWidth="0.6"
+          />
+
+          <polygon
+            className="gsap-cad-line"
+            points="234,220 334,166 334,180 234,234"
+            fill="#05070D"
+            stroke="#1E293B"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="206,220 234,220 234,234 206,234"
+            fill="#0B132B"
+            stroke="#34D399"
+            strokeWidth="1.2"
+          />
+          <polygon
+            className="gsap-cad-line"
+            points="106,166 206,220 206,234 106,180"
+            fill="#080C16"
+            stroke="#1E293B"
+            strokeWidth="1.2"
+          />
+
+          {/* Aperture Inset */}
+          <ellipse
+            className="gsap-cad-line"
+            cx="220"
+            cy="158"
+            rx="56"
+            ry="31"
+            fill="#04060A"
+            stroke="#334155"
+            strokeWidth="1.2"
+          />
+
+          {/* Gyroscopic Counter-Rotating Dial */}
+          <g className="gsap-dial-ring">
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+              const rad = (deg * Math.PI) / 180;
+              const r1x = 44 * Math.cos(rad);
+              const r1y = 24 * Math.sin(rad);
+              const r2x = 52 * Math.cos(rad);
+              const r2y = 28.5 * Math.sin(rad);
+              return (
+                <line
+                  key={`gsap-dial-${deg}`}
+                  x1={220 + r1x}
+                  y1={158 + r1y}
+                  x2={220 + r2x}
+                  y2={158 + r2y}
+                  stroke="#34D399"
+                  strokeWidth="0.8"
+                />
+              );
+            })}
+          </g>
+
+          {/* Venetian Slits */}
+          <ellipse cx="220" cy="145" rx="44" ry="24" fill="#010204" />
+          <line
+            className="gsap-cad-line"
+            x1="184"
+            y1="135"
+            x2="256"
+            y2="135"
+            stroke="#1E293B"
+            strokeWidth="0.75"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="180"
+            y1="139"
+            x2="260"
+            y2="139"
+            stroke="#334155"
+            strokeWidth="0.75"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="178"
+            y1="143"
+            x2="262"
+            y2="143"
+            stroke="#475569"
+            strokeWidth="0.75"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="178"
+            y1="147"
+            x2="262"
+            y2="147"
+            stroke="#34D399"
+            strokeWidth="1"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="180"
+            y1="151"
+            x2="260"
+            y2="151"
+            stroke="#475569"
+            strokeWidth="0.75"
+          />
+          <line
+            className="gsap-cad-line"
+            x1="184"
+            y1="155"
+            x2="256"
+            y2="155"
+            stroke="#334155"
+            strokeWidth="0.75"
+          />
+
+          {/* Laser Core */}
+          <circle className="gsap-laser-core" cx="220" cy="145" r="4" fill="#34D399" />
+
+          <text x="122" y="152" fill="#64748B" fontSize="6.5" fontFamily="monospace">
+            {"LYXIS // CAD-PLOTTER"}
+          </text>
+        </g>
+      </svg>
     </div>
   );
 }

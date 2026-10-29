@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Motion & Animation Lab — Lyxis",
   description:
-    "Interactive comparison of Linear-style technical wireframe illustrations using Pure CSS, Motion, GSAP, and Three.js.",
+    "Interactive comparison of Linear-style technical wireframe illustrations using Pure CSS, Motion, GSAP, Three.js, and Quantum Canvas.",
 };
 
 export default function IllustrationsLabPage() {
@@ -25,15 +25,16 @@ export default function IllustrationsLabPage() {
             variant="outline"
             className="border-primary/40 text-primary bg-primary/10 font-mono text-xs uppercase"
           >
-            <Sparkles className="w-3.5 h-3.5 mr-1" /> Animation Architecture Lab
+            <Sparkles className="w-3.5 h-3.5 mr-1" /> Animation Architecture Lab (MK-IV)
           </Badge>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-            The Psychometric Calibration Engine
+            The Psychometric Calibration Monolith
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
-            Satu ilustrasi isometrik teknis yang sama untuk konteks TOEFL ITP® Lyxis (3-Tier
-            Assessment Core: Listening, Structure, Reading), diimplementasikan dalam 4 engine
-            animasi berbeda untuk dibandingkan secara langsung.
+            Satu ilustrasi isometrik teknis presisi tinggi (MK-IV Monolith) untuk konteks TOEFL ITP®
+            Lyxis (Acoustic Transducer Plinth, Syntactic Logic Fin Array, & Semantic Diagnostic
+            Aperture), diimplementasikan dalam 5 engine animasi berbeda dengan mekanika animasi yang
+            tidak biasa.
           </p>
         </div>
 
