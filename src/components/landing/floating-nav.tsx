@@ -12,20 +12,9 @@ import { NAV_LINKS } from "@/lib/constants/navigation";
 
 export function FloatingNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  // Monitor scroll for subtle elevation & border refinement
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Lock body scroll, listen for Escape key, offsite outside clicks, and desktop resize
+  // Lock body scroll on mobile open, listen for Escape key and resize
   useEffect(() => {
     if (!mobileMenuOpen) {
       document.body.style.overflow = "";
@@ -69,57 +58,36 @@ export function FloatingNav() {
 
   return (
     <>
-      {/* Fullscreen Backdrop Overlay (Offsite Click to Close) */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40 md:hidden pointer-events-auto animate-in fade-in duration-200"
-          onClick={() => setMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Sticky Header Container: Anchored at top-0, strictly aligned with max-w-7xl px-4 sm:px-6 lg:px-8 */}
-      <header
-        className={cn(
-          "sticky top-0 z-50 w-full pt-3 sm:pt-4 pb-2 px-4 sm:px-6 lg:px-8 pointer-events-none transition-colors duration-300",
-          isScrolled ? "bg-background/40 backdrop-blur-xs" : "bg-transparent",
-        )}
-      >
-        <div
-          className={cn(
-            "max-w-7xl mx-auto flex items-center justify-between rounded-full border bg-background/90 backdrop-blur-2xl px-4 sm:px-6 py-2 pointer-events-auto transition-all duration-300",
-            isScrolled
-              ? "border-border shadow-md shadow-primary/10 bg-background/95"
-              : "border-border/80 shadow-sm shadow-primary/5",
-          )}
-        >
+      {/* Standard Full-Width Non-Floating Top Header */}
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           {/* Logo & Name */}
           <Link href="/" className="flex items-center group shrink-0">
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
+            <span className="font-extrabold text-xl sm:text-2xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
               Lyxis
             </span>
           </Link>
 
-          {/* Desktop Navigation Links: Cohesive Segmented Dock */}
-          <nav className="hidden md:flex items-center gap-1 text-xs font-semibold text-muted-foreground bg-muted/40 p-1 rounded-full border border-border/60">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-muted-foreground">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3.5 py-1.5 rounded-full hover:text-foreground hover:bg-background/90 active:scale-[0.98] transition-all"
+                className="hover:text-foreground transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Action Controls & Ergonomic Right Suite: Unified h-9 & rounded-full */}
-          <div className="flex items-center gap-2">
+          {/* Action Controls */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/login"
               className={cn(
-                buttonVariants({ variant: "ghost", size: "xs" }),
-                "hidden sm:inline-flex rounded-full text-xs font-semibold text-muted-foreground hover:text-foreground active:scale-[0.98] transition-all h-9 px-3.5",
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "hidden sm:inline-flex text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground h-9 px-3.5",
               )}
             >
               Sign In
@@ -128,8 +96,8 @@ export function FloatingNav() {
             <Link
               href="/dashboard"
               className={cn(
-                buttonVariants({ variant: "default", size: "xs" }),
-                "hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-xs font-bold shadow-xs hover:shadow-md active:scale-[0.98] transition-all",
+                buttonVariants({ variant: "default", size: "sm" }),
+                "hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-xs sm:text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm shadow-primary/20 transition-all",
               )}
             >
               <span>Start Assessment</span>
@@ -138,13 +106,13 @@ export function FloatingNav() {
 
             <Separator orientation="vertical" className="h-4 self-center mx-1 hidden sm:block" />
 
-            <ThemeToggle className="h-9 w-9 rounded-full border border-border/60 bg-muted/20 hover:bg-muted/60 active:scale-[0.95] transition-all" />
+            <ThemeToggle className="h-9 w-9 rounded-full border border-border/60 bg-muted/20 hover:bg-muted/60 transition-all" />
 
             {/* Mobile Menu Toggle Button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-muted/20 text-foreground transition-all hover:bg-muted/50 active:scale-[0.95]"
+              className="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-muted/20 text-foreground transition-all hover:bg-muted/50"
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -153,26 +121,26 @@ export function FloatingNav() {
           </div>
         </div>
 
-        {/* Mobile Drawer Overlay Panel (Elevated & Protected) */}
+        {/* Mobile Dropdown Panel Anchored to Header */}
         {mobileMenuOpen && (
           <div
             ref={drawerRef}
-            className="md:hidden mt-2 max-w-lg mx-auto rounded-3xl border border-border bg-card/95 backdrop-blur-2xl shadow-2xl p-5 space-y-4 pointer-events-auto animate-in fade-in slide-in-from-top-2 duration-200"
+            className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-xl px-4 py-5 space-y-4 animate-in fade-in slide-in-from-top-1 duration-150"
           >
-            <nav className="flex flex-col space-y-1 text-sm font-semibold text-muted-foreground">
+            <nav className="flex flex-col space-y-2 text-sm font-semibold text-muted-foreground">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3.5 py-2.5 rounded-xl hover:bg-muted/60 hover:text-foreground transition-colors"
+                  className="px-3 py-2 rounded-lg hover:bg-muted/60 hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            <div className="pt-3 border-t border-border/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+            <div className="pt-3 border-t border-border/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
@@ -188,7 +156,7 @@ export function FloatingNav() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
                   buttonVariants({ variant: "default", size: "sm" }),
-                  "w-full sm:w-auto h-10 px-5 rounded-full text-xs font-bold gap-1.5",
+                  "w-full sm:w-auto h-10 px-5 rounded-full text-xs font-bold gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90",
                 )}
               >
                 <span>Start Assessment</span>
@@ -201,3 +169,6 @@ export function FloatingNav() {
     </>
   );
 }
+
+// Named alias
+export { FloatingNav as SiteNav };
