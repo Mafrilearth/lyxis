@@ -13,6 +13,9 @@
       "!**/.next",
       "!**/dist",
       "!**/public",
+      "!**/.agents",
+      "!**/.gemini",
+      "!**/docs",
       "!**/pnpm-lock.yaml"
     ]
   },

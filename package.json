@@ -62,5 +62,9 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
   "packageManager": "pnpm@12.11.2"
 }
