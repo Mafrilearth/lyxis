@@ -6,66 +6,168 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-### Official Next.js Project Architecture & Rules (From Bundled Docs)
-
-1. **Colocation & Component Architecture (`01-getting-started/02-project-structure.md`):**
-   - In Next.js App Router, folders inside `app/` do **not** become public routes unless they contain `page.tsx` or `route.ts`.
-   - Files and UI components can be **safely colocated inside route segments** without being exposed to the client URL.
-   - The name `components/` has **no special framework significance**. Keep page-specific components directly inside their respective route directory or inline in the page file.
-   - Private folders: prefix with an underscore (`_components/` or `_folder/`) to explicitly opt a folder and all its subfolders out of routing.
-   - Route groups: wrap folders in parenthesis `(group)/` to organize routes without altering the URL path.
-
-2. **Asynchronous Request APIs (Breaking Changes in Next.js 15 & 16):**
-   - Dynamic route parameters: `params` is a Promise. Always await it: `const { id } = await params;`.
-   - URL search parameters: `searchParams` is a Promise. Always await it: `const { query } = await searchParams;`.
-   - Cookies & Headers: `cookies()` and `headers()` are asynchronous. Always await them: `const cookieStore = await cookies();`.
-   - Draft Mode: `draftMode()` is asynchronous. Always await it: `const { isEnabled } = await draftMode();`.
-
-3. **React Server Components (RSC) Boundaries (`01-getting-started/05-server-and-client-components.md`):**
-   - All files in `app/` are Server Components by default.
-   - Only add `'use client'` when state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), browser APIs, or custom hooks are required.
-   - Keep `'use client'` boundaries pushed to the leaves of the component tree to maximize server-rendering benefits and reduce client JS bundle size.
-   - Data passed from Server Components to Client Components across the network boundary must be serializable.
-
-4. **Component Hierarchy in Route Segments:**
-   - The components render in strict nested hierarchy:
-     `Layout -> Template -> ErrorBoundary (error.tsx) -> Suspense (loading.tsx) -> NotFoundBoundary (not-found.tsx) -> Page`.
-
-5. **Data Mutations & Server Functions (`01-getting-started/07-mutating-data.md`):**
-   - Use Server Functions / Server Actions with the `'use server'` directive.
-   - Leverage React 19 form actions (`<form action={action}>`) and `useActionState`.
-   - Security rule: Server Functions are callable via direct HTTP POST requests; always authenticate and authorize the user inside every Server Function.
-
-6. **Request Interception & Proxying (`01-getting-started/16-proxy.md`):**
-   - In Next.js 16, Middleware is standardized as Proxy (`proxy.ts` / `middleware.ts`).
-   - Use for lightweight routing, header transformations, and optimistic redirects; never perform heavy database or session queries inside proxy.
-
-7. **Data Caching & Prerendering (`01-getting-started/08-caching.md`):**
-   - Use the `"use cache"` directive paired with `cacheLife()` for cached computation.
-   - Wrap dynamic or uncached data access in `<Suspense fallback={...}>` to stream content at request time without blocking page prerendering.
-
-8. **On-Demand Cache Revalidation (`01-getting-started/09-revalidating.md`):**
-   - Use `revalidatePath('/path')` or `revalidateTag('tag')` inside Server Functions to immediately purge cached data upon successful mutation.
-
-9. **Error Handling Architecture (`01-getting-started/10-error-handling.md`):**
-   - Model expected form or business errors as return values (e.g. `{ error: "Invalid credentials" }`), not thrown exceptions.
-   - Catch unexpected exceptions via `error.tsx` boundaries (Client Components offering `reset()` retry mechanisms) and root-level `global-error.tsx`.
-   - Use `notFound()` to immediately render the nearest `not-found.tsx` boundary.
-
-10. **Metadata, OpenGraph & Special Files (`01-getting-started/14-metadata-and-og-images.md`):**
-    - Define static metadata via `export const metadata: Metadata = { ... }` or dynamic metadata via `export async function generateMetadata({ params, searchParams })`.
-    - Supported file conventions: `icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx`, `twitter-image.tsx`, `sitemap.ts`, `robots.ts`, `manifest.ts`.
-
-11. **Route Handlers (`01-getting-started/15-route-handlers.md`):**
-    - Defined in `route.ts` using Web standard `Request` and `Response` APIs (extended via `NextRequest` and `NextResponse`).
-    - Handlers support `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, `OPTIONS`.
-    - A `route.ts` file cannot exist at the same folder segment level as a `page.tsx` file.
-
-12. **Next.js AI Tooling & MCP Protocols (`02-guides/ai-agents.md` & `02-guides/mcp.md`):**
-    - Always reference version-matched framework documentation in `node_modules/next/dist/docs/`.
-    - Use the built-in development server MCP endpoint at `/_next/mcp` for real-time runtime diagnostics, compilation issue detection, and route inspection.
-
 <!-- END:nextjs-agent-rules -->
+
+<!-- BEGIN:nextjs-official-specifications -->
+
+## Official Next.js App Router Architecture & Standards (Exhaustive Canonical Specification)
+
+This specification is extracted directly from the version-matched framework documentation bundled in `node_modules/next/dist/docs/`. All AI coding agents and human engineers must adhere to these exact standards without exception:
+
+### 1. Colocation & Component Architecture (`01-getting-started/02-project-structure.md`)
+
+- In Next.js App Router, folders inside `app/` do **not** become public routes unless they contain `page.tsx` or `route.ts`.
+- Files and UI components can be **safely colocated inside route segments** without being exposed to the client URL.
+- The name `components/` or `lib/` has **no special framework significance**. Keep route-specific components directly inside their respective route directory (`src/app/<route>/`) or inline in the page file.
+- Private folders: prefix with an underscore (`_components/` or `_folder/`) to explicitly opt a folder and all its subfolders out of routing.
+- Route groups: wrap folders in parenthesis `(group)/` to organize routes without altering the URL path.
+- Zero copy-paste UI folder: HeroUI v3 is directly installed as an npm package (`@heroui/react` and `@heroui/styles`). Never create `src/components/ui/` or redundant wrappers.
+
+### 2. The 11 Official Routing & System Files (`03-file-conventions/`)
+
+- `layout.tsx`: Shared UI that wraps child routes, preserves client-side state across navigation, and does not re-render. Root layout must define `<html>` and `<body>`.
+- `page.tsx`: Unique UI that makes a route segment publicly accessible.
+- `loading.tsx`: Instant React Suspense fallback skeleton streamed while page data loads.
+- `not-found.tsx`: 404 UI boundary rendered automatically when `notFound()` is invoked or a route does not match.
+- `error.tsx`: React Error Boundary (must be `'use client'`) catching runtime exceptions and exposing an `error` object and `reset()` retry handler. Catches errors in child components and pages, but not in its sibling `layout.tsx`.
+- `global-error.tsx`: Root-level Error Boundary replacing the root layout on unhandled root errors; must declare its own `<html>` and `<body>` tags and be `'use client'`.
+- `route.ts`: Standalone HTTP API Route Handler supporting standard Web `Request`/`Response` methods (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, `OPTIONS`). Cannot coexist at the same segment level as `page.tsx`.
+- `template.tsx`: Re-rendered layout that mounts a fresh instance and state on every navigation (ideal for page transitions/animations).
+- `default.tsx`: Fallback view for unmatched parallel route slots during client navigation.
+- `unauthorized.tsx` & `forbidden.tsx`: Specialized status boundaries rendered upon calling `unauthorized()` (HTTP 401) or `forbidden()` (HTTP 403).
+- `proxy.ts` / `middleware.ts`: Request interceptor before route evaluation. In Next.js 16, standardized as Proxy (`src/proxy.ts` or `proxy.ts`). Single file per project.
+- `instrumentation.ts`: Server lifecycle hooks (`register()` executed on server startup, `onRequestError()` for global server error telemetry).
+- `mdx-components.tsx`: Custom component mapper for MDX files.
+
+### 3. Strict Component Rendering Hierarchy
+
+In every route segment, Next.js executes components in strict nested order:
+`Layout -> Template -> ErrorBoundary (error.tsx) -> Suspense (loading.tsx) -> NotFoundBoundary (not-found.tsx) -> Page`
+
+### 4. Folder Routing & Segment Conventions
+
+- **Standard Segment**: `folderName/` -> Maps to URL `/folderName`.
+- **Dynamic Segment**: `[param]/` -> Matches single dynamic segment (`/post/123`).
+- **Catch-all Segment**: `[...slug]/` -> Matches all subsequent segments (`/shop/clothing/shirts`).
+- **Optional Catch-all**: `[[...slug]]/` -> Matches optional segments including root route (`/docs`, `/docs/a/b`).
+- **Route Group**: `(folderName)/` -> Organizational group omitted from URL path.
+- **Parallel Routes**: `@slotName/` -> Named slots passed as props to the shared parent `layout.tsx`. Supports independent streaming and error boundaries.
+- **Intercepted Routes**: `(.)` (same level), `(..)` (one level above), `(..)(..)` (two levels above), `(...)` (from root `app`).
+- **Private Folders**: `_folderName/` -> Completely opted out of the routing system.
+
+### 5. Directives Protocol (`03-api-reference/01-directives/`)
+
+- `'use client'`: Declares a module and its imported children as a Client Component boundary. Must be placed at the very top of the file before imports. Required when using state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), browser APIs, or custom hooks.
+- `'use server'`: Declares an asynchronous function or file as a Server Function / Server Action. Can be placed at the top of a file or inside an async function. Creates a publicly callable HTTP POST endpoint.
+- `'use cache'`: Next.js 15+ Cache Directive for functions or components. Automatically serializes inputs to derive cache keys. Paired with `cacheLife()` and `cacheTag()`.
+- `'use cache: private'`: Caches computation strictly scoped to the current user session / cookie context.
+- `'use cache: remote'`: Distributed/CDN caching across multi-region deployments.
+
+### 6. Asynchronous Request APIs (Breaking Changes in Next.js 15 & 16)
+
+All runtime request parameters are asynchronous Promises and must be explicitly `await`ed:
+- Dynamic route parameters: `const { id } = await params;`
+- URL search parameters: `const { query } = await searchParams;`
+- Cookies: `const cookieStore = await cookies();` (`get()`, `getAll()`, `set()`, `delete()`, `has()`)
+- Headers: `const headerStore = await headers();`
+- Draft mode: `const { isEnabled } = await draftMode();`
+
+### 7. Official Next.js Server & Runtime Functions (`03-api-reference/04-functions/`)
+
+- **Navigation & Flow Control**:
+  - `redirect(url, type?)`: Programmatic server-side redirect (throws internal `NEXT_REDIRECT`).
+  - `permanentRedirect(url, type?)`: HTTP 308 permanent redirect.
+  - `notFound()`: Triggers closest `not-found.tsx` boundary (throws `NEXT_NOT_FOUND`).
+  - `unauthorized()`: Triggers closest `unauthorized.tsx` boundary (HTTP 401).
+  - `forbidden()`: Triggers closest `forbidden.tsx` boundary (HTTP 403).
+  - `unstable_rethrow(err)`: Rethrows internal Next.js control signals (redirects, notFound) if caught inside user try/catch blocks.
+- **Caching & Revalidation**:
+  - `cacheLife(profile | { stale, revalidate, expire })`: Configures TTL lifetimes for `'use cache'`.
+  - `cacheTag(...tags)`: Attaches cache invalidation tags to cached functions/components.
+  - `revalidatePath(path, type?)`: Purges cache for a specific route path on-demand.
+  - `revalidateTag(tag)`: Purges cache for a specific cache tag on-demand.
+  - `updateTag(tag)`: Instantly updates cache tags without full invalidation round-trip.
+  - `connection()`: Signals that code requires a dynamic request context, opting out of build-time prerendering.
+  - `unstable_cache(fn, keyParts, options)`: Caches database and expensive external API calls.
+  - `unstable_noStore()`: Programmatically opts out of static caching for data fetch.
+- **Background Execution**:
+  - `after(callback)`: Schedules asynchronous side-effects (logging, telemetry, database mutations) to execute after the response has closed and streamed to the client.
+- **Static Generation**:
+  - `generateStaticParams()`: Prerenders dynamic segments at build time for Static Site Generation (SSG).
+- **Security & Data Tainting**:
+  - `experimental_taintObjectReference(message, object)`: Prevents leaking sensitive server-only objects (e.g. user records with passwords) to client components.
+  - `experimental_taintUniqueValue(message, lifetime, value)`: Prevents leaking sensitive tokens, passwords, or keys to client components.
+- **HTTP & Dynamic OG**:
+  - `NextRequest` & `NextResponse` (`next/server`): Web standard HTTP request/response helpers with cookie, redirect, and rewrite support.
+  - `ImageResponse` (`next/og`): Generates dynamic PNG/JPEG OpenGraph images with JSX & CSS.
+  - `userAgent(request)`: Parser for browser, OS, device, and bot detection.
+
+### 8. Official Next.js Client Hooks (`next/navigation` & `next/web-vitals`)
+
+- `useRouter()`: Programmatic client navigation (`push()`, `replace()`, `refresh()`, `back()`, `forward()`, `prefetch()`).
+- `usePathname()`: Returns current URL pathname string.
+- `useSearchParams()`: Returns read-only `URLSearchParams` instance.
+- `useParams()`: Returns route params object in Client Components.
+- `useSelectedLayoutSegment(slot?)`: Returns current active single child route segment.
+- `useSelectedLayoutSegments(slot?)`: Returns array of active nested route segments.
+- `useLinkStatus()`: Pending transition indicator for `<Link>`.
+- `useReportWebVitals(metric => ...)`: Real-time Core Web Vitals telemetry (LCP, FID, CLS, INP, TTFB).
+
+### 9. Built-in Next.js Components (`03-api-reference/02-components/`)
+
+- `<Link href="...">`: Soft client-side navigation with automatic prefetching (`prefetch={true | false | null}`) and scroll restoration.
+- `<Image src="..." alt="..." width={...} height={...} priority fill sizes>`: Automatic WebP/AVIF compression, lazy loading, layout shift (CLS) prevention.
+- `<Form action="...">`: Progressive enhancement form component (Next.js 15+). Handles GET searches (updating URL and prefetching) and POST mutations via Server Actions.
+- `<Script src="..." strategy="...">`: Script loading strategies (`beforeInteractive`, `afterInteractive`, `lazyOnload`, `worker`).
+- `next/font`: `next/font/google` and `next/font/local` with CSS variable injection for zero-layout-shift self-hosted fonts.
+
+### 10. Route Segment Configurations
+
+Export standardized route segment options from `page.tsx`, `layout.tsx`, or `route.ts`:
+- `export const dynamic = 'auto' | 'force-dynamic' | 'error' | 'force-static';`
+- `export const dynamicParams = true | false;`
+- `export const revalidate = false | 0 | number;`
+- `export const fetchCache = 'auto' | 'default-cache' | 'only-cache' | 'force-cache' | 'force-no-store' | 'default-no-store' | 'only-no-store';`
+- `export const runtime = 'nodejs' | 'edge';`
+- `export const preferredRegion = 'auto' | 'global' | 'home' | string | string[];`
+- `export const maxDuration = number;` (execution timeout in seconds)
+
+### 11. Metadata, OpenGraph & Special File Conventions (`01-getting-started/14-metadata-and-og-images.md`)
+
+- Static metadata: `export const metadata: Metadata = { ... }`
+- Dynamic metadata: `export async function generateMetadata({ params, searchParams }, parent): Promise<Metadata>`
+- Viewport configuration: `export const viewport: Viewport = { ... }` or `generateViewport()`
+- Dynamic Social Images: `opengraph-image.tsx`, `twitter-image.tsx` via `ImageResponse`.
+- Dynamic SEO: `generateSitemaps()`, `sitemap.ts`, `robots.ts`, `manifest.ts`.
+- App Icons: `favicon.ico`, `icon.tsx`, `apple-icon.tsx`.
+
+### 12. Request Proxy & Edge Interception (`01-getting-started/16-proxy.md`)
+
+- In Next.js 16, Middleware is standardized as Proxy (`proxy.ts` / `middleware.ts`).
+- Single file per project at `src/proxy.ts` or `proxy.ts`.
+- Reserved strictly for lightweight routing, header transformations, and optimistic redirects.
+- **Strict Prohibition**: Never perform heavy database or session queries inside Proxy.
+
+### 13. Data Mutations & Server Functions Security (`01-getting-started/07-mutating-data.md`)
+
+- Use Server Functions / Server Actions with `'use server'` for mutations.
+- Leverage React 19 form actions (`<form action={action}>`) and `useActionState`.
+- **Security Rule**: Server Functions are reachable via direct HTTP POST requests; always authenticate and authorize inside every Server Function.
+- On-demand revalidation: Call `revalidatePath('/path')` or `revalidateTag('tag')` upon successful mutation.
+
+### 14. Error Handling Architecture (`01-getting-started/10-error-handling.md`)
+
+- Model expected business or validation errors as return values (e.g. `{ error: "Invalid credentials" }`), not thrown exceptions.
+- Catch unexpected runtime exceptions via `error.tsx` (Client Components offering `reset()` retry mechanisms).
+- Trigger 404 boundaries with `notFound()`, 401 with `unauthorized()`, and 403 with `forbidden()`.
+
+### 15. Next.js AI Tooling, MCP & Dev Loop (`02-guides/ai-agents.md` & `02-guides/mcp.md`)
+
+- Always reference version-matched framework documentation in `node_modules/next/dist/docs/`.
+- Use the development server MCP endpoint at `/_next/mcp` for real-time compilation issues, route inspection, and runtime logs.
+- Utilize runtime verification loop: `next dev` browser error forwarding (`logging.browserToTerminal`), `get_compilation_issues`, and `compile_route`.
+
+<!-- END:nextjs-official-specifications -->
 
 <!-- BEGIN:heroui-agent-rules -->
 
