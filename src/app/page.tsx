@@ -26,7 +26,7 @@ export default async function HomePage() {
         >
           <div className="space-y-4 max-w-2xl mx-auto flex flex-col items-center">
             <Chip size="sm" variant="soft" className="border border-border font-mono text-xs">
-              TOEFL ITP® Standard
+              TOEFL ITP® • 115 Min
             </Chip>
 
             <h1
@@ -37,10 +37,10 @@ export default async function HomePage() {
             </h1>
 
             <p className="text-base sm:text-lg text-muted leading-relaxed max-w-xl mx-auto text-balance">
-              Standardized score prediction and verified institutional credentials.
+              Calibrated score prediction and verified institutional credentials.
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <div className="pt-2 flex items-center justify-center">
               {isAuthenticated ? (
                 <Link
                   href="/candidate/dashboard"
@@ -52,27 +52,15 @@ export default async function HomePage() {
                   Enter Dashboard
                 </Link>
               ) : (
-                <>
-                  <Link
-                    href="/register"
-                    className={cn(
-                      buttonVariants({ variant: "primary", size: "md" }),
-                      "inline-flex items-center justify-center rounded-md h-10 px-6 text-sm font-semibold",
-                    )}
-                  >
-                    Begin Diagnostic
-                  </Link>
-
-                  <Link
-                    href="/login"
-                    className={cn(
-                      buttonVariants({ variant: "outline", size: "md" }),
-                      "inline-flex items-center justify-center rounded-md h-10 px-6 text-sm font-medium border-border hover:bg-surface-secondary text-foreground",
-                    )}
-                  >
-                    Sign In
-                  </Link>
-                </>
+                <Link
+                  href="/register"
+                  className={cn(
+                    buttonVariants({ variant: "primary", size: "md" }),
+                    "inline-flex items-center justify-center rounded-md h-10 px-7 text-sm font-semibold",
+                  )}
+                >
+                  Begin Diagnostic
+                </Link>
               )}
             </div>
           </div>

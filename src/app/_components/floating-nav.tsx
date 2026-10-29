@@ -30,34 +30,22 @@ export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
               <Link
                 href="/candidate/dashboard"
                 className={cn(
-                  buttonVariants({ variant: "primary", size: "sm" }),
-                  "h-8 px-4 text-xs font-semibold rounded-md",
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "h-8 px-4 text-xs font-semibold rounded-md border-border hover:bg-surface-secondary text-foreground",
                 )}
               >
                 Dashboard
               </Link>
             ) : (
-              <>
-                <Link
-                  href="/login"
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "sm" }),
-                    "h-8 px-3.5 text-xs font-medium rounded-md text-muted hover:text-foreground",
-                  )}
-                >
-                  Sign In
-                </Link>
-
-                <Link
-                  href="/register"
-                  className={cn(
-                    buttonVariants({ variant: "primary", size: "sm" }),
-                    "h-8 px-4 text-xs font-semibold rounded-md",
-                  )}
-                >
-                  Register
-                </Link>
-              </>
+              <Link
+                href="/login"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "h-8 px-3.5 text-xs font-medium rounded-md text-muted hover:text-foreground",
+                )}
+              >
+                Sign In
+              </Link>
             )}
           </div>
 
