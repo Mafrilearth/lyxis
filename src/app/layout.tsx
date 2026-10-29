@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Lyxis — TOEFL Diagnostic",
+    default: "Lyxis — TOEFL ITP® Diagnostic Simulation",
     template: "%s | Lyxis",
   },
-  description: "Standardized score prediction and verified credentials.",
+  description: "Calibrated score prediction and verified institutional credentials.",
   applicationName: "Lyxis",
   category: "Education",
   classification: "Academic Assessment",
-  keywords: ["Lyxis", "TOEFL Diagnostic", "CBT", "Assessment", "CEFR"],
+  keywords: ["Lyxis", "TOEFL ITP", "Diagnostic Simulation", "Score Prediction", "CEFR"],
   authors: [{ name: "Lyxis" }],
   creator: "Lyxis",
   publisher: "Lyxis",
@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     date: false,
   },
   openGraph: {
-    title: "Lyxis — TOEFL Diagnostic",
-    description: "Standardized score prediction and verified credentials.",
+    title: "Lyxis — TOEFL ITP® Diagnostic Simulation",
+    description: "Calibrated score prediction and verified institutional credentials.",
     siteName: "Lyxis",
     url: baseUrl,
     type: "website",
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lyxis — TOEFL Diagnostic",
-    description: "Standardized score prediction and verified credentials.",
+    title: "Lyxis — TOEFL ITP® Diagnostic Simulation",
+    description: "Calibrated score prediction and verified institutional credentials.",
   },
   robots: {
     index: true,
@@ -98,12 +98,12 @@ const jsonLd = {
     {
       "@type": "WebApplication",
       "@id": `${baseUrl}/#webapp`,
-      name: "Lyxis — TOEFL Diagnostic",
+      name: "Lyxis — TOEFL ITP® Diagnostic Simulation",
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web Browser",
       browserRequirements: "Requires modern web browser with HTML5 Audio and JavaScript enabled",
       isAccessibleForFree: true,
-      description: "Standardized score prediction and verified credentials.",
+      description: "Calibrated score prediction and verified institutional credentials.",
       offers: {
         "@type": "Offer",
         price: "0",
@@ -116,7 +116,7 @@ const jsonLd = {
       name: "Lyxis",
       url: baseUrl,
       logo: `${baseUrl}/icon.svg`,
-      description: "Standardized score prediction and verified credentials.",
+      description: "Calibrated score prediction and verified institutional credentials.",
     },
     {
       "@type": "FAQPage",

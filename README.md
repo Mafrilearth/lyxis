@@ -1,6 +1,6 @@
-# Lyxis — TOEFL Diagnostic
+# Lyxis — TOEFL ITP® Diagnostic Simulation
 
-> Standardized score prediction and verified credentials.
+> Calibrated score prediction and verified institutional credentials.
 
 ---
 

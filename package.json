@@ -1,7 +1,7 @@
 {
   "name": "lyxis",
   "version": "0.1.0",
-  "description": "Standardized score prediction and verified credentials.",
+  "description": "Calibrated score prediction and verified institutional credentials.",
   "private": true,
   "scripts": {
     "dev": "next dev",

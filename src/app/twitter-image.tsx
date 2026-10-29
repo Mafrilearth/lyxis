@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Lyxis — TOEFL Diagnostic Platform";
+export const alt = "Lyxis — TOEFL ITP® Diagnostic Simulation";
 export const size = {
   width: 1200,
   height: 630,
@@ -68,7 +68,7 @@ export default function TwitterImage() {
           lineHeight: 1.4,
         }}
       >
-        Standardized Diagnostic Assessment & Cryptographically Verified Credentials
+        Calibrated Score Prediction & Verified Institutional Credentials
       </div>
     </div>,
     {
