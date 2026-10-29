@@ -31,6 +31,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  experimental: {
+    authInterrupts: true,
+  },
 
   turbopack: {
     rules: {
