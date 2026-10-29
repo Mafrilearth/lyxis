@@ -167,6 +167,57 @@ Export standardized route segment options from `page.tsx`, `layout.tsx`, or `rou
 - Use the development server MCP endpoint at `/_next/mcp` for real-time compilation issues, route inspection, and runtime logs.
 - Utilize runtime verification loop: `next dev` browser error forwarding (`logging.browserToTerminal`), `get_compilation_issues`, and `compile_route`.
 
+### 16. AI Agent Hallucination Guardrails & Banned Anti-Patterns
+
+To guarantee 100% compliance with Next.js official architecture, AI agents must strictly avoid the following banned patterns:
+- **NEVER use Pages Router APIs in App Router**:
+  - Banned: `getStaticProps`, `getServerSideProps`, `getInitialProps`, `_app.tsx`, `_document.tsx`.
+  - Banned: `import { useRouter } from "next/router"` (MUST use `import { useRouter } from "next/navigation"`).
+- **NEVER access Request Parameters synchronously**:
+  - Banned: `params.id`, `searchParams.q`, `cookies().get()`, `headers().get()`.
+  - Mandatory: Always `await` runtime promises: `const { id } = await params;`, `const { q } = await searchParams;`, `const cookieStore = await cookies();`, `const headerStore = await headers();`.
+- **NEVER import server-only code into Client Components**:
+  - Banned: Importing database connections, Prisma, Supabase secret client, or environment secrets into files marked with `'use client'`.
+  - Mandatory: Use Server Actions or Route Handlers with `'use server'` or enforce with `import "server-only"`.
+- **NEVER create copy-paste UI directories**:
+  - Banned: Creating `src/components/ui/` or copying component boilerplate.
+  - Mandatory: Use HeroUI v3 npm package directly (`@heroui/react` and `@heroui/styles`) or colocate page-specific components in `src/app/<route>/`.
+- **NEVER perform heavy data operations in Proxy / Middleware**:
+  - Banned: Database queries, heavy cryptographic verification, or slow network calls in `src/proxy.ts` or `src/middleware.ts`.
+  - Mandatory: Reserve Proxy strictly for lightweight routing, headers mutation, and fast redirects. Run authentication checks in Server Components or DAL.
+- **NEVER use bare anchor tags for internal navigation**:
+  - Banned: `<a href="/dashboard">`.
+  - Mandatory: Always use Next.js `<Link href="/dashboard">` or HeroUI `Button` with `render={(props) => <Link href="/dashboard" {...props}>...}` to maintain client SPA state.
+- **NEVER cause React Hydration Mismatches**:
+  - Banned: Reading `window`, `document`, or `localStorage` during initial component render.
+  - Mandatory: Read browser APIs inside `useEffect`, or add `suppressHydrationWarning` on elements displaying dynamic dates/times.
+
+### 17. Data Access Layer (DAL) & Zero Trust Security Architecture
+
+- **Server-Only Isolation**: Centralize sensitive database queries and business logic inside dedicated data helper modules protected with `import "server-only"`.
+- **Data Transfer Objects (DTOs)**: Never pass raw database entities (containing password hashes, secret tokens, or private metadata) to Client Components. Transform all database responses into minimal, typed DTOs.
+- **Taint Enforcement**: Protect sensitive objects using Next.js security taint APIs:
+  - `experimental_taintObjectReference("Do not pass user session to client", session)`
+  - `experimental_taintUniqueValue("Do not pass secret token to client", lifetime, token)`
+- **Server Actions Zero Trust**: Every Server Action is an open HTTP POST endpoint. Always:
+  1. Authenticate user session from `await cookies()`.
+  2. Authorize permissions for the specific requested action/resource.
+  3. Validate all payload arguments using Zod schemas before database execution.
+
+### 18. Streaming, Anti-Waterfall & Hydration Resilience
+
+- **Anti-Waterfall Protocol**: Never execute independent data fetches sequentially with consecutive `await` statements. Concurrently dispatch using `Promise.all([fetchA(), fetchB()])`.
+- **Suspense Boundaries for Dynamic Data**: Wrap uncached dynamic data components inside `<Suspense fallback={<Skeleton />}>` to allow Next.js to stream the static shell immediately without triggering `blocking-prerender-dynamic` errors.
+- **Typed Routing**: Maintain `typedRoutes: true` in `next.config.ts`. For dynamic routes or runtime string redirects, cast using `import type { Route } from "next"` and `path as Route`.
+
+### 19. Next.js Developer & AI Agent Verification Loop
+
+Before declaring any coding task complete, AI agents must run and pass the 3-step verification loop:
+1. **TypeScript Typecheck**: Execute `pnpm typecheck` or `next typegen` to ensure zero typing errors across routes and parameters.
+2. **Biome Lint & Format Check**: Execute `pnpm biome check` to ensure code style, import sorting, and linting rules are 100% compliant.
+3. **Turbopack Build Verification**: Execute `pnpm build` to verify that all App Router segments (static and dynamic) compile and optimize cleanly with exit code 0.
+4. **Runtime MCP Visibility**: Utilize the running Next.js MCP server at `/_next/mcp` configured in `.mcp.json` (`next-devtools-mcp`) for zero-build-time compilation issue checks (`get_compilation_issues`, `compile_route`).
+
 <!-- END:nextjs-official-specifications -->
 
 <!-- BEGIN:heroui-agent-rules -->
