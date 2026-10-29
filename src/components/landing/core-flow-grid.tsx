@@ -20,7 +20,7 @@ export function CoreFlowGrid() {
         <div className="w-full aspect-[4/3] flex items-center justify-center p-2">
           <svg
             viewBox="0 0 240 180"
-            className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+            className="w-full h-full"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-label="Langkah 1 Pendaftaran Akun"
@@ -104,7 +104,7 @@ export function CoreFlowGrid() {
         <div className="w-full aspect-[4/3] flex items-center justify-center p-2">
           <svg
             viewBox="0 0 240 180"
-            className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+            className="w-full h-full"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-label="Langkah 2 Pengerjaan 140 Soal"
@@ -208,7 +208,7 @@ export function CoreFlowGrid() {
         <div className="w-full aspect-[4/3] flex items-center justify-center p-2">
           <svg
             viewBox="0 0 240 180"
-            className="w-full h-full drop-shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+            className="w-full h-full"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-label="Langkah 3 Skor dan Hasil Diagnostik"

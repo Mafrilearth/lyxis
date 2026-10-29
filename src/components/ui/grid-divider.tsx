@@ -6,14 +6,17 @@ interface GridDividerProps {
 }
 
 /**
- * Clean Horizontal Grid Divider
- * Pure continuous border line without any crosshair (+) marks.
+ * Clean Architectural Grid Divider
+ * The horizontal line gracefully fades out to transparent as it approaches the web boundaries.
  */
 export function GridDivider({ className }: GridDividerProps) {
   return (
     <div
       aria-hidden="true"
-      className={cn("w-full border-b border-border pointer-events-none select-none", className)}
+      className={cn(
+        "w-full h-px bg-gradient-to-r from-transparent via-border to-transparent pointer-events-none select-none",
+        className,
+      )}
     />
   );
 }

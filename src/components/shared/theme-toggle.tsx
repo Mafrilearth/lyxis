@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       <button
         type="button"
         className={cn(
-          "h-9 w-9 inline-flex items-center justify-center rounded-full border border-border/60 bg-muted/20 text-muted-foreground opacity-50",
+          "h-9 w-9 inline-flex items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-800 bg-background text-muted-foreground opacity-50 shadow-none cursor-default",
           className,
         )}
         aria-label="Toggle visual theme"
@@ -36,11 +36,11 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "h-9 w-9 inline-flex items-center justify-center rounded-full border border-border/60 bg-muted/20 text-foreground hover:bg-muted/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "h-9 w-9 inline-flex items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-800 bg-background text-foreground hover:bg-muted transition-colors shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
         className,
       )}
-      title={isDark ? "Switch to Alabaster Light Mode" : "Switch to Obsidian Dark Mode"}
-      aria-label={isDark ? "Switch to Alabaster Light Mode" : "Switch to Obsidian Dark Mode"}
+      title={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
+      aria-label={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
     >
       {isDark ? (
         <Sun className="h-4 w-4 text-amber-400 transition-transform hover:rotate-45" />
