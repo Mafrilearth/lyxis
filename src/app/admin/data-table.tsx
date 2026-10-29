@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import type { Route } from "next";
 import { Button, Chip, Input } from "@heroui/react";
 import {
   ArrowUpDownIcon,
@@ -13,6 +15,7 @@ import {
 
 export interface CandidateRecord {
   id: number;
+  attemptId?: string;
   header: string;
   type: string;
   status: string;
@@ -169,12 +172,24 @@ export function DataTable({ data = [] }: DataTableProps) {
                 <tr key={item.id} className="hover:bg-surface-secondary/50 transition-colors">
                   <td className="py-3 px-4 font-mono text-muted-foreground">{item.id}</td>
                   <td className="py-3 px-4">
-                    <div className="flex items-center gap-2 font-medium text-foreground">
-                      <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <UserIcon className="size-3.5" />
+                    {item.attemptId ? (
+                      <Link
+                        href={`/admin/attempts/${item.attemptId}` as Route}
+                        className="flex items-center gap-2 font-medium text-foreground hover:text-primary transition-colors hover:underline"
+                      >
+                        <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                          <UserIcon className="size-3.5" />
+                        </div>
+                        <span>{item.header}</span>
+                      </Link>
+                    ) : (
+                      <div className="flex items-center gap-2 font-medium text-foreground">
+                        <div className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                          <UserIcon className="size-3.5" />
+                        </div>
+                        <span>{item.header}</span>
                       </div>
-                      <span>{item.header}</span>
-                    </div>
+                    )}
                   </td>
                   <td className="py-3 px-4 text-muted-foreground">{item.type}</td>
                   <td className="py-3 px-4">

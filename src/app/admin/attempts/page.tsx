@@ -31,6 +31,7 @@ export default async function AttemptsPage() {
 
   const tableData = attempts.map((a, index) => ({
     id: index + 1,
+    attemptId: a.id,
     header: a.candidateName || "Candidate",
     type: "Form A (140 Items)",
     status: a.status === "SUBMITTED" ? "Done" : "In Process",
