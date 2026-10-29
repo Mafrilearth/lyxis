@@ -163,6 +163,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
+      data-scrollbar="thin"
       className={`${instrumentSans.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
       <head>
@@ -173,9 +174,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
         <ThemeProvider
-          attribute="class"
+          attribute={["class", "data-theme"]}
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input, Label } from "@heroui/react";
+import { Button, Input, Label, TextField } from "@heroui/react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
@@ -128,7 +128,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
       )}
 
       <form onSubmit={handleRegister} className="space-y-4">
-        <div className="space-y-1.5">
+        <TextField isRequired isDisabled={isLoading} className="space-y-1.5">
           <Label htmlFor="reg-name">Full Name</Label>
           <Input
             id="reg-name"
@@ -138,12 +138,10 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
             onChange={(e) => setFullName(e.target.value)}
             className="h-10 text-sm rounded-lg"
             autoComplete="name"
-            required
-            disabled={isLoading}
           />
-        </div>
+        </TextField>
 
-        <div className="space-y-1.5">
+        <TextField isRequired isDisabled={isLoading} className="space-y-1.5">
           <Label htmlFor="reg-email">Email</Label>
           <Input
             id="reg-email"
@@ -153,12 +151,10 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
             onChange={(e) => setEmail(e.target.value)}
             className="h-10 text-sm rounded-lg"
             autoComplete="email"
-            required
-            disabled={isLoading}
           />
-        </div>
+        </TextField>
 
-        <div className="space-y-1.5">
+        <TextField isRequired isDisabled={isLoading} className="space-y-1.5">
           <Label htmlFor="reg-password">Password</Label>
           <Input
             id="reg-password"
@@ -168,10 +164,8 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
             onChange={(e) => setPassword(e.target.value)}
             className="h-10 text-sm rounded-lg"
             autoComplete="new-password"
-            required
-            disabled={isLoading}
           />
-        </div>
+        </TextField>
 
         <Button
           type="submit"

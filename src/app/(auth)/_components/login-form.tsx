@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input, Label } from "@heroui/react";
+import { Button, Input, Label, TextField } from "@heroui/react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
@@ -131,7 +131,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       )}
 
       <form onSubmit={handleLogin} className="space-y-4">
-        <div className="space-y-1.5">
+        <TextField isRequired isDisabled={isLoading} className="space-y-1.5">
           <Label htmlFor="login-email">Email</Label>
           <Input
             id="login-email"
@@ -141,12 +141,10 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
             onChange={(e) => setEmail(e.target.value)}
             className="h-10 text-sm rounded-lg"
             autoComplete="email"
-            required
-            disabled={isLoading}
           />
-        </div>
+        </TextField>
 
-        <div className="space-y-1.5">
+        <TextField isRequired isDisabled={isLoading} className="space-y-1.5">
           <Label htmlFor="login-password">Password</Label>
           <Input
             id="login-password"
@@ -156,10 +154,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
             onChange={(e) => setPassword(e.target.value)}
             className="h-10 text-sm rounded-lg"
             autoComplete="current-password"
-            required
-            disabled={isLoading}
           />
-        </div>
+        </TextField>
 
         <Button
           type="submit"
