@@ -4,11 +4,11 @@ import { GsapLinearMark } from "@/components/illustrations/gsap-linear-mark";
 import { MotionLinearMark } from "@/components/illustrations/motion-linear-mark";
 import { PureCssLinearMark } from "@/components/illustrations/pure-css-linear-mark";
 import { QuantumCanvasMark } from "@/components/illustrations/quantum-canvas-mark";
-import { ThreeLinearMark } from "@/components/illustrations/three-linear-mark";
+import { SplineLinearMark } from "@/components/illustrations/spline-linear-mark";
 import { Activity } from "lucide-react";
 import { useState } from "react";
 
-type LibraryKey = "all" | "css" | "motion" | "gsap" | "three" | "canvas";
+type LibraryKey = "all" | "css" | "motion" | "gsap" | "spline" | "canvas";
 
 export function IllustrationShowcase() {
   const [activeTab, setActiveTab] = useState<LibraryKey>("all");
@@ -63,14 +63,14 @@ export function IllustrationShowcase() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab("three")}
+          onClick={() => setActiveTab("spline")}
           className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all ${
-            activeTab === "three"
+            activeTab === "spline"
               ? "bg-sky-600 text-white shadow-md font-semibold"
               : "bg-muted/40 text-muted-foreground hover:bg-muted"
           }`}
         >
-          4. THREE.JS (360° ORBIT)
+          4. SPLINE 3D (LEVEL 6 GPU)
         </button>
         <button
           type="button"
@@ -149,22 +149,21 @@ export function IllustrationShowcase() {
           </div>
         )}
 
-        {(activeTab === "all" || activeTab === "three") && (
+        {(activeTab === "all" || activeTab === "spline") && (
           <div className="space-y-3">
-            <ThreeLinearMark />
+            <SplineLinearMark />
             <div className="p-4 rounded-xl bg-muted/20 border border-border/40 font-mono text-xs space-y-1.5">
               <div className="flex justify-between items-center text-foreground font-semibold">
-                <span>4. THREE.JS (WEBGL)</span>
-                <span className="text-sky-400">~150 KB</span>
+                <span>4. SPLINE 3D (LEVEL 6 ALL-IN-ONE)</span>
+                <span className="text-sky-400">@splinetool</span>
               </div>
               <p className="text-muted-foreground text-[11px] leading-relaxed">
-                Ruang 3D sejati dengan kamera ortografik aksonometrik 30°. Memiliki 7 heatsink blade
-                3D nyata, dual-axis gyroscopic toruses, konstelasi 100 partikel, dan mouse drag
-                orbit bebas.
+                All-in-one interactive 3D WebGL/WebGPU runtime. Zero manual boilerplates, scene
+                physics, and direct cursor reactivity via hardware acceleration.
               </p>
               <div className="text-[10px] text-slate-500 pt-1 border-t border-border/30 flex justify-between">
-                <span>WORKLOAD: GL SHADERS</span>
-                <span>FPS: 60 FPS</span>
+                <span>WORKLOAD: SPLINE RUNTIME</span>
+                <span>FPS: 60-120 FPS</span>
               </div>
             </div>
           </div>
@@ -245,14 +244,14 @@ export function IllustrationShowcase() {
                 </td>
               </tr>
               <tr className="hover:bg-muted/10">
-                <td className="py-3 px-3 font-semibold text-foreground">4. Three.js WebGL</td>
-                <td className="py-3 px-3 text-sky-400 font-bold">~150 KB</td>
-                <td className="py-3 px-3">Orthographic WebGL Context</td>
+                <td className="py-3 px-3 font-semibold text-foreground">4. Spline 3D (Level 6)</td>
+                <td className="py-3 px-3 text-sky-400 font-bold">All-in-One</td>
+                <td className="py-3 px-3">Spline WebGL Runtime</td>
                 <td className="py-3 px-3">
-                  True 3D Architectural Fin Array + Gyro Torus + 360° Drag Orbit
+                  All-in-One 3D Canvas + Real-Time Physics + Camera Orbit & Tracking
                 </td>
                 <td className="py-3 px-3 text-foreground">
-                  Dedicated 3D Calibration Sandbox / Lab Viewport
+                  Interactive 3D Hero / Spatial Showcase
                 </td>
               </tr>
               <tr className="hover:bg-muted/10">

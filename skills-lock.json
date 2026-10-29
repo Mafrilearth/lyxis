@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "animate": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animate/SKILL.md",
+      "computedHash": "fb0a18403891238d4ce4fc80f891689678766c29092de1e3aadc0c917133ee5d"
+    },
     "animation-performance": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
@@ -31,6 +37,12 @@
       "skillPath": "skills/gsap-react/SKILL.md",
       "computedHash": "255206fb6a4a079ad73b4a12e7c63197dc451a8549c7ac4e852b50ff74ef3bd6"
     },
+    "magic-ui": {
+      "source": "magicuidesign/magicui",
+      "sourceType": "github",
+      "skillPath": "skills/magic-ui/SKILL.md",
+      "computedHash": "751895d50c76490c6f92a68cdbe61100bd96b4963d1e91e37b5d82c8df0fc2d7"
+    },
     "prisma-client-api": {
       "source": "prisma/skills",
       "sourceType": "github",
@@ -48,6 +60,12 @@
       "sourceType": "github",
       "skillPath": "skills-legacy/sentry-nextjs-sdk/SKILL.md",
       "computedHash": "1484b4da0b1dac637f8b71e6b8bfdfe77ed581ab34b0c83d26a73ab3efce4f93"
+    },
+    "spline-interactive": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/spline-interactive/SKILL.md",
+      "computedHash": "73c61d312b731d3e491cd635d19427767c80c4a1f4a9cc1cd18a3a530efa8aa6"
     },
     "supabase": {
       "source": "supabase/agent-skills",
