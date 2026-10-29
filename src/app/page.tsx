@@ -8,18 +8,19 @@ import Link from "next/link";
  * Standard Global 8pt Grid Architecture
  * Homepage strictly contains: Header, Hero, and Footer.
  * Language: Global English.
- * All components wrapped in visible, solid, high-contrast CAD grid rails (border-zinc-300 dark:border-zinc-800).
- * Footer: Strictly "© 2026. All rights reserved." only.
+ * - Header: Full width horizontal line at bottom, no left/right borders.
+ * - Hero: Centered content wrapped in vertical CAD rails.
+ * - Footer: Full horizontal top line spanning edge-to-edge, strictly NO bottom border, NO side borders.
  */
 export default function HomePage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/20 selection:text-primary">
-      {/* 1. HEADER GRID (Strictly 16 Units = 64px = 8x8px) */}
+      {/* 1. HEADER (Full horizontal border-b, no left/right lines) */}
       <FloatingNav />
 
       {/* 2. HERO GRID CONTAINER (Wrapped in Solid Unfaded Grid Rails) */}
       <main className="flex-1 max-w-6xl w-full mx-auto border-x border-zinc-300 dark:border-zinc-800 bg-background flex flex-col">
-        <section className="flex-1 flex flex-col items-center justify-center text-center py-20 sm:py-28 lg:py-32 px-6 sm:px-8 space-y-6 border-b border-zinc-300 dark:border-zinc-800 relative">
+        <section className="flex-1 flex flex-col items-center justify-center text-center py-20 sm:py-28 lg:py-32 px-6 sm:px-8 space-y-6 relative">
           <div className="space-y-4 max-w-3xl mx-auto flex flex-col items-center">
             {/* Global Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.15] text-balance">
@@ -59,9 +60,9 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* 3. FOOTER GRID (Strictly Copyright Only, No Brand, No Links) */}
-      <footer className="w-full border-b border-zinc-300 dark:border-zinc-800 bg-background/95">
-        <div className="max-w-6xl mx-auto border-x border-zinc-300 dark:border-zinc-800 py-6 px-6 sm:px-8 flex items-center justify-center text-center font-mono text-xs text-muted-foreground">
+      {/* 3. FOOTER (Full horizontal across viewport, no bottom border, no side borders) */}
+      <footer className="w-full border-t border-zinc-300 dark:border-zinc-800 bg-background">
+        <div className="w-full max-w-6xl mx-auto py-6 px-6 sm:px-8 flex items-center justify-center text-center font-mono text-xs text-muted-foreground">
           <span>© 2026. All rights reserved.</span>
         </div>
       </footer>
