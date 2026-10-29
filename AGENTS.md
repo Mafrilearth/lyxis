@@ -13,20 +13,35 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
    - Files and UI components can be **safely colocated inside route segments** without being exposed to the client URL.
    - The name `components/` has **no special framework significance**. Keep page-specific components directly inside their respective route directory or inline in the page file.
    - Private folders: prefix with an underscore (`_components/` or `_folder/`) to explicitly opt a folder and all its subfolders out of routing.
+   - Route groups: wrap folders in parenthesis `(group)/` to organize routes without altering the URL path.
 
-2. **Asynchronous Request APIs (Breaking Changes):**
+2. **Asynchronous Request APIs (Breaking Changes in Next.js 15 & 16):**
    - Dynamic route parameters: `params` is a Promise. Always await it: `const { id } = await params;`.
    - URL search parameters: `searchParams` is a Promise. Always await it: `const { query } = await searchParams;`.
    - Cookies & Headers: `cookies()` and `headers()` are asynchronous. Always await them: `const cookieStore = await cookies();`.
+   - Draft Mode: `draftMode()` is asynchronous. Always await it: `const { isEnabled } = await draftMode();`.
 
-3. **React Server Components (RSC) Boundaries:**
+3. **React Server Components (RSC) Boundaries (`01-getting-started/05-server-and-client-components.md`):**
    - All files in `app/` are Server Components by default.
-   - Only add `'use client'` when state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), or browser APIs are required.
-   - Keep `'use client'` boundaries pushed to the leaves of the component tree.
+   - Only add `'use client'` when state (`useState`), effects (`useEffect`), event handlers (`onPress`, `onClick`), browser APIs, or custom hooks are required.
+   - Keep `'use client'` boundaries pushed to the leaves of the component tree to maximize server-rendering benefits and reduce client JS bundle size.
 
 4. **Component Hierarchy in Route Segments:**
    - The components render in strict nested hierarchy:
      `Layout -> Template -> ErrorBoundary (error.tsx) -> Suspense (loading.tsx) -> NotFoundBoundary (not-found.tsx) -> Page`.
+
+5. **Data Mutations & Server Functions (`01-getting-started/07-mutating-data.md`):**
+   - Use Server Functions / Server Actions with the `'use server'` directive.
+   - Leverage React 19 form actions (`<form action={action}>`).
+   - Security rule: Server Functions are callable via direct HTTP POST requests; always authenticate and authorize the user inside every Server Function.
+
+6. **Request Interception & Proxying (`01-getting-started/16-proxy.md`):**
+   - In Next.js 16, Middleware is standardized as Proxy (`proxy.ts` / `middleware.ts`).
+   - Use for lightweight routing, header transformations, and optimistic redirects; never perform heavy database or session queries inside proxy.
+
+7. **Data Caching & Prerendering (`01-getting-started/08-caching.md`):**
+   - Use the `"use cache"` directive paired with `cacheLife()` for cached computation.
+   - Wrap dynamic or uncached data access in `<Suspense fallback={...}>` to stream content at request time without blocking page prerendering.
 
 <!-- END:nextjs-agent-rules -->
 
