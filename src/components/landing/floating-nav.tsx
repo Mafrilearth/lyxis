@@ -12,7 +12,7 @@ import Link from "next/link";
  * - Full horizontal bottom line (border-b), strictly NO left/right border lines.
  * - Content mathematically centered along direction axis.
  * - Uniform corner radii (rounded-lg = 8px = 1 grid cell).
- * - Strictly: Brand name only, Sign In, Sign Up, Theme Toggle.
+ * - Strictly: Brand name only, Masuk, Daftar, Theme Toggle.
  */
 export function FloatingNav() {
   return (
@@ -34,7 +34,7 @@ export function FloatingNav() {
               "h-9 px-3.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Sign In
+            Masuk
           </Link>
 
           <Link
@@ -44,7 +44,7 @@ export function FloatingNav() {
               "h-9 px-4 sm:px-5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg transition-colors border border-transparent shadow-none",
             )}
           >
-            Sign Up
+            Daftar
           </Link>
 
           <ThemeToggle />
