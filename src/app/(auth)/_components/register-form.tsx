@@ -13,7 +13,7 @@ import { toast } from "sonner";
 export function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/dashboard";
+  const next = searchParams.get("next") || "/candidate/dashboard";
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -236,7 +236,9 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
         Already have an account?{" "}
         <Link
           href={
-            next && next !== "/dashboard" ? `/login?next=${encodeURIComponent(next)}` : "/login"
+            next && next !== "/candidate/dashboard"
+              ? `/login?next=${encodeURIComponent(next)}`
+              : "/login"
           }
           className="font-semibold text-primary hover:underline ml-1"
         >

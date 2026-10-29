@@ -16,7 +16,7 @@ export default async function RegisterPage() {
   } = await supabase.auth.getUser();
 
   if (user) {
-    redirect("/dashboard");
+    redirect("/candidate/dashboard");
   }
 
   return (

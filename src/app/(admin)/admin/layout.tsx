@@ -42,7 +42,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   // 3. Regular candidates attempting to access any admin surface are redirected to their dashboard
   if (!isAdmin) {
-    redirect("/dashboard");
+    redirect("/candidate/dashboard");
   }
 
   return (

@@ -5,7 +5,7 @@ export default function DashboardLayout({
   metrics,
 }: {
   children: React.ReactNode;
-  metrics: React.ReactNode;
+  metrics?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col min-h-screen">

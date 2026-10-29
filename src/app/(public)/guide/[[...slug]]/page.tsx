@@ -57,7 +57,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between border-b border-border pb-4">
-          <Link href="/dashboard" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+          <Link
+            href="/candidate/dashboard"
+            className={buttonVariants({ variant: "ghost", size: "sm" })}
+          >
             <ArrowLeft className="size-4 mr-2" /> Return to Dashboard
           </Link>
           <div className="flex items-center gap-2">

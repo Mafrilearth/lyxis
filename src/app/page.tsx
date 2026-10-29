@@ -57,7 +57,7 @@ export default async function HomePage() {
             <div className="pt-2 flex justify-center">
               {isAuthenticated ? (
                 <Link
-                  href="/dashboard"
+                  href="/candidate/dashboard"
                   className={cn(
                     buttonVariants({ variant: "primary", size: "lg" }),
                     "inline-flex items-center justify-center rounded-lg h-10 px-6 text-sm font-semibold",

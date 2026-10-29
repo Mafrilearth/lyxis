@@ -52,7 +52,10 @@ export default function ErrorBoundary({
           >
             <RotateCcw className="size-3.5 mr-1.5" /> Retry Execution
           </Button>
-          <Link href="/dashboard" className={buttonVariants({ variant: "ghost", size: "md" })}>
+          <Link
+            href="/candidate/dashboard"
+            className={buttonVariants({ variant: "ghost", size: "md" })}
+          >
             Candidate Portal
           </Link>
         </div>

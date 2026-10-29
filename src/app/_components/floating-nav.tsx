@@ -42,7 +42,7 @@ export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
           <div className="flex items-center gap-2 h-8" role="group" aria-label="Account">
             {isAuthenticated ? (
               <Link
-                href="/dashboard"
+                href="/candidate/dashboard"
                 className={cn(
                   buttonVariants({ variant: "primary", size: "sm" }),
                   "h-8 px-4 text-sm font-medium rounded-lg",

@@ -43,7 +43,7 @@ async function DashboardContent() {
   } = await supabase.auth.getUser();
 
   if (!user?.email) {
-    redirect("/login?next=/dashboard");
+    redirect("/login?next=/candidate/dashboard");
   }
 
   const candidateEmail = user.email;
@@ -195,7 +195,7 @@ async function DashboardContent() {
             </div>
 
             <Link
-              href={`/exam/${inProgressAttempt.id}`}
+              href={`/candidate/exam/${inProgressAttempt.id}`}
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "h-12 px-7 rounded-2xl font-bold gap-2 text-sm shrink-0 shadow-md",
@@ -434,7 +434,7 @@ async function DashboardContent() {
                           <td className="text-right py-4 px-4">
                             <div className="flex items-center justify-end gap-2">
                               <Link
-                                href={`/result/${attempt.id}`}
+                                href={`/candidate/result/${attempt.id}`}
                                 className={cn(
                                   buttonVariants({ variant: "outline", size: "sm" }),
                                   "h-9 px-3 gap-1.5 text-xs font-semibold rounded-xl",

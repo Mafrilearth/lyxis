@@ -170,7 +170,7 @@ export function AdminNav({ userEmail }: { userEmail: string }) {
             </p>
             <nav className="flex flex-col gap-1 pt-1">
               <Link
-                href="/dashboard"
+                href="/candidate/dashboard"
                 className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-surface-secondary hover:text-foreground transition-colors"
               >
                 <HomeIcon className="size-4" />

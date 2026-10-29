@@ -22,7 +22,7 @@ export function ExamHeader({
   return (
     <header className="sticky top-0 z-30 flex h-20 w-full items-center justify-between border-b border-separator bg-background/90 px-6 sm:px-10 backdrop-blur-xl">
       <div className="flex items-center gap-4">
-        <Link href="/dashboard" className="flex flex-col group">
+        <Link href="/candidate/dashboard" className="flex flex-col group">
           <span className="font-extrabold text-xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
             Lyxis
           </span>

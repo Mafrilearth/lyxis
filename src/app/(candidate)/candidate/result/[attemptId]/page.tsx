@@ -105,7 +105,7 @@ async function ResultContent({ params }: ResultPageProps) {
           </p>
           <div className="pt-2">
             <Link
-              href="/dashboard"
+              href="/candidate/dashboard"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "gap-2 text-sm font-semibold rounded-2xl",
@@ -163,7 +163,7 @@ async function ResultContent({ params }: ResultPageProps) {
               <ArrowLeft className="h-4 w-4" /> Home
             </Link>
             <Link
-              href="/dashboard"
+              href="/candidate/dashboard"
               className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors"
             >
               Candidate Portal →

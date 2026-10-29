@@ -152,7 +152,7 @@ async function AttemptDetailContent({ params }: PageProps) {
         </div>
         <div className="flex items-center gap-2">
           <Link
-            href={`/result/${attempt.id}`}
+            href={`/candidate/result/${attempt.id}`}
             className={buttonVariants({ variant: "outline", size: "sm" })}
           >
             <ExternalLinkIcon className="mr-1.5 size-3.5" />

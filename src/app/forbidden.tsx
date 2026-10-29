@@ -27,7 +27,10 @@ export default function Forbidden() {
         </div>
 
         <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/dashboard" className={buttonVariants({ variant: "primary", size: "md" })}>
+          <Link
+            href="/candidate/dashboard"
+            className={buttonVariants({ variant: "primary", size: "md" })}
+          >
             <ArrowLeft className="size-3.5 mr-1.5" /> Return to Dashboard
           </Link>
         </div>

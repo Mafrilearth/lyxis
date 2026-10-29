@@ -76,7 +76,7 @@ export async function startExamAction(input: StartExamInput): Promise<StartExamR
     return {
       success: true,
       attemptId,
-      redirectUrl: `/exam/${attemptId}`,
+      redirectUrl: `/candidate/exam/${attemptId}`,
     };
   } catch (error) {
     Sentry.captureException(error);
@@ -291,7 +291,7 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
 
     return {
       success: true,
-      redirectUrl: `/result/${attemptId}`,
+      redirectUrl: `/candidate/result/${attemptId}`,
       certificateNumber,
     };
   } catch (error) {

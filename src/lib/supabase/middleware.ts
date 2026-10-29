@@ -11,14 +11,27 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  // Protected candidate routes and admin routes
-  const isCandidateProtected =
-    pathname === "/dashboard" ||
-    pathname.startsWith("/dashboard/") ||
-    pathname.startsWith("/exam/") ||
-    pathname.startsWith("/result/");
+  // Protected candidate routes and admin routes (strictly prefixed by role)
+  const isCandidateProtected = pathname === "/candidate" || pathname.startsWith("/candidate/");
   const isAdminProtected = pathname === "/admin" || pathname.startsWith("/admin/");
   const isAuthPage = pathname === "/login" || pathname === "/register";
+
+  // Gracefully rewrite or redirect legacy un-prefixed candidate routes to role-prefixed routes
+  if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/dashboard/, "/candidate/dashboard");
+    return NextResponse.redirect(url);
+  }
+  if (pathname.startsWith("/exam/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/exam/, "/candidate/exam");
+    return NextResponse.redirect(url);
+  }
+  if (pathname.startsWith("/result/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/result/, "/candidate/result");
+    return NextResponse.redirect(url);
+  }
 
   // Fast-path cookie check: Look for Supabase auth tokens before initializing auth network calls
   const hasAuthCookie = request.cookies
@@ -75,7 +88,7 @@ export async function updateSession(request: NextRequest) {
 
   // Redirect authenticated users away from login and register pages
   if (user && isAuthPage) {
-    const next = request.nextUrl.searchParams.get("next") || "/dashboard";
+    const next = request.nextUrl.searchParams.get("next") || "/candidate/dashboard";
     const url = request.nextUrl.clone();
     url.pathname = next.startsWith("/") ? next : `/${next}`;
     url.searchParams.delete("next");
