@@ -4,12 +4,13 @@ export interface NavItem {
 }
 
 export const NAV_LINKS: readonly NavItem[] = [
-  { label: "Standards", href: "#features" },
-  { label: "How It Works", href: "#flow" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Admin", href: "/admin" },
 ] as const;
 
 export const FOOTER_LINKS: readonly NavItem[] = [
-  ...NAV_LINKS,
-  { label: "Candidate Portal", href: "/dashboard" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Admin Console", href: "/admin" },
+  { label: "Sign In", href: "/login" },
+  { label: "Register", href: "/register" },
 ] as const;

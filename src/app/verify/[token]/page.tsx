@@ -87,7 +87,7 @@ async function VerifyContent({ params }: VerifyPageProps) {
 
       {/* Top Ambient Glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-gradient-to-b from-primary/15 via-blue-500/5 to-transparent blur-3xl pointer-events-none -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
@@ -96,11 +96,8 @@ async function VerifyContent({ params }: VerifyPageProps) {
         <div className="text-center space-y-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-3 font-black text-2xl tracking-tight"
+            className="inline-flex items-center font-extrabold text-3xl tracking-tight text-foreground transition-opacity hover:opacity-80"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground text-base shadow-md">
-              L
-            </span>
             Lyxis
           </Link>
           <p className="text-xs sm:text-sm font-bold tracking-wider uppercase text-muted-foreground">
@@ -109,7 +106,7 @@ async function VerifyContent({ params }: VerifyPageProps) {
         </div>
 
         {isFound ? (
-          <div className="rounded-[2.5rem] p-2 bg-gradient-to-b from-emerald-500/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-2xl">
+          <div className="rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-emerald-500/30 shadow-2xl">
             <div className="rounded-[calc(2.5rem-0.5rem)] bg-card p-8 sm:p-12 space-y-8">
               <div className="flex items-center gap-4 border-b border-border/40 pb-6">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
@@ -196,7 +193,7 @@ async function VerifyContent({ params }: VerifyPageProps) {
             </div>
           </div>
         ) : (
-          <div className="rounded-[2.5rem] p-2 bg-gradient-to-b from-destructive/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-2xl">
+          <div className="rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-destructive/30 shadow-2xl">
             <div className="rounded-[calc(2.5rem-0.5rem)] bg-card p-8 sm:p-12 text-center space-y-5">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive mx-auto">
                 <ShieldAlert className="h-8 w-8" />

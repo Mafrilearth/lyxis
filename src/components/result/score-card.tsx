@@ -25,7 +25,7 @@ export function ScoreCard({ totalScore, cefrLevel, candidateName }: ScoreCardPro
   };
 
   return (
-    <div className="rounded-[2.5rem] p-2 bg-gradient-to-b from-primary/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-xl">
+    <div className="rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-xl">
       <div className="rounded-[calc(2.5rem-0.5rem)] bg-card p-8 sm:p-12 space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-border/40 pb-6">
           <div className="space-y-1">

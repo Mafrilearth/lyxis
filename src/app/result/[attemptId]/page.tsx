@@ -147,7 +147,7 @@ async function ResultContent({ params }: ResultPageProps) {
 
       {/* Top Ambient Glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-gradient-to-b from-primary/15 via-blue-500/5 to-transparent blur-3xl pointer-events-none -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 

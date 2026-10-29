@@ -12,7 +12,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 
       {/* Top Ambient Glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] bg-gradient-to-b from-primary/15 via-blue-500/5 to-transparent blur-3xl pointer-events-none -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
       <div
@@ -82,9 +82,9 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        {/* Right Column: Calibrated Double-Bezel Auth Card */}
+        {/* Right Column: Clean Primary Border Auth Card */}
         <div className="lg:col-span-6 w-full">
-          <div className="rounded-3xl p-1.5 sm:p-2 bg-gradient-to-b from-primary/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-xl">
+          <div className="rounded-3xl p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-xl">
             <div className="rounded-[calc(1.5rem-0.125rem)] bg-card p-6 sm:p-8 lg:p-10">
               {children}
             </div>

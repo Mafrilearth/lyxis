@@ -298,8 +298,8 @@
 .bezel-frame {
   padding: 0.5rem;
   border-radius: 2.5rem;
-  background: linear-gradient(180deg, var(--border) 0%, transparent 100%);
-  border: 1px solid var(--border);
+  background-color: var(--card);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
 }
 .bezel-frame-inner {
   border-radius: calc(2.5rem - 0.5rem);

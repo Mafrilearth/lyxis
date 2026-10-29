@@ -214,9 +214,9 @@ export function ExamRunner({
 
       {/* Main Testing Viewport: Generous & Expansive */}
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left / Center: Question Canvas with Double-Bezel Console Frame */}
+        {/* Left / Center: Question Canvas with Clean Primary Border Console Frame */}
         <div className="lg:col-span-9 flex flex-col justify-between">
-          <div className="rounded-[2.5rem] p-2 sm:p-2.5 bg-gradient-to-b from-primary/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-2xl shadow-primary/10">
+          <div className="rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-2xl">
             <div className="rounded-[calc(2.5rem-0.5rem)] bg-card border border-border/60 overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)]">
               {/* Top Window Bar: Clear, Spacious, Uncluttered */}
               <div className="border-b border-border/60 bg-muted/25 px-6 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-4">

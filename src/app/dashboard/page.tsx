@@ -101,7 +101,7 @@ async function DashboardContent() {
 
       {/* Top Ambient Glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-gradient-to-b from-primary/15 via-blue-500/5 to-transparent blur-3xl pointer-events-none -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
       <div
@@ -161,8 +161,8 @@ async function DashboardContent() {
 
       {/* Main Content Dashboard: Expansive & Clean */}
       <main className="flex-1 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-16 w-full space-y-12">
-        {/* Welcome Banner: Double-Bezel Frame */}
-        <div className="rounded-[2rem] sm:rounded-[2.5rem] p-2 bg-gradient-to-b from-primary/20 via-border/40 to-muted/20 ring-1 ring-border/80 shadow-lg">
+        {/* Welcome Banner: Clean Primary Border Frame */}
+        <div className="rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-lg">
           <div className="rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.5rem-0.5rem)] bg-card p-8 sm:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">

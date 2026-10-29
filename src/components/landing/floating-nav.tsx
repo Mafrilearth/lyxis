@@ -103,13 +103,13 @@ export function FloatingNav() {
           {/* Desktop Navigation Links: Cohesive Segmented Dock */}
           <nav className="hidden md:flex items-center gap-1 text-xs font-semibold text-muted-foreground bg-muted/40 p-1 rounded-full border border-border/60">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="px-3.5 py-1.5 rounded-full hover:text-foreground hover:bg-background/90 active:scale-[0.98] transition-all"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
