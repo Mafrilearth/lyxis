@@ -11,7 +11,7 @@ export interface AnimatedBeamProps {
   fromRef: RefObject<HTMLElement | null>;
   toRef: RefObject<HTMLElement | null>;
   curvature?: number;
-  reverse?: boolean;
+  reverse?: boolean; // Include the reverse prop
   pathColor?: string;
   pathWidth?: number;
   pathOpacity?: number;

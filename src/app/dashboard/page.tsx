@@ -1,6 +1,6 @@
 import { StartTestButton } from "@/components/dashboard/start-test-button";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
+import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -102,10 +102,6 @@ async function DashboardContent() {
       {/* Top Ambient Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-primary/5 blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-grid-subtle text-foreground/[0.025] pointer-events-none -z-10"
         aria-hidden="true"
       />
 

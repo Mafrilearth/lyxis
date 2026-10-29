@@ -2,53 +2,90 @@
 
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+interface FloatingNavProps {
+  isAuthenticated?: boolean;
+}
+
 /**
  * Standard Global Header Navigation (8pt Baseline Grid Architecture)
- * - Exact height: h-16 (64px = 16 Tailwind units = 8 x 8px grid cells).
- * - Docks firmly to top when scrolling (sticky top-0).
- * - Full horizontal bottom line (border-b), strictly NO left/right border lines.
- * - Content mathematically centered along direction axis.
- * - Uniform corner radii (rounded-lg = 8px = 1 grid cell).
- * - Strictly: Brand name only, Masuk, Daftar, Theme Toggle.
+ * - Exact height: h-16 (64px = 8 x 8px grid cells).
+ * - Full horizontal edge-to-edge bottom line (border-b), strictly NO side borders.
+ * - Semantic Hierarchy: W3C WAI-ARIA Landmark <header> and <nav>.
+ * - Component Grouping: Strict separation between User Authentication and System Utility.
+ * - Strict 8pt Scale: h-8 (32px = 4x8pt) interactive controls, gap-2 (8px), gap-4 (16px), h-4 (16px) divider.
+ * - Uniform Components: Uses official shadcn buttonVariants and Separator.
+ * - Auth-aware: Directs authenticated users to Dashboard; presents unauthenticated users with Sign In/Up.
+ * - 100% Global English and accessibility compliant.
  */
-export function FloatingNav() {
+export function FloatingNav({ isAuthenticated = false }: FloatingNavProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-300 dark:border-zinc-800 bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
-        {/* Brand Anchor: Vertically Centered */}
-        <Link href="/" className="flex items-center group shrink-0 outline-none">
-          <span className="font-extrabold text-xl tracking-tight text-foreground leading-none transition-opacity group-hover:opacity-85 select-none">
+        {/* 1. Brand Identity Anchor */}
+        <Link
+          href="/"
+          aria-label="Lyxis"
+          className="flex items-center shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+        >
+          <span className="font-extrabold text-xl tracking-tight text-foreground leading-none select-none">
             Lyxis
           </span>
         </Link>
 
-        {/* Action Cluster: Centered Alignment, 8px Radius, Zero Shadows */}
-        <div className="flex items-center gap-3">
-          <Link
-            href="/login"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "h-9 px-3.5 text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors border border-transparent shadow-none",
-            )}
-          >
-            Sign In
-          </Link>
+        {/* 2. Semantic Navigation Landmark */}
+        <nav aria-label="Main" className="flex items-center gap-4 h-8">
+          {/* Group A: User Authentication Actions */}
+          <div className="flex items-center gap-2 h-8" role="group" aria-label="Account">
+            {isAuthenticated ? (
+              <Link
+                href="/dashboard"
+                className={cn(
+                  buttonVariants({ variant: "default", size: "default" }),
+                  "h-8 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg border border-transparent shadow-none",
+                )}
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "default" }),
+                    "h-8 px-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg border border-transparent shadow-none",
+                  )}
+                >
+                  Sign In
+                </Link>
 
-          <Link
-            href="/register"
-            className={cn(
-              buttonVariants({ variant: "default", size: "sm" }),
-              "h-9 px-4 sm:px-5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg transition-colors border border-transparent shadow-none",
+                <Link
+                  href="/register"
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "default" }),
+                    "h-8 px-4 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg border border-transparent shadow-none",
+                  )}
+                >
+                  Sign Up
+                </Link>
+              </>
             )}
-          >
-            Sign Up
-          </Link>
+          </div>
 
-          <ThemeToggle />
-        </div>
+          {/* Group Boundary Divider (Official Shadcn Separator - Exactly Centered) */}
+          <Separator
+            orientation="vertical"
+            className="!h-4 !w-px my-auto self-center bg-border shrink-0"
+          />
+
+          {/* Group B: System Utility Controls */}
+          <div className="flex items-center h-8" role="group" aria-label="System">
+            <ThemeToggle />
+          </div>
+        </nav>
       </div>
     </header>
   );

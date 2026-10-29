@@ -46,8 +46,7 @@ export const metadata: Metadata = {
     default: "Lyxis — TOEFL Diagnostic",
     template: "%s | Lyxis",
   },
-  description:
-    "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
+  description: "Standardized score prediction and verified credentials.",
   applicationName: "Lyxis",
   category: "Education",
   classification: "Academic Assessment",
@@ -71,8 +70,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Lyxis — TOEFL Diagnostic",
-    description:
-      "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
+    description: "Standardized score prediction and verified credentials.",
     siteName: "Lyxis",
     url: baseUrl,
     type: "website",
@@ -89,8 +87,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Lyxis — TOEFL Diagnostic",
-    description:
-      "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
+    description: "Standardized score prediction and verified credentials.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -121,8 +118,7 @@ const jsonLd = {
       operatingSystem: "Web Browser",
       browserRequirements: "Requires modern web browser with HTML5 Audio and JavaScript enabled",
       isAccessibleForFree: true,
-      description:
-        "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
+      description: "Standardized score prediction and verified credentials.",
       offers: {
         "@type": "Offer",
         price: "0",
@@ -135,8 +131,7 @@ const jsonLd = {
       name: "Lyxis",
       url: baseUrl,
       logo: `${baseUrl}/icon.svg`,
-      description:
-        "Standardized computer-based TOEFL diagnostic assessment and verified credential platform.",
+      description: "Standardized score prediction and verified credentials.",
     },
     {
       "@type": "FAQPage",

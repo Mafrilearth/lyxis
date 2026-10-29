@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import { AlertCircle, ArrowRight, CheckCircle2, Loader2, Lock, Mail } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -31,12 +31,12 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     setSuccessMessage(null);
 
     if (!email.trim() || !email.includes("@")) {
-      setErrorMessage("Please enter a valid email address.");
+      setErrorMessage("Please enter a valid email.");
       return;
     }
 
     if (!password) {
-      setErrorMessage("Please enter your account password.");
+      setErrorMessage("Please enter your password.");
       return;
     }
 
@@ -60,9 +60,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       const msg =
         err instanceof Error
           ? err.message === "Invalid login credentials"
-            ? "Invalid email or password combination. Please verify your credentials."
+            ? "Invalid email or password."
             : err.message
-          : "Authentication server connection failure.";
+          : "Authentication failed.";
       setErrorMessage(msg);
       toast.error(msg);
     } finally {
@@ -88,109 +88,100 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   };
 
   return (
-    <div className={cn("space-y-6", className)} {...props}>
-      {/* Form Header */}
-      <div className="space-y-2 text-left">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
-          Sign In to Candidate Portal
-        </h2>
+    <div className={cn("space-y-6 text-left", className)} {...props}>
+      {/* Header */}
+      <div className="space-y-2">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+          Sign In
+        </h1>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Access your diagnostic assessment dashboard, progress metrics, and permanent digital
-          credentials.
+          Enter your credentials to continue.
         </p>
       </div>
 
       {/* Error & Success Feedback Alerts */}
       {errorMessage && (
-        <div className="flex items-start gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
+        <div
+          role="alert"
+          className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs sm:text-sm text-destructive"
+        >
+          <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
           <p className="leading-relaxed">{errorMessage}</p>
         </div>
       )}
 
       {successMessage && (
-        <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-700 dark:text-emerald-400">
-          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
+        <div
+          role="status"
+          className="flex items-start gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs sm:text-sm text-emerald-700 dark:text-emerald-400"
+        >
+          <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
           <p className="leading-relaxed">{successMessage}</p>
         </div>
       )}
 
-      {/* Sign In Credentials Form */}
-      <form onSubmit={handleLogin} className="space-y-5">
-        <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="login-email" className="text-sm font-semibold">
-              Email Address
-            </FieldLabel>
-            <div className="relative mt-1.5">
-              <Mail className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
-              <Input
-                id="login-email"
-                type="email"
-                placeholder="candidate@university.edu"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="pl-12 h-13 sm:h-14 text-sm sm:text-base rounded-2xl"
-                autoComplete="email"
-                required
-                disabled={isLoading}
-              />
-            </div>
-          </Field>
-
-          <Field>
-            <FieldLabel htmlFor="login-password" className="text-sm font-semibold">
-              Account Password
-            </FieldLabel>
-            <div className="relative mt-1.5">
-              <Lock className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
-              <Input
-                id="login-password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="pl-12 h-13 sm:h-14 text-sm sm:text-base rounded-2xl"
-                autoComplete="current-password"
-                required
-                disabled={isLoading}
-              />
-            </div>
-          </Field>
-
-          <Button
-            type="submit"
-            className="w-full h-13 sm:h-14 text-base font-bold gap-2 mt-3 rounded-2xl shadow-md"
+      {/* Form */}
+      <form onSubmit={handleLogin} className="space-y-4">
+        <div className="space-y-1.5">
+          <Label htmlFor="login-email">Email</Label>
+          <Input
+            id="login-email"
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-10 text-sm rounded-lg"
+            autoComplete="email"
+            required
             disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Authenticating...
-              </>
-            ) : (
-              <>
-                Sign In to Candidate Portal <ArrowRight className="h-4 w-4" />
-              </>
-            )}
-          </Button>
-        </FieldGroup>
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="login-password">Password</Label>
+          <Input
+            id="login-password"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="h-10 text-sm rounded-lg"
+            autoComplete="current-password"
+            required
+            disabled={isLoading}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full h-10 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" /> Signing in...
+            </>
+          ) : (
+            "Sign In"
+          )}
+        </Button>
       </form>
 
       {/* Google OAuth Section */}
-      <div className="space-y-4 pt-1">
+      <div className="space-y-4">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border/60" />
+            <span className="w-full border-t border-border" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase font-bold tracking-wider text-muted-foreground">
-            <span className="bg-card px-3">Or Continue Instantly</span>
+          <div className="relative flex justify-center text-xs uppercase text-muted-foreground">
+            <span className="bg-background px-2">Or</span>
           </div>
         </div>
 
         <Button
           variant="outline"
           type="button"
-          className="w-full h-13 sm:h-14 text-sm sm:text-base font-semibold gap-3 border-border/80 hover:bg-muted/50 rounded-2xl"
+          className="w-full h-10 text-sm font-medium rounded-lg border border-border shadow-none gap-2"
           onClick={handleGoogleAuth}
           disabled={isLoading}
         >
@@ -213,22 +204,22 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
               fill="#EA4335"
             />
           </svg>
-          Continue with Google Account
+          Google
         </Button>
       </div>
 
       {/* Switcher to Register */}
-      <div className="pt-2 text-center text-sm text-muted-foreground border-t border-border/50">
-        Don&apos;t have a candidate account?{" "}
+      <div className="pt-2 text-center text-sm text-muted-foreground border-t border-border">
+        Don&apos;t have an account?{" "}
         <Link
           href={
             next && next !== "/dashboard"
               ? `/register?next=${encodeURIComponent(next)}`
               : "/register"
           }
-          className="font-bold text-primary hover:underline ml-1"
+          className="font-semibold text-primary hover:underline ml-1"
         >
-          Create Candidate Account →
+          Sign Up
         </Link>
       </div>
     </div>

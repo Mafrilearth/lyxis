@@ -166,7 +166,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-1 h-3"
+                ? "bg-primary animate-pulse h-3"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-2",
@@ -176,7 +176,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-2 h-5"
+                ? "bg-primary animate-pulse h-5"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-3",
@@ -186,7 +186,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-3 h-7"
+                ? "bg-primary animate-pulse h-7"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-4",
@@ -196,7 +196,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-4 h-4"
+                ? "bg-primary animate-pulse h-4"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-3",
@@ -206,7 +206,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-5 h-6"
+                ? "bg-primary animate-pulse h-6"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-2",
@@ -216,7 +216,7 @@ export function AudioPlayer({
             className={cn(
               "w-1 rounded-full transition-all",
               isPlaying
-                ? "bg-primary animate-wave-6 h-3"
+                ? "bg-primary animate-pulse h-3"
                 : isPlayed
                   ? "bg-rose-500/40 h-2"
                   : "bg-muted-foreground/30 h-2",

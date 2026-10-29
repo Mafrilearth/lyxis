@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import { AlertCircle, ArrowRight, CheckCircle2, Loader2, Lock, Mail, User } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -32,19 +32,17 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
     setSuccessMessage(null);
 
     if (!fullName.trim() || fullName.trim().length < 3) {
-      setErrorMessage(
-        "Official full legal name is required (minimum 3 characters, matching your passport/national ID).",
-      );
+      setErrorMessage("Name must be at least 3 characters.");
       return;
     }
 
     if (!email.trim() || !email.includes("@")) {
-      setErrorMessage("Please enter a valid active email address.");
+      setErrorMessage("Please enter a valid email.");
       return;
     }
 
     if (!password || password.length < 6) {
-      setErrorMessage("Password must contain at least 6 characters.");
+      setErrorMessage("Password must be at least 6 characters.");
       return;
     }
 
@@ -70,10 +68,8 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
         router.push(next);
         router.refresh();
       } else if (data?.user) {
-        setSuccessMessage(
-          "Registration completed! Please check your email inbox to verify your candidate account before signing in.",
-        );
-        toast.success("Verification link dispatched to your email address.");
+        setSuccessMessage("Account created. Please check your email to verify your account.");
+        toast.success("Verification link sent.");
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to register new candidate account.";
@@ -102,132 +98,115 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
   };
 
   return (
-    <div className={cn("space-y-6", className)} {...props}>
-      {/* Form Header */}
-      <div className="space-y-2 text-left">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
-          Create Candidate Account
-        </h2>
+    <div className={cn("space-y-6 text-left", className)} {...props}>
+      {/* Header */}
+      <div className="space-y-2">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+          Sign Up
+        </h1>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Enroll your profile to launch calibrated diagnostic assessments and preserve verified
-          credentials.
+          Create an account to get started.
         </p>
       </div>
 
       {/* Error & Success Feedback Alerts */}
       {errorMessage && (
-        <div className="flex items-start gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
+        <div
+          role="alert"
+          className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs sm:text-sm text-destructive"
+        >
+          <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
           <p className="leading-relaxed">{errorMessage}</p>
         </div>
       )}
 
       {successMessage && (
-        <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-700 dark:text-emerald-400">
-          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
+        <div
+          role="status"
+          className="flex items-start gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs sm:text-sm text-emerald-700 dark:text-emerald-400"
+        >
+          <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
           <p className="leading-relaxed">{successMessage}</p>
         </div>
       )}
 
-      {/* Candidate Registration Form */}
-      <form onSubmit={handleRegister} className="space-y-5">
-        <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="reg-name" className="text-sm font-semibold">
-              Official Full Legal Name
-            </FieldLabel>
-            <div className="relative mt-1.5">
-              <User className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
-              <Input
-                id="reg-name"
-                type="text"
-                placeholder="As listed on Passport or National ID"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="pl-12 h-13 sm:h-14 text-sm sm:text-base rounded-2xl"
-                autoComplete="name"
-                required
-                disabled={isLoading}
-              />
-            </div>
-            <FieldDescription className="text-xs text-muted-foreground mt-1">
-              This legal name will appear permanently on your official digital certificate.
-            </FieldDescription>
-          </Field>
-
-          <Field>
-            <FieldLabel htmlFor="reg-email" className="text-sm font-semibold">
-              Active Email Address
-            </FieldLabel>
-            <div className="relative mt-1.5">
-              <Mail className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
-              <Input
-                id="reg-email"
-                type="email"
-                placeholder="candidate@university.edu"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="pl-12 h-13 sm:h-14 text-sm sm:text-base rounded-2xl"
-                autoComplete="email"
-                required
-                disabled={isLoading}
-              />
-            </div>
-          </Field>
-
-          <Field>
-            <FieldLabel htmlFor="reg-password" className="text-sm font-semibold">
-              Account Password (Min. 6 Characters)
-            </FieldLabel>
-            <div className="relative mt-1.5">
-              <Lock className="absolute left-4 top-4 h-5 w-5 text-muted-foreground" />
-              <Input
-                id="reg-password"
-                type="password"
-                placeholder="Minimum 6 characters"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="pl-12 h-13 sm:h-14 text-sm sm:text-base rounded-2xl"
-                autoComplete="new-password"
-                required
-                disabled={isLoading}
-              />
-            </div>
-          </Field>
-
-          <Button
-            type="submit"
-            className="w-full h-13 sm:h-14 text-base font-bold gap-2 mt-3 rounded-2xl shadow-md"
+      {/* Form */}
+      <form onSubmit={handleRegister} className="space-y-4">
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-name">Full Name</Label>
+          <Input
+            id="reg-name"
+            type="text"
+            placeholder="Jane Doe"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            className="h-10 text-sm rounded-lg"
+            autoComplete="name"
+            required
             disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Registering Account...
-              </>
-            ) : (
-              <>
-                Create Candidate Account <ArrowRight className="h-4 w-4" />
-              </>
-            )}
-          </Button>
-        </FieldGroup>
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-email">Email</Label>
+          <Input
+            id="reg-email"
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-10 text-sm rounded-lg"
+            autoComplete="email"
+            required
+            disabled={isLoading}
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-password">Password</Label>
+          <Input
+            id="reg-password"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="h-10 text-sm rounded-lg"
+            autoComplete="new-password"
+            required
+            disabled={isLoading}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full h-10 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" /> Creating account...
+            </>
+          ) : (
+            "Sign Up"
+          )}
+        </Button>
       </form>
 
       {/* Google OAuth Section */}
-      <div className="space-y-4 pt-1">
+      <div className="space-y-4">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border/60" />
+            <span className="w-full border-t border-border" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase font-bold tracking-wider text-muted-foreground">
-            <span className="bg-card px-3">Or Continue Instantly</span>
+          <div className="relative flex justify-center text-xs uppercase text-muted-foreground">
+            <span className="bg-background px-2">Or</span>
           </div>
         </div>
 
         <Button
           variant="outline"
           type="button"
-          className="w-full h-13 sm:h-14 text-sm sm:text-base font-semibold gap-3 border-border/80 hover:bg-muted/50 rounded-2xl"
+          className="w-full h-10 text-sm font-medium rounded-lg border border-border shadow-none gap-2"
           onClick={handleGoogleAuth}
           disabled={isLoading}
         >
@@ -250,20 +229,20 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
               fill="#EA4335"
             />
           </svg>
-          Continue with Google Account
+          Google
         </Button>
       </div>
 
       {/* Switcher to Login */}
-      <div className="pt-2 text-center text-sm text-muted-foreground border-t border-border/50">
-        Already registered as a candidate?{" "}
+      <div className="pt-2 text-center text-sm text-muted-foreground border-t border-border">
+        Already have an account?{" "}
         <Link
           href={
             next && next !== "/dashboard" ? `/login?next=${encodeURIComponent(next)}` : "/login"
           }
-          className="font-bold text-primary hover:underline ml-1"
+          className="font-semibold text-primary hover:underline ml-1"
         >
-          Sign In to Your Account →
+          Sign In
         </Link>
       </div>
     </div>

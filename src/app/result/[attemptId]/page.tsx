@@ -3,7 +3,7 @@ import { PrintButton } from "@/components/result/print-button";
 import { CompetencyRadarChart } from "@/components/result/radar-chart";
 import { ScoreCard } from "@/components/result/score-card";
 import { SectionBreakdown } from "@/components/result/section-breakdown";
-import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
+import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
 import { buttonVariants } from "@/components/ui/button";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";

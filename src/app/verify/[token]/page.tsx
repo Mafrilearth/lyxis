@@ -1,4 +1,4 @@
-import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
+import { AmbientMeshCanvas } from "@/components/shared/ambient-mesh-canvas";
 import { Badge } from "@/components/ui/badge";
 import { createClient } from "@/lib/supabase/server";
 import { Calendar, CheckCircle2, ShieldAlert, ShieldCheck, User } from "lucide-react";

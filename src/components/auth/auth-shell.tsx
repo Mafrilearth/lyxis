@@ -1,96 +1,61 @@
-import { AmbientMeshCanvas } from "@/components/ui/ambient-mesh-canvas";
-import { Badge } from "@/components/ui/badge";
-import { Headphones, QrCode, ShieldCheck, Sparkles } from "lucide-react";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import Link from "next/link";
 import type React from "react";
 
-export function AuthShell({ children }: { children: React.ReactNode }) {
+interface AuthShellProps {
+  children: React.ReactNode;
+  mode: "login" | "register";
+}
+
+/**
+ * Standard Global Authentication Shell (8pt Baseline Grid Architecture)
+ * - Exact height header & footer: h-16 (64px = 8 x 8px grid cells).
+ * - Symmetrical CAD vertical boundary rails (max-w-6xl, border-x-0 xl:border-x border-border).
+ * - Non-redundant: Clean header with Brand and ThemeToggle; mode switcher located exclusively at form bottom.
+ * - Semantic Hierarchy: W3C WAI-ARIA Landmark <header>, <main>, and <footer>.
+ * - 100% Global English and accessibility compliant.
+ */
+export function AuthShell({ children }: AuthShellProps) {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center p-6 sm:p-10 lg:p-14 bg-background text-foreground overflow-hidden selection:bg-primary/20 selection:text-primary">
-      {/* Living Atmospheric Mesh Background Canvas */}
-      <AmbientMeshCanvas />
-
-      {/* Top Ambient Glow */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] bg-primary/5 blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-grid-subtle text-foreground/[0.025] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Column: Expansive Editorial Showcase */}
-        <div className="lg:col-span-6 space-y-8 text-left">
-          <Link href="/" className="inline-flex flex-col group">
-            <span className="font-extrabold text-3xl tracking-tight leading-none text-foreground transition-opacity group-hover:opacity-80">
+    <div className="relative min-h-screen bg-background text-foreground flex flex-col">
+      {/* 1. HEADER (h-16, full horizontal border-b) */}
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+        <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
+          {/* Brand Identity Anchor */}
+          <Link
+            href="/"
+            aria-label="Lyxis"
+            className="flex items-center shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          >
+            <span className="font-extrabold text-xl tracking-tight text-foreground leading-none select-none">
               Lyxis
-            </span>
-            <span className="text-xs text-muted-foreground font-medium tracking-wide mt-1.5">
-              Psychometric English Diagnostic Engine
             </span>
           </Link>
 
-          <div className="space-y-4">
-            <Badge
-              variant="outline"
-              className="text-xs sm:text-sm font-semibold px-3.5 py-1 text-primary border-primary/20 bg-primary/5 gap-2"
-            >
-              <Sparkles className="h-4 w-4" /> Candidate Command Center
-            </Badge>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.14]">
-              The Calibration of Academic Mastery.
-            </h1>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Sign in or create an account to access your private candidate terminal, launch the
-              standardized diagnostic assessment, and retain verifiable credentials.
-            </p>
-          </div>
-
-          {/* 3 Key Trust Pillars: Spacious & Clean */}
-          <div className="space-y-3 pt-2">
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl border border-border/60 bg-muted/20">
-              <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-              <span className="text-sm font-semibold text-foreground">
-                140 Comprehensive Items Conforming to Official Form A
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl border border-border/60 bg-muted/20">
-              <Headphones className="h-5 w-5 text-primary shrink-0" />
-              <span className="text-sm font-semibold text-foreground">
-                Single-Play High-Fidelity Audio Listening Stream
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3 p-3.5 rounded-2xl border border-border/60 bg-muted/20">
-              <QrCode className="h-5 w-5 text-emerald-500 shrink-0" />
-              <span className="text-sm font-semibold text-foreground">
-                Digital Certificate with Publicly Verifiable QR Authentication
-              </span>
-            </div>
-          </div>
-
-          <div className="pt-2">
-            <Link
-              href="/"
-              className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
-            >
-              ← Return to Lyxis Overview
-            </Link>
+          {/* System Utility Controls */}
+          <div className="flex items-center h-8" role="group" aria-label="System">
+            <ThemeToggle />
           </div>
         </div>
+      </header>
 
-        {/* Right Column: Clean Primary Border Auth Card */}
-        <div className="lg:col-span-6 w-full">
-          <div className="rounded-3xl p-1.5 sm:p-2 bg-card border-2 border-primary/20 shadow-xl">
-            <div className="rounded-[calc(1.5rem-0.125rem)] bg-card p-6 sm:p-8 lg:p-10">
-              {children}
-            </div>
-          </div>
+      {/* 2. MAIN CONTAINER (Responsive rails: border-x-0 on mobile/tablet, xl:border-x when margin exists) */}
+      <main
+        id="main-content"
+        className="flex-1 max-w-6xl w-full mx-auto border-x-0 xl:border-x border-border bg-background flex flex-col items-center justify-center py-16 sm:py-24 px-6 sm:px-8"
+      >
+        <div className="w-full max-w-md mx-auto">{children}</div>
+      </main>
+
+      {/* 3. FOOTER (Symmetrical h-16, full width border-t) */}
+      <footer
+        role="contentinfo"
+        className="w-full border-t border-border bg-background h-16 flex items-center justify-center"
+      >
+        <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 flex items-center justify-center text-center font-mono text-xs text-muted-foreground">
+          <p>© 2026 Lyxis. All rights reserved.</p>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

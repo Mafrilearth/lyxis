@@ -2,7 +2,7 @@
 
 import { startExamAction } from "@/actions/exam";
 import { Button } from "@/components/ui/button";
-import { Loader2, Play } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -25,13 +25,13 @@ export function StartTestButton({ candidateName, candidateEmail }: StartTestButt
       });
 
       if (!result.success || !result.redirectUrl) {
-        throw new Error(result.error || "Failed to initialize assessment session");
+        throw new Error(result.error || "Failed to start assessment");
       }
 
-      toast.success("Assessment session initialized. Transitioning to testing console...");
+      toast.success("Starting assessment session...");
       router.push(result.redirectUrl);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Failed to initialize assessment session";
+      const msg = err instanceof Error ? err.message : "Failed to start assessment";
       toast.error(msg);
       setIsLoading(false);
     }
@@ -41,17 +41,14 @@ export function StartTestButton({ candidateName, candidateEmail }: StartTestButt
     <Button
       onClick={handleStart}
       disabled={isLoading}
-      size="default"
-      className="h-13 sm:h-14 px-8 rounded-2xl font-bold gap-3 text-sm sm:text-base shrink-0 shadow-lg shadow-primary/25 hover:shadow-primary/40 cursor-pointer transition-all active:scale-[0.98]"
+      className="h-10 px-6 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent shadow-none cursor-pointer"
     >
       {isLoading ? (
         <>
-          <Loader2 className="h-5 w-5 animate-spin" /> Preparing Assessment...
+          <Loader2 className="h-4 w-4 animate-spin mr-2" /> Starting...
         </>
       ) : (
-        <>
-          <Play className="h-5 w-5" /> Launch Assessment Form A
-        </>
+        "Start Assessment"
       )}
     </Button>
   );

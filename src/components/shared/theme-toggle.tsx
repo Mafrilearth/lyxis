@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import * as React from "react";
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       <button
         type="button"
         className={cn(
-          "h-9 w-9 inline-flex items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-800 bg-background text-muted-foreground opacity-50 shadow-none cursor-default",
+          "h-8 w-8 inline-flex items-center justify-center rounded-lg border border-border bg-background text-muted-foreground opacity-50 shadow-none cursor-default",
           className,
         )}
         aria-label="Toggle visual theme"
@@ -36,18 +36,18 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "h-9 w-9 inline-flex items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-800 bg-background text-foreground hover:bg-muted transition-colors shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
+        "h-8 w-8 inline-flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
         className,
       )}
-      title={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
-      aria-label={isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"}
+      title={isDark ? "Light theme" : "Dark theme"}
+      aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="h-4 w-4 text-amber-400 transition-transform hover:rotate-45" />
+        <Sun className="h-4 w-4 text-amber-400" />
       ) : (
-        <Moon className="h-4 w-4 text-primary transition-transform hover:-rotate-12" />
+        <Moon className="h-4 w-4 text-primary" />
       )}
-      <span className="sr-only">Toggle theme (Current: {theme})</span>
+      <span className="sr-only">Toggle theme</span>
     </button>
   );
 }

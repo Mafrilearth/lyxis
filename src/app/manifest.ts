@@ -2,14 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Lyxis — Psychometric English Diagnostic Engine",
+    name: "Lyxis — TOEFL Diagnostic",
     short_name: "Lyxis",
-    description:
-      "The Calibration of Academic Mastery. Standardized English psychometric assessment and diagnostic calibration engine.",
+    description: "Standardized score prediction and verified credentials.",
     start_url: "/",
     display: "standalone",
-    background_color: "#07090E",
-    theme_color: "#07090E",
+    background_color: "#07080B",
+    theme_color: "#07080B",
     icons: [
       {
         src: "/icon.svg",

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { AnimatedBeam } from "./animated-beam";
 import { cn } from "@/lib/utils";
 import {
   Award,
