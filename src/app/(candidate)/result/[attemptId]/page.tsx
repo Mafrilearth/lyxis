@@ -3,7 +3,7 @@ import { PrintButton } from "./print-button";
 import { CompetencyRadarChart } from "./radar-chart";
 import { ScoreCard } from "./score-card";
 import { SectionBreakdown } from "./section-breakdown";
-import { AmbientMeshCanvas } from "../../ambient-mesh-canvas";
+import { AmbientMeshCanvas } from "@/app/ambient-mesh-canvas";
 import { buttonVariants } from "@heroui/styles";
 import type { CefrLevel } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";
