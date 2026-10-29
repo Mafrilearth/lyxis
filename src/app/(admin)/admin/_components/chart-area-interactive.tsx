@@ -57,8 +57,8 @@ export function ChartAreaInteractive({ data = [] }: ChartAreaInteractiveProps) {
               <AreaChart data={filteredData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="fillAttempts" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--accent, #ff3700)" stopOpacity={0.6} />
-                    <stop offset="95%" stopColor="var(--accent, #ff3700)" stopOpacity={0.02} />
+                    <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.6} />
+                    <stop offset="95%" stopColor="var(--accent)" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid
@@ -107,7 +107,7 @@ export function ChartAreaInteractive({ data = [] }: ChartAreaInteractiveProps) {
                   dataKey="attempts"
                   type="monotone"
                   fill="url(#fillAttempts)"
-                  stroke="var(--accent, #ff3700)"
+                  stroke="var(--accent)"
                   strokeWidth={2}
                 />
               </AreaChart>

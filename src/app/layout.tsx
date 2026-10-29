@@ -2,14 +2,15 @@ import { ThemeProvider } from "./_components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Instrument_Sans, Newsreader } from "next/font/google";
+import { Geist_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import type React from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-ibm-plex-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -164,7 +165,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       suppressHydrationWarning
       data-scrollbar="thin"
-      className={`${instrumentSans.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      className={`${ibmPlexSans.variable} ${newsreader.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
       <head>
         <script
