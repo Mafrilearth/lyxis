@@ -1,10 +1,12 @@
 "use server";
 
+import { sendCertificateEmail } from "@/lib/email";
 import { calculatePsychometrics } from "@/lib/psychometrics/scoring-engine";
 import { generateCertificateSignature } from "@/lib/psychometrics/security";
 import { createClient } from "@/lib/supabase/server";
 import { candidateRegisterSchema } from "@/lib/validations/candidate";
 import { answerSubmissionSchema, telemetryEventSchema } from "@/lib/validations/exam";
+import * as Sentry from "@sentry/nextjs";
 import crypto from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -77,6 +79,7 @@ export async function startExamAction(input: StartExamInput): Promise<StartExamR
       redirectUrl: `/exam/${attemptId}`,
     };
   } catch (error) {
+    Sentry.captureException(error);
     console.error("Critical error in startExamAction:", error);
     return {
       success: false,
@@ -215,6 +218,20 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
 
     try {
       const supabase = await createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      let candidateEmail = user?.email;
+      if (!candidateEmail) {
+        const { data: attemptRow } = await supabase
+          .from("exam_attempts")
+          .select("candidateEmail")
+          .eq("id", attemptId)
+          .single();
+        candidateEmail = attemptRow?.candidateEmail;
+      }
+
       await supabase.from("exam_attempts").upsert(
         {
           id: attemptId,
@@ -249,6 +266,19 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
         },
         { onConflict: "attemptId" },
       );
+
+      // Asynchronously trigger Resend certificate delivery
+      if (candidateEmail) {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://lyxis.mafrilearth.com";
+        sendCertificateEmail({
+          candidateEmail,
+          candidateName,
+          totalScore: psychometrics.totalScaledScore,
+          cefrLevel: psychometrics.cefrLevel,
+          certificateNumber,
+          verificationUrl: `${appUrl}/verify/${attemptId}`,
+        }).catch((err) => console.warn("[Email] Failed to send certificate email:", err));
+      }
     } catch (dbError) {
       console.warn("Notice: Submission scores calculated with in-memory persistence:", dbError);
     }
@@ -259,6 +289,7 @@ export async function submitExamAction(input: SubmitExamInput): Promise<SubmitEx
       certificateNumber,
     };
   } catch (error) {
+    Sentry.captureException(error);
     console.error("Critical error in submitExamAction:", error);
     return {
       success: false,
